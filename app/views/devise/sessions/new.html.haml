@@ -1,0 +1,20 @@
+.row
+  #signinbox.col-md-6.col-md-offset-3.col-sm-8.col-sm-offset-2
+    .panel.panel-info
+      .panel-heading
+        .panel-title= t('.sign_in', :default => "Sign in")
+      .panel-body
+        = simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+          .row
+            .col-md-12
+              = f.input :email, autofocus: true
+            .col-md-12
+              = f.input :password
+            - if devise_mapping.rememberable?
+              .col-md-12
+                = f.input :remember_me, as: :boolean
+            .col-md-12
+              .btn-toolbar
+                = f.button :submit, t('.sign_in', default: "Sign in"), class: 'btn btn-success'
+        .devise-links
+          = render "devise/shared/links"

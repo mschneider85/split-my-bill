@@ -1,0 +1,23 @@
+.row
+  #signupbox.col-md-6.col-md-offset-3.col-sm-8.col-sm-offset-2
+    .panel.panel-info
+      .panel-heading
+        .panel-title= t('.sign_up', :default => "Sign up")
+      .panel-body
+        = simple_form_for(resource, as: resource_name, url: registration_path(resource_name), validate: true) do |f|
+          .row
+            .col-md-12
+              = f.input :email, autofocus: true, required: true
+            .col-md-6
+              = f.input :first_name
+            .col-md-6
+              = f.input :last_name
+            .col-md-12
+              = f.input :password
+            .col-md-12
+              = f.input :password_confirmation, validate: true
+            .col-md-12
+              .btn-toolbar
+                = f.button :submit, t('.sign_up', default: "Sign up"), class: 'btn btn-success'
+        .devise-links
+          = render "devise/shared/links"

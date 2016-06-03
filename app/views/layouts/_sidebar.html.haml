@@ -1,0 +1,59 @@
+%aside.main-sidebar
+  / sidebar: style can be found in sidebar.less
+  %section.sidebar{:style => "height: auto;"}
+    / Sidebar user panel
+    .user-panel
+      .pull-left.image
+        = image_tag current_user.avatar_url, class: 'img-circle'
+      .pull-left.info
+        %p= current_user.name
+        %a{:href => "#"}
+          = icon('circle', class: 'text-success')
+          Online
+    / search form
+    %form.sidebar-form{:action => "#", :method => "get"}
+      .input-group
+        %input.form-control{:name => "q", :placeholder => "Search...", :type => "text"}
+          %span.input-group-btn
+            %button#search-btn.btn.btn-flat{:name => "search", :type => "submit"}
+              %i.fa.fa-search
+    / /.search form
+    / sidebar menu: : style can be found in sidebar.less
+    %ul.sidebar-menu
+      %li.header MAIN NAVIGATION
+      %li.active.treeview
+        %a{:href => "#"}
+          %i.fa.fa-dashboard
+          %span Dashboard
+          %i.fa.fa-angle-left.pull-right
+        %ul.treeview-menu
+          %li
+            %a{:href => "index.html"}
+              %i.fa.fa-circle-o
+              Dashboard v1
+          %li.active
+            %a{:href => "index2.html"}
+              %i.fa.fa-circle-o
+              Dashboard v2
+      %li.treeview
+        %a{:href => "#"}
+          %i.fa.fa-files-o
+          %span Layout Options
+          %span.label.label-primary.pull-right 4
+        %ul.treeview-menu
+          %li
+            %a{:href => "pages/layout/top-nav.html"}
+              %i.fa.fa-circle-o
+              Top Navigation
+          %li
+            %a{:href => "pages/layout/boxed.html"}
+              %i.fa.fa-circle-o
+              Boxed
+          %li
+            %a{:href => "pages/layout/fixed.html"}
+              %i.fa.fa-circle-o
+              Fixed
+          %li
+            %a{:href => "pages/layout/collapsed-sidebar.html"}
+              %i.fa.fa-circle-o
+              Collapsed Sidebar
