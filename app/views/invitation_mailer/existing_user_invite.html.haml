@@ -1,0 +1,11 @@
+!!!
+%html
+  %head
+    %meta{ :content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type" }
+    %title SplitMyBill Gruppeneinladung
+  %body{ style: "background: #fff; color: #000; font-family: verdana, arial, helvetica, sans-serif; font-size: 10pt;" }
+    Du wurdest zur Gruppe
+    = @invite.group_name
+    eingeladen
+    = link_to "#{root_url}#{groups_path}", target: "_blank" do
+      = "#{root_url}#{groups_path}"

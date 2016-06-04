@@ -1,0 +1,20 @@
+.box
+  .box-header
+    %h3.box-title= Group.model_name.human(count: 2)
+  / /.box-header
+  .box-body.no-padding
+    %table.table.table-hover
+      %tbody
+        %tr
+          %th= Group.human_attribute_name(:name)
+          %th= Group.human_attribute_name(:description)
+          %th
+        - @groups.each do |group|
+          %tr
+            %td= group.name
+            %td= group.description
+            %td
+              .btn-toolbar
+                = link_to edit_group_path(group), class: 'btn btn-default' do
+                  = t('actions.edit')
+  / /.box-body

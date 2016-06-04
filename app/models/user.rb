@@ -3,10 +3,17 @@ class User < ActiveRecord::Base
   # :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable, :confirmable
 
+  has_many :memberships
+  has_many :groups, through: :memberships
+  has_many :invitations, class_name: 'Invite', foreign_key: 'recipient_id'
+  has_many :sent_invites, class_name: 'Invite', foreign_key: 'sender_id'
+
+  attr_accessor :invite_token
+
   validates :first_name, :last_name, :email, presence: true
 
   def name
-    ([first_name, last_name].compact.join(' ') if [first_name, last_name].any?) || email
+    [first_name, last_name].merge_with(" ")
   end
 
   def avatar_url

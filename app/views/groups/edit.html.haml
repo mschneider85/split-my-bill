@@ -1,0 +1,31 @@
+.row
+  .col-md-12
+    .box
+      .box-header
+        %h3.box-title= [@group.name, User.model_name.human(count: 2)].merge_with(" - ")
+        .box-tools.pull-right
+          %button.btn.btn-box-tool{ data: { widget: :collapse }, type: :button }
+            %i.fa.fa-minus
+      / /.box-header
+      .box-body.no-padding
+        %table.table.table-hover
+          %tbody
+            - @group.users.each do |user|
+              %tr
+                %td= image_tag user.avatar_url, class: 'img-circle img-table'
+                %td= user.name
+                %td
+                  %span= user.email
+      / /.box-body
+.row
+  .col-md-12
+    .box
+      .box-header
+        %h3.box-title= [@group.name, Invite.model_name.human(count: 2)].merge_with(" - ")
+      / /.box-header
+      .box-body
+        = simple_form_for @invite, url: invites_path, remote: :true do |f|
+          = f.input :group_id, as: :hidden, value: @invite.group_id
+          = f.input :email
+          = f.button :submit
+      / /.box-body

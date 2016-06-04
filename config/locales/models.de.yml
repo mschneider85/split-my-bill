@@ -1,0 +1,15 @@
+de:
+  activerecord:
+    models:
+      user:
+        one: Benutzer
+        other: Benutzer
+      group:
+        one: Gruppe
+        other: Gruppen
+      invite:
+        one: Einladung
+        other: Einladungen
+      membership:
+        one: Mitgliedschaft
+        other: Mitgliedschaften

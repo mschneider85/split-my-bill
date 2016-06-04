@@ -57,3 +57,7 @@
             %a{:href => "pages/layout/collapsed-sidebar.html"}
               %i.fa.fa-circle-o
               Collapsed Sidebar
+      %li
+        = link_to groups_path do
+          = icon('object-group')
+          %span= Group.model_name.human(count: 2)

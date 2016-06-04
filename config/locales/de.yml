@@ -1,14 +1,11 @@
 de:
   messages:
     member_since: Mitglied seit
+    not_found: '%{model} nicht gefunden.'
   actions:
+    edit: bearbeiten
     sign_out: ausloggen
     sign_in: einloggen
-  activerecord:
-    attributes:
-      user:
-        first_name: Vorname
-        last_name: Nachname
   date:
     abbr_day_names:
     - So
