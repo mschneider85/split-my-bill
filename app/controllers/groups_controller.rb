@@ -27,7 +27,7 @@ class GroupsController < AuthenticateController
 
   def destroy
   end
-
+  
   private
 
   def load_group

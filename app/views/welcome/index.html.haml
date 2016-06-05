@@ -3,22 +3,22 @@ hello world!
   .col-md-3.col-sm-6.col-xs-12
     .info-box
       %span.info-box-icon.bg-aqua
-        %i.ion.ion-ios-gear-outline
+        %i.ion.ion-chatbox-working
       .info-box-content
-        %span.info-box-text CPU Traffic
+        %span.info-box-text= Invite.model_name.human(count: 2)
         %span.info-box-number
-          90
-          %small %
+          = Invite.count
       / /.info-box-content
     / /.info-box
   / /.col
   .col-md-3.col-sm-6.col-xs-12
     .info-box
       %span.info-box-icon.bg-red
-        %i.fa.fa-google-plus
+        %i.ion.ion-person-stalker
       .info-box-content
-        %span.info-box-text Likes
-        %span.info-box-number 41,410
+        %span.info-box-text= User.model_name.human(count: 2)
+        %span.info-box-number
+          = User.count
       / /.info-box-content
     / /.info-box
   / /.col

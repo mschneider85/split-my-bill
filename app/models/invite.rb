@@ -8,10 +8,19 @@ class Invite < ActiveRecord::Base
 
   delegate :name, to: :group, prefix: true
 
-  scope :pending, -> { where(accepted: false) }
+  scope :pending, -> { where(accepted: nil) }
+  scope :declined, -> { where(accepted: false) }
+  scope :accepted, -> { where(accepted: true) }
+  scope :for_sender, ->(user) { where(sender: user) }
+  scope :for_recipient, ->(user) { where(recipient: user) }
 
   def accept!
     self.accepted = true
+    self.save
+  end
+
+  def decline!
+    self.accepted = false
     self.save
   end
 

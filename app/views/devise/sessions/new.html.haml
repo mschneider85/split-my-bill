@@ -15,6 +15,7 @@
                 = f.input :remember_me, as: :boolean
             .col-md-12
               .btn-toolbar
-                = f.button :submit, t('.sign_in', default: "Sign in"), class: 'btn btn-success'
+                = button_tag type: 'submit', class: 'btn btn-success' do
+                  = t('.sign_in', default: "Sign in")
         .devise-links
           = render "devise/shared/links"

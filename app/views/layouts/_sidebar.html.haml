@@ -63,6 +63,13 @@
           %span= Group.model_name.human(count: 2)
           %span.label.label-primary.pull-right= current_user.groups.count
         %ul.treeview-menu
+          %li
+            %form.sidebar-form{:action => "#", :method => "get"}
+              .input-group
+                %input.form-control{:name => "q", :placeholder => "Search...", :type => "text"}
+                  %span.input-group-btn
+                    %button#search-btn.btn.btn-flat{:name => "search", :type => "submit"}
+                      %i.fa.fa-search
           - current_user.groups.order(updated_at: :desc).limit(5).each do |group|
             - if group.persisted?
               %li{ class: ('active' if controller_name == 'groups' && @group && @group.id == group.id) }

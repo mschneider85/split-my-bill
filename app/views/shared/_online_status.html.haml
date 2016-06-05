@@ -1,5 +1,5 @@
-%small
-  %p{ data: { user_id: user.id } }
+%p{ data: { user_id: user.id } }
+  %small
     - if online?(user)
       = icon('circle', class: 'text-success')
       Online
