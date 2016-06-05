@@ -8,6 +8,7 @@ class RegistrationsController < Devise::RegistrationsController
     if @token.present?
       invite = Invite.find_by(token: @token, email: resource.email)
       if invite
+        invite.accept!
         resource.groups.push(invite.group)
         resource.skip_confirmation!
       end

@@ -2,8 +2,10 @@ de:
   messages:
     member_since: Mitglied seit
     not_found: '%{model} nicht gefunden.'
+    created: '%{model} erstellt.'
   actions:
     edit: bearbeiten
+    cancel: abbrechen
     sign_out: ausloggen
     sign_in: einloggen
   date:

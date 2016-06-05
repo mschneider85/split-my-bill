@@ -81,6 +81,9 @@ GEM
       responders
       warden (~> 1.2.3)
     devise-i18n (1.0.1)
+    devise_lastseenable (0.0.6)
+      devise
+      rails (>= 3.0.4)
     erubis (2.7.0)
     execjs (2.7.0)
     font-awesome-sass (4.5.0)
@@ -237,6 +240,7 @@ DEPENDENCIES
   coffee-rails (~> 4.1.0)
   devise
   devise-i18n
+  devise_lastseenable
   font-awesome-sass
   haml-rails
   ionicons-rails
@@ -262,4 +266,4 @@ RUBY VERSION
    ruby 2.2.1p85
 
 BUNDLED WITH
-   1.12.3
+   1.12.5

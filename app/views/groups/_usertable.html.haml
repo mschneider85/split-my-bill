@@ -1,0 +1,20 @@
+.row
+  .col-md-12
+    .box
+      .box-header
+        %h3.box-title= [group.name, User.model_name.human(count: 2)].merge_with(" - ")
+        .box-tools.pull-right
+          %button.btn.btn-box-tool{ data: { widget: :collapse }, type: :button }
+            %i.fa.fa-minus
+      / /.box-header
+      .box-body.no-padding
+        %table.table.table-hover.table-bordered
+          %tbody
+            - group.users.each do |user|
+              %tr
+                %td.text-center= image_tag user.avatar_url, class: 'img-circle img-table'
+                %td
+                  = user.name
+                  = render 'shared/online_status', user: user
+                %td= user.email
+      / /.box-body

@@ -21,18 +21,18 @@
     / sidebar menu: : style can be found in sidebar.less
     %ul.sidebar-menu
       %li.header MAIN NAVIGATION
-      %li.active.treeview
+      %li.treeview
         %a{:href => "#"}
           %i.fa.fa-dashboard
           %span Dashboard
           %i.fa.fa-angle-left.pull-right
         %ul.treeview-menu
           %li
-            %a{:href => "index.html"}
+            %a{:href => "#"}
               %i.fa.fa-circle-o
               Dashboard v1
-          %li.active
-            %a{:href => "index2.html"}
+          %li
+            %a{:href => "#"}
               %i.fa.fa-circle-o
               Dashboard v2
       %li.treeview
@@ -57,7 +57,23 @@
             %a{:href => "pages/layout/collapsed-sidebar.html"}
               %i.fa.fa-circle-o
               Collapsed Sidebar
-      %li
-        = link_to groups_path do
+      %li.treeview{ class: ('active' if controller_name == 'groups') }
+        = link_to '#' do
           = icon('object-group')
           %span= Group.model_name.human(count: 2)
+          %span.label.label-primary.pull-right= current_user.groups.count
+        %ul.treeview-menu
+          - current_user.groups.order(updated_at: :desc).limit(5).each do |group|
+            - if group.persisted?
+              %li{ class: ('active' if controller_name == 'groups' && @group && @group.id == group.id) }
+                = link_to edit_group_path(group) do
+                  = icon('circle-o')
+                  = group.name
+          %li{ class: ('active' if controller_name == 'groups' && action_name == 'index') }
+            = link_to groups_path do
+              = icon('list')
+              Alle Anzeigen
+          %li{ class: ('active' if controller_name == 'groups' && ['new', 'create'].include?(action_name)) }
+            = link_to new_group_path do
+              = icon('plus')
+              = t('helpers.submit.create', model: Group.model_name.human)

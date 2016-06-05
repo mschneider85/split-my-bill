@@ -8,6 +8,13 @@ class Invite < ActiveRecord::Base
 
   delegate :name, to: :group, prefix: true
 
+  scope :pending, -> { where(accepted: false) }
+
+  def accept!
+    self.accepted = true
+    self.save
+  end
+
   private
 
   def generate_token

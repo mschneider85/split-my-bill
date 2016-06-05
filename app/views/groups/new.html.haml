@@ -1,0 +1,15 @@
+.box
+  .box-header.with-border
+    %h3.box-title Neue Gruppe
+  / /.box-header
+  = simple_form_for @group do |f|
+    .box-body
+      = f.input :name
+      = f.input :description
+    / /.box-body
+    .box-footer
+      = link_to groups_path, class: 'btn btn-default' do
+        = t('actions.cancel').humanize
+      = button_tag type: 'submit', class: 'btn btn-info pull-right' do
+        = t('helpers.submit.create', model: Group.model_name.human)
+    / /.box-footer
