@@ -44,3 +44,16 @@ hello world!
       / /.info-box-content
     / /.info-box
   / /.col
+  .col-md-6.col-sm-6.col-xs-12
+    .box.box-primary
+      .box-header.with-border
+        %h3.box-title Einladungen
+        .box-tools.pull-right
+          %button.btn.btn-box-tool{"data-widget" => "collapse", :type => "button"}
+            %i.fa.fa-minus
+          %button.btn.btn-box-tool{"data-widget" => "remove", :type => "button"}
+            %i.fa.fa-times
+      .box-body
+        .chart
+          = column_chart Invite.where('created_at > ?', 1.week.ago).group_by_day(:created_at).count
+      / /.box-body

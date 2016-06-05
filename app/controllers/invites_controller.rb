@@ -1,4 +1,11 @@
 class InvitesController < AuthenticateController
+  def index
+    @invites = current_user.sent_invites + current_user.invitations
+  end
+
+  def show
+  end
+
   def create
     @invite = Invite.new(invite_params)
     @invite.sender_id = current_user.id

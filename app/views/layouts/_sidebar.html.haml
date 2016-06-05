@@ -10,14 +10,6 @@
         %a{:href => "#"}
           = icon('circle', class: 'text-success')
           Online
-    / search form
-    %form.sidebar-form{:action => "#", :method => "get"}
-      .input-group
-        %input.form-control{:name => "q", :placeholder => "Search...", :type => "text"}
-          %span.input-group-btn
-            %button#search-btn.btn.btn-flat{:name => "search", :type => "submit"}
-              %i.fa.fa-search
-    / /.search form
     / sidebar menu: : style can be found in sidebar.less
     %ul.sidebar-menu
       %li.header MAIN NAVIGATION
@@ -57,30 +49,24 @@
             %a{:href => "pages/layout/collapsed-sidebar.html"}
               %i.fa.fa-circle-o
               Collapsed Sidebar
-      %li.treeview{ class: ('active' if controller_name == 'groups') }
+      %li.treeview#group-tree{ class: ('active' if controller_name == 'groups') }
         = link_to '#' do
           = icon('object-group')
           %span= Group.model_name.human(count: 2)
           %span.label.label-primary.pull-right= current_user.groups.count
         %ul.treeview-menu
           %li
-            %form.sidebar-form{:action => "#", :method => "get"}
+            = form_for :group_search, html: { autocomplete: 'off', id: 'group-search-form', class: 'sidebar-form' }, url: filter_groups_path, method: :get, remote: true do |f|
               .input-group
-                %input.form-control{:name => "q", :placeholder => "Search...", :type => "text"}
-                  %span.input-group-btn
-                    %button#search-btn.btn.btn-flat{:name => "search", :type => "submit"}
-                      %i.fa.fa-search
-          - current_user.groups.order(updated_at: :desc).limit(5).each do |group|
-            - if group.persisted?
-              %li{ class: ('active' if controller_name == 'groups' && @group && @group.id == group.id) }
-                = link_to edit_group_path(group) do
-                  = icon('circle-o')
-                  = group.name
-          %li{ class: ('active' if controller_name == 'groups' && action_name == 'index') }
-            = link_to groups_path do
-              = icon('list')
-              Alle Anzeigen
-          %li{ class: ('active' if controller_name == 'groups' && ['new', 'create'].include?(action_name)) }
-            = link_to new_group_path do
-              = icon('plus')
-              = t('helpers.submit.create', model: Group.model_name.human)
+                = f.text_field :group_name, name: 'group_name', placeholder: "Suchen...", class: 'form-control', id: 'group-search-input'
+                %span.input-group-btn
+                  = button_tag type: 'submit', class: 'btn btn-flat' do
+                    = icon('search')
+        %ul.treeview-menu#groups-list
+          = render 'layouts/group_list_items', groups: @groups
+:coffee
+  $('#group-search-input').bind 'keyup', ->
+    form = $('#group-search-form')
+    url = '/filter_groups'
+    formData = form.serialize()
+    $.get url, formData

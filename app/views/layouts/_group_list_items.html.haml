@@ -1,0 +1,14 @@
+- groups.limit(5).each do |group|
+  - if group.persisted?
+    %li{ class: ('active' if controller_name == 'groups' && @group && @group.id == group.id) }
+      = link_to edit_group_path(group) do
+        = icon('circle-o')
+        = group.name
+%li{ class: ('active' if controller_name == 'groups' && action_name == 'index') }
+  = link_to groups_path do
+    = icon('list')
+    Alle Anzeigen
+%li{ class: ('active' if controller_name == 'groups' && ['new', 'create'].include?(action_name)) }
+  = link_to new_group_path do
+    = icon('plus')
+    = t('helpers.submit.create', model: Group.model_name.human)

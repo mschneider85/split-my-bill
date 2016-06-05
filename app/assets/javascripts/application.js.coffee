@@ -18,6 +18,8 @@
 #= require admin-lte
 #= require rails.validations
 #= require rails.validations.simple_form
+#= require Chart.bundle
+#= require chartkick
 #= require_tree .
 
 $(document).ready ->
