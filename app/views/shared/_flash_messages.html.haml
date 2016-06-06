@@ -3,3 +3,5 @@
     %div{class: "alert alert-#{name == 'notice' ? 'success' : 'danger'} fade in"}
       %button.close{data: {dismiss: 'alert'}} ×
       = msg
+:coffee
+  $('.alert').delay(3000).fadeOut(2000);

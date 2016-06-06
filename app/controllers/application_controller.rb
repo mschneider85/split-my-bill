@@ -13,6 +13,6 @@ class ApplicationController < ActionController::Base
   private
 
   def load_group_list
-    @groups ||= current_user.groups.order(updated_at: :desc)
+    @groups ||= current_user.groups.order(updated_at: :desc) if current_user
   end
 end

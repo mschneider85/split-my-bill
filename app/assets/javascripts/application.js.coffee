@@ -30,3 +30,23 @@ $(document).on 'page:load', ->
   if o.sidebarPushMenu
     $.AdminLTE.pushMenu.activate(o.sidebarToggleSelector)
   $.AdminLTE.layout.activate()
+
+$(document).on 'page:fetch', -> fadeout()
+$(document).on 'page:change', -> fadein()
+$(document).on 'page:before-unload', -> remove()
+$(document).on 'page:restore', -> remove()
+
+fadeout = ->
+  $('section.content').addClass('animated fadeOut')
+  setTimeout( ->
+      $('#ajax-loader').fadeIn('slow')
+    , 1500
+  )
+
+fadein = ->
+  $('section.content').addClass('animated fadeIn')
+  setTimeout( remove(), 1000 )
+
+remove = ->
+  $('section.content').removeClass('animated fadeOut fadeIn')
+  $('#ajax-loader').hide()

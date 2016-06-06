@@ -16,6 +16,7 @@ class InvitesController < AuthenticateController
       else
         InvitationMailer.new_user_invite(@invite, new_user_registration_path(invite_token: @invite.token, invite_email: @invite.email)).deliver_now
       end
+    @flash = { "notice" => "Einladung verschickt." }
     else
       redirect_to group_path(@invite.group), alert: t('messages.not_found', model: Group.model_name.human(count: 1))
     end
