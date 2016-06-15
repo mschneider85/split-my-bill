@@ -1,0 +1,5 @@
+= simple_form_for [@group, @entry] do |f|
+  = f.input :amount
+  = f.input :user_ids, multiple: true, as: :check_boxes, collection: @group.users
+  = button_tag type: 'submit', class: 'btn btn-info' do
+    = t('helpers.submit.create', model: Entry.model_name.human)

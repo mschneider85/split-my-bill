@@ -1,5 +1,5 @@
 class GroupsController < AuthenticateController
-  before_action :load_group, only: [:edit, :update, :destroy]
+  before_action :load_group, only: [:show, :edit, :update, :destroy]
   def index
     @groups = current_user.groups.all.order(updated_at: :desc)
   end
@@ -18,8 +18,12 @@ class GroupsController < AuthenticateController
     end
   end
 
-  def edit
+  def show
     @invite = @group.invites.new
+    @entries = @group.entries.all.order(created_at: :desc)
+  end
+
+  def edit
   end
 
   def update
@@ -27,7 +31,7 @@ class GroupsController < AuthenticateController
 
   def destroy
   end
-  
+
   private
 
   def load_group

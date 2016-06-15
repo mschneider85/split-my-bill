@@ -1,1 +1,2 @@
-$('#groups-list').html("<%= j render 'layouts/group_list_items', groups: @groups %>");
+$('#group-tree ul.treeview-menu li:not(:first)').remove();
+$('#group-tree ul.treeview-menu li:first').after("<%= j render 'layouts/group_list_items', groups: @groups %>")

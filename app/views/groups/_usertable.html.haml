@@ -10,11 +10,12 @@
       .box-body.no-padding
         %table.table.table-hover.table-bordered
           %tbody
-            - group.users.each do |user|
+            - group.memberships.each do |membership|
               %tr
-                %td.text-center= image_tag user.avatar_url, class: 'img-circle img-table'
+                %td.text-center= image_tag membership.user.avatar_url, class: 'img-circle img-table'
                 %td
-                  = user.name
-                  = render 'shared/online_status', user: user
-                %td= user.email
+                  = membership.user.name
+                  = render 'shared/online_status', user: membership.user
+                %td= number_to_currency membership.balance
+                %td= membership.user.email
       / /.box-body

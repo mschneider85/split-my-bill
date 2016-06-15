@@ -13,3 +13,6 @@ de:
       membership:
         one: Mitgliedschaft
         other: Mitgliedschaften
+      entry:
+        one: Buchung
+        other: Buchungen

@@ -7,8 +7,12 @@ class User < ActiveRecord::Base
   has_many :groups, through: :memberships
   has_many :invitations, class_name: 'Invite', foreign_key: 'recipient_id'
   has_many :sent_invites, class_name: 'Invite', foreign_key: 'sender_id'
+  has_many :debts, class_name: 'Transaction', foreign_key: :debtor_id
+  has_many :credits, class_name: 'Transaction', foreign_key: :creditor_id
 
   attr_accessor :invite_token
+
+  scope :without, ->(user) { where.not(id: user) }
 
   validates :first_name, :last_name, :email, presence: true
 

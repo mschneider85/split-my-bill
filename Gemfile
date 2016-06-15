@@ -21,6 +21,9 @@ gem 'chartkick'
 gem 'groupdate'
 gem 'hightop'
 
+gem 'money-rails'
+gem 'eu_central_bank'
+
 gem 'devise'
 gem 'devise_lastseenable'
 gem 'devise-i18n'
@@ -39,5 +42,6 @@ group :development do
   gem 'rack-mini-profiler'
   gem 'letter_opener'
   gem 'any_login'
+  gem 'rails-erd'
 end
 gem 'rails_12factor', group: :production

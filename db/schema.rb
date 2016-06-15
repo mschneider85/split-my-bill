@@ -11,10 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160605100348) do
+ActiveRecord::Schema.define(version: 20160611175316) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "entries", force: :cascade do |t|
+    t.string   "name"
+    t.string   "type"
+    t.integer  "amount_cents",    default: 0,     null: false
+    t.string   "amount_currency", default: "EUR", null: false
+    t.integer  "group_id"
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+  end
 
   create_table "groups", force: :cascade do |t|
     t.string   "name"
@@ -43,6 +53,20 @@ ActiveRecord::Schema.define(version: 20160605100348) do
 
   add_index "memberships", ["group_id"], name: "index_memberships_on_group_id", using: :btree
   add_index "memberships", ["user_id"], name: "index_memberships_on_user_id", using: :btree
+
+  create_table "transactions", force: :cascade do |t|
+    t.integer  "amount_cents",    default: 0,     null: false
+    t.string   "amount_currency", default: "EUR", null: false
+    t.integer  "creditor_id"
+    t.integer  "debtor_id"
+    t.integer  "entry_id"
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+  end
+
+  add_index "transactions", ["creditor_id"], name: "index_transactions_on_creditor_id", using: :btree
+  add_index "transactions", ["debtor_id"], name: "index_transactions_on_debtor_id", using: :btree
+  add_index "transactions", ["entry_id"], name: "index_transactions_on_entry_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "first_name",             default: "", null: false
