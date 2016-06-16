@@ -16,6 +16,7 @@
 #= require jquery_ujs
 #= require bootstrap-sprockets
 #= require admin-lte
+#= require autoNumeric
 #= require rails.validations
 #= require rails.validations.simple_form
 #= require Chart.bundle
@@ -50,3 +51,10 @@ fadein = ->
 remove = ->
   $('section.content').removeClass('animated fadeOut fadeIn')
   $('#ajax-loader').hide()
+
+$ ->
+  $('.modal').on 'hidden.bs.modal', ->
+    $(this).removeData('bs.modal').find('.modal-content').html('')
+
+  $('.modal').on 'shown.bs.modal', ->
+    $(this).find('[autofocus]:first').focus()

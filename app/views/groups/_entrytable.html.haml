@@ -1,0 +1,16 @@
+%ul.list-group
+  %li.list-group-item
+    = link_to [:new, group, :entry], class: 'btn btn-default', data: { toggle: 'modal', target: '.modal' } do
+      = icon 'plus'
+      Neu
+  - group.entries.all.order(created_at: :desc).each do |entry|
+    %li.list-group-item
+      %span.label.label-primary= l entry.created_at.to_date
+      %span.label.label-default= humanized_money_with_symbol entry.amount
+      = entry.transactions.map{ |transaction| transaction.creditor.name }.uniq.to_sentence
+      = icon 'long-arrow-right'
+      - debtor_array = entry.transactions.map{ |transaction| transaction.debtor.name }.uniq
+      - if debtor_array.size == @group.memberships.count
+        Alle
+      - else
+        = debtor_array.to_sentence

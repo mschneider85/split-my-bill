@@ -19,5 +19,8 @@
         %section.content
           = render 'shared/flash_messages'
           = yield
+        .modal.fade{ role: 'dialog', tabindex: "-1", aria: { hidden: true } }
+          .modal-dialog
+            .modal-content
       = render 'layouts/footer'
     = any_login_here

@@ -1,0 +1,7 @@
+<% if @entry.errors.any? %>
+  $('.modal-body').html("<%= j render 'form', group: @group, entry: @entry %>");
+<% else %>
+  $('#entrytable').html("<%= j render 'groups/entrytable', group: @group %>")
+  $('#usertable').html("<%= j render 'groups/usertable', group: @group %>")
+  $('.modal').modal('hide');
+<% end %>

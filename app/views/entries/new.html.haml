@@ -1,5 +1,16 @@
-= simple_form_for [@group, @entry] do |f|
-  = f.input :amount
-  = f.input :user_ids, multiple: true, as: :check_boxes, collection: @group.users
-  = button_tag type: 'submit', class: 'btn btn-info' do
+.modal-header
+  = button_tag 'x', class: "close", data: { dismiss: "modal" }, aria: { hidden: true }
+  %h4.modal-title Neue Buchung
+
+.modal-body
+  = render 'form', group: @group, entry: @entry
+
+.modal-footer
+  = button_tag t('actions.cancel'), class: 'btn btn-cancel', data: { dismiss: "modal" }
+  = button_tag type: 'submit', class: 'btn btn-info submit-form' do
     = t('helpers.submit.create', model: Entry.model_name.human)
+
+:coffee
+  $ ->
+    $('.submit-form').click ->
+      $(this).closest('.modal').find('form').submit()

@@ -1,4 +1,15 @@
-= render 'usertable', group: @group
+.row
+  .col-md-12
+    .box
+      .box-header
+        %h3.box-title= [@group.name, User.model_name.human(count: 2)].merge_with(" - ")
+        .box-tools.pull-right
+          %button.btn.btn-box-tool{ data: { widget: :collapse }, type: :button }
+            %i.fa.fa-minus
+      / /.box-header
+      .box-body.no-padding#usertable
+        = render 'usertable', group: @group
+      / /.box-body
 .row
   .col-md-12
     .box
@@ -8,23 +19,8 @@
           %button.btn.btn-box-tool{ data: { widget: :collapse }, type: :button }
             %i.fa.fa-minus
       / /.box-header
-      .box-body
-        %ul.list-group
-          %li.list-group-item
-            = link_to [:new, @group, :entry], class: 'btn btn-default' do
-              = icon 'plus'
-              Neu
-          - @entries.each do |entry|
-            %li.list-group-item
-              %span.label.label-primary= l entry.created_at.to_date
-              %span.label.label-default= humanized_money_with_symbol entry.amount
-              = entry.transactions.map{ |transaction| transaction.creditor.name }.uniq.to_sentence
-              = icon 'long-arrow-right'
-              - debtor_array = entry.transactions.map{ |transaction| transaction.debtor.name }.uniq
-              - if debtor_array.size == @group.memberships.count
-                Alle
-              - else
-                = debtor_array.to_sentence
+      .box-body#entrytable
+        = render 'entrytable', group: @group
       / /.box-body
 .row
   .col-md-12

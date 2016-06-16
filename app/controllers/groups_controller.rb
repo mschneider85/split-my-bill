@@ -20,7 +20,6 @@ class GroupsController < AuthenticateController
 
   def show
     @invite = @group.invites.new
-    @entries = @group.entries.all.order(created_at: :desc)
   end
 
   def edit

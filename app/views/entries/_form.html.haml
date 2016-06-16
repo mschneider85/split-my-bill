@@ -1,0 +1,10 @@
+= simple_form_for(@entry, url: [@group, @entry], remote: true, validate: true) do |f|
+  .row
+    .col-md-4
+      = f.input :amount, input_html: { data: { role: 'money', a_sep: '.', a_dec: ',' } }, autofocus: true
+    .col-md-8
+      = f.input :user_ids, as: :check_boxes, collection: @group.users, checked: @entry.user_ids
+
+:coffee
+  $ ->
+    $('input[data-role=money]').autoNumeric('init')

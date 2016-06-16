@@ -6,6 +6,7 @@ class EntriesController < AuthenticateController
 
   def new
     @entry = @group.entries.new
+    render layout: false
   end
 
   def create
@@ -24,12 +25,7 @@ class EntriesController < AuthenticateController
     if @users.find_by(id: current_user)
       @entry.transactions.build(amount: (@entry.amount.to_i)-splitted_amount, creditor: current_user, debtor: current_user)
     end
-
-    if @entry.save
-      redirect_to group_path(@entry.group), notice: t('messages.created', model: Entry.model_name.human(count: 1))
-    else
-      redirect_to group_path(@entry.group), alert: t('messages.not_found', model: Entry.model_name.human(count: 1))
-    end
+    @entry.save
   end
 
   private
