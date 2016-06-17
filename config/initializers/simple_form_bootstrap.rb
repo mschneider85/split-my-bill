@@ -30,12 +30,38 @@ SimpleForm.setup do |config|
     b.use :hint,  wrap_with: { tag: 'p', class: 'help-block' }
   end
 
-  config.wrappers :vertical_boolean, tag: 'div', class: 'form-group', error_class: 'has-error' do |b|
+  config.wrappers :vertical_boolean, tag: 'div', class: 'form-group', boolean_style: :inline, error_class: 'has-error' do |b|
     b.use :html5
     b.optional :readonly
 
-    b.wrapper tag: 'div', class: 'checkbox' do |ba|
+    b.wrapper tag: 'div', class: 'checkbox3' do |ba|
       ba.use :label_input
+    end
+
+    b.use :error, wrap_with: { tag: 'span', class: 'help-block' }
+    b.use :hint,  wrap_with: { tag: 'p', class: 'help-block' }
+  end
+
+  config.wrappers :vertical_checkboxes, tag: 'div', class: 'form-group', boolean_style: :inline, error_class: 'has-error' do |b|
+    b.use :html5
+    b.optional :readonly
+    b.use :label
+
+    b.wrapper tag: 'div', class: 'checkbox3 checkbox-check' do |ba|
+      ba.use :input
+    end
+
+    b.use :error, wrap_with: { tag: 'span', class: 'help-block' }
+    b.use :hint,  wrap_with: { tag: 'p', class: 'help-block' }
+  end
+
+  config.wrappers :vertical_radio, tag: 'div', class: 'form-group', boolean_style: :inline, error_class: 'has-error' do |b|
+    b.use :html5
+    b.optional :readonly
+    b.use :label
+
+    b.wrapper tag: 'div', class: 'radio3' do |ba|
+      ba.use :input
     end
 
     b.use :error, wrap_with: { tag: 'span', class: 'help-block' }
@@ -109,12 +135,12 @@ SimpleForm.setup do |config|
     end
   end
 
-  config.wrappers :horizontal_boolean, tag: 'div', class: 'form-group', error_class: 'has-error' do |b|
+  config.wrappers :horizontal_boolean, tag: 'div', class: 'form-group', boolean_style: :inline, error_class: 'has-error' do |b|
     b.use :html5
     b.optional :readonly
 
     b.wrapper tag: 'div', class: 'col-sm-offset-3 col-sm-9' do |wr|
-      wr.wrapper tag: 'div', class: 'checkbox' do |ba|
+      wr.wrapper tag: 'div', class: 'checkbox3' do |ba|
         ba.use :label_input
       end
 
@@ -166,8 +192,8 @@ SimpleForm.setup do |config|
   # buttons and other elements.
   config.default_wrapper = :vertical_form
   config.wrapper_mappings = {
-    check_boxes: :vertical_radio_and_checkboxes,
-    radio_buttons: :vertical_radio_and_checkboxes,
+    check_boxes: :vertical_checkboxes,
+    radio_buttons: :vertical_radio,
     file: :vertical_file_input,
     boolean: :vertical_boolean,
     datetime: :multi_select,

@@ -3,7 +3,7 @@
     .col-md-4
       = f.input :amount, input_html: { data: { role: 'money', a_sep: '.', a_dec: ',' } }, autofocus: true
     .col-md-8
-      = f.input :user_ids, as: :check_boxes, collection: @group.users, checked: @entry.user_ids
+      = f.input :user_ids, as: :check_boxes, collection: @group.users, checked: (@entry.user_ids || @group.users.map(&:id))
 
 :coffee
   $ ->
