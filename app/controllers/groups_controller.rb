@@ -1,5 +1,5 @@
 class GroupsController < AuthenticateController
-  before_action :load_group, only: [:show, :edit, :update, :destroy]
+  before_action :load_group, :store_group, only: [:show, :edit, :update, :destroy]
   def index
     @groups = current_user.groups.all.order(updated_at: :desc)
   end
@@ -36,6 +36,10 @@ class GroupsController < AuthenticateController
   def load_group
     @group = Group.find_by(id: params[:id])
     redirect_to root_path, alert: t('messages.not_found', model: Group.model_name.human(count: 1)) unless @group
+  end
+
+  def store_group
+    cookies[:latest_group] = @group.id
   end
 
   def group_params

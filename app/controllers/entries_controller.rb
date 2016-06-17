@@ -14,10 +14,10 @@ class EntriesController < AuthenticateController
     @users = User.where(id: params[:entry][:user_ids].reject(&:blank?))
     @quotient = @users.count
 
-    splitted_amount = 0
+    splitted_amount = 0.0
 
     @users.without(current_user).each do |user|
-      current_amount = ((100.0*@entry.amount.to_i/@quotient).ceil)/100.0
+      current_amount = ((100.0*@entry.amount.to_f/@quotient).ceil)/100.0
       @entry.transactions.build(amount: current_amount, creditor: current_user, debtor: user)
       splitted_amount += current_amount
     end

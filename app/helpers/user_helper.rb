@@ -6,4 +6,14 @@ module UserHelper
       return false
     end
   end
+
+  def bootstrap_state_for_balance(amount)
+    if amount > 0
+      "success"
+    elsif amount < 0
+      "danger"
+    else
+      "primary"
+    end
+  end
 end

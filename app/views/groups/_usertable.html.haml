@@ -7,4 +7,4 @@
           = membership.user.name
           = render 'shared/online_status', user: membership.user
         %td.text-right
-          %strong= number_to_currency membership.balance
+          = render 'shared/formatted_balance', amount: membership.balance
