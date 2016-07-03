@@ -11,7 +11,7 @@
         = render 'usertable', group: @group
       / /.box-body
 .row
-  .col-md-12
+  .col-md-6
     .box
       .box-header
         %h3.box-title= [@group.name, Entry.model_name.human(count: 2)].merge_with(" - ")
@@ -22,8 +22,22 @@
       .box-body#entrytable
         = render 'entrytable', group: @group
       / /.box-body
-.row
-  .col-md-12
+  - if current_membership.liabilities.count > 0
+    .col-md-6
+      .box
+        .box-header
+          %h3.box-title Rückzahlungen
+        / /.box-header
+        .box-body
+          %table.table
+            %tbody
+              - current_membership.liabilities.keys.each do |user|
+                %tr
+                  %td= user.name
+                  %td
+                    %span.label.label-default= humanized_money_with_symbol current_membership.liabilities[user]/100.0
+        / /.box-body
+  .col-md-6
     .box
       .box-header
         %h3.box-title= [@group.name, Invite.model_name.human(count: 2)].merge_with(" - ")

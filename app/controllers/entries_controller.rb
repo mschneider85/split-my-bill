@@ -31,7 +31,7 @@ class EntriesController < AuthenticateController
   private
 
   def entry_params
-    params.require(:entry).permit(:name, :type, :amount, :currency, user_ids: [], transactions_attributes: [:amount, :creditor, :debtor])
+    params.require(:entry).permit(:name, :entry_type, :amount, :currency, user_ids: [], transactions_attributes: [:amount, :creditor, :debtor])
   end
 
   def load_group

@@ -24,4 +24,8 @@ class User < ActiveRecord::Base
     gravatar_id = Digest::MD5.hexdigest(email.downcase)
     "http://gravatar.com/avatar/#{gravatar_id}.png?s=200&d=monsterid"
   end
+
+  def balance
+    (credits.sum(:amount_cents) - debts.sum(:amount_cents)) / 100.0
+  end
 end

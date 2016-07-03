@@ -5,6 +5,8 @@
       Neu
   - group.entries.all.order(created_at: :desc).each do |entry|
     %li.list-group-item
+      %label= entry.name
+      %br
       %span.label.label-primary= l entry.created_at.to_date
       %span.label.label-default= humanized_money_with_symbol entry.amount
       = entry.transactions.map{ |transaction| transaction.creditor.name }.uniq.to_sentence

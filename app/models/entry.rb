@@ -2,11 +2,13 @@ class Entry < ActiveRecord::Base
   has_many :transactions, dependent: :destroy
   belongs_to :group
 
+  TYPES = %w(expense balance).freeze
   accepts_nested_attributes_for :transactions
-
   attr_accessor :user_ids
 
   validate :validate_user_ids
+  validates :entry_type, inclusion: { in: TYPES }
+  validates :name, presence: true
   monetize :amount_cents, numericality: { greater_than: 0 }
 
   private

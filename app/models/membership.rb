@@ -1,12 +1,18 @@
 class Membership < ActiveRecord::Base
   belongs_to :user
   belongs_to :group
-  has_many :debts, through: :user
-  has_many :credits, through: :user
+  has_many :debts, -> { where("debtor_id != creditor_id") }, through: :user
+  has_many :credits, -> { where("debtor_id != creditor_id") }, through: :user
 
   validates :user, uniqueness: { scope: :group }
 
   def balance
     (credits.sum(:amount_cents) - debts.sum(:amount_cents)) / 100.0
+  end
+
+  def liabilities
+    grouped_debts = debts.group(:creditor).sum(:amount_cents)
+    grouped_credits = credits.group(:debtor).sum(:amount_cents)
+    grouped_credits.merge(grouped_debts){ |user, credit, debit| debit - credit }.reject {|k, v|  v <= 0 }
   end
 end

@@ -1,5 +1,7 @@
 class GroupsController < AuthenticateController
   before_action :load_group, :store_group, only: [:show, :edit, :update, :destroy]
+  helper_method :current_membership
+
   def index
     @groups = current_user.groups.all.order(updated_at: :desc)
   end
@@ -44,5 +46,9 @@ class GroupsController < AuthenticateController
 
   def group_params
     params.require(:group).permit(:name, :description)
+  end
+
+  def current_membership
+    @current_membership ||= current_user.memberships.find_by(group: @group)
   end
 end
