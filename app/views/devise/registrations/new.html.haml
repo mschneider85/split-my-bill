@@ -19,6 +19,7 @@
               = f.input :password_confirmation, validate: true
             .col-md-12
               .btn-toolbar
-                = f.button :submit, t('.sign_up', default: "Sign up"), class: 'btn btn-success'
+                = button_tag type: 'submit', class: 'btn btn-success' do
+                  = t('.sign_up', default: "Sign up")
         .devise-links
           = render "devise/shared/links"

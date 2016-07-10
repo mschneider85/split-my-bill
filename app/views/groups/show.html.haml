@@ -2,25 +2,95 @@
   .col-md-12
     .box
       .box-header
-        %h3.box-title= [@group.name, User.model_name.human(count: 2)].merge_with(" - ")
+        %h3.box-title= @group.name
         .box-tools.pull-right
+          = link_to [:edit, @group], class: 'btn btn-box-tool', data: { toggle: 'modal', target: '.modal' } do
+            = icon 'cog'
           %button.btn.btn-box-tool{ data: { widget: :collapse }, type: :button }
             %i.fa.fa-minus
       / /.box-header
       .box-body.no-padding#usertable
-        = render 'usertable', group: @group
-      / /.box-body
-.row
-  .col-md-6
-    .box
-      .box-header
-        %h3.box-title= [@group.name, Entry.model_name.human(count: 2)].merge_with(" - ")
-        .box-tools.pull-right
-          %button.btn.btn-box-tool{ data: { widget: :collapse }, type: :button }
-            %i.fa.fa-minus
-      / /.box-header
-      .box-body#entrytable
-        = render 'entrytable', group: @group
+        .nav-tabs-custom
+          %ul.nav.nav-tabs
+            %li.active
+              %a{ data: { toggle: 'tab' }, href: '#tab_dashboard' } Dashboard
+            %li
+              %a{ data: { toggle: 'tab' }, href: '#tab_users' }= User.model_name.human(count: 2)
+            %li
+              %a{ data: { toggle: 'tab' }, href: '#tab_3' } Tab 3
+            %li.dropdown
+              %a.dropdown-toggle{ data: { toggle: 'dropdown' }, href: "#"}
+                Report
+                %span.caret
+              %ul.dropdown-menu
+                %li{:role => "presentation"}
+                  %a{:href => "#", :role => "menuitem", :tabindex => "-1"} Action
+                %li{:role => "presentation"}
+                  %a{:href => "#", :role => "menuitem", :tabindex => "-1"} Another action
+                %li{:role => "presentation"}
+                  %a{:href => "#", :role => "menuitem", :tabindex => "-1"} Something else here
+                %li.divider{:role => "presentation"}
+                %li{:role => "presentation"}
+                  %a{:href => "#", :role => "menuitem", :tabindex => "-1"} Separated link
+          .tab-content
+            #tab_dashboard.tab-pane.active
+              .row
+                .col-md-3.col-sm-6.col-xs-12
+                  .info-box.bg-red
+                    %span.info-box-icon
+                      = icon 'money'
+                    .info-box-content
+                      %span.info-box-text Gesamtkosten
+                      %span.info-box-number= @report.expenses_sum
+                    / /.info-box-content
+                  / /.info-box
+                .col-md-3.col-sm-6.col-xs-12
+                  .info-box.bg-yellow
+                    %span.info-box-icon
+                      = icon 'users'
+                    .info-box-content
+                      %span.info-box-text ø Kosten / Person
+                      %span.info-box-number= @report.expenses_avg
+                    / /.info-box-content
+                  / /.info-box
+                .col-md-3.col-sm-6.col-xs-12
+                  .info-box.bg-green
+                    %span.info-box-icon
+                      = icon 'calendar'
+                    .info-box-content
+                      %span.info-box-text Erste Ausgabe
+                      %span.info-box-number= @report.first_expense
+                    / /.info-box-content
+                  / /.info-box
+                .col-md-3.col-sm-6.col-xs-12
+                  .info-box.bg-blue
+                    %span.info-box-icon
+                      = icon 'calendar'
+                    .info-box-content
+                      %span.info-box-text Letzte Ausgabe
+                      %span.info-box-number= @report.last_expense
+                    / /.info-box-content
+                  / /.info-box
+                .col-md-12.col-sm-12.col-xs-12
+                  = link_to [:new, @group, :entry], class: 'btn btn-default', data: { toggle: 'modal', target: '.modal' } do
+                    = icon 'plus'
+                    Neu
+                .col-md-12.col-sm-12.col-xs-12
+                  = render 'entrytable', group: @group
+            / /.tab-pane
+            #tab_users.tab-pane
+              = render 'usertable', group: @group
+            / /.tab-pane
+            #tab_3.tab-pane
+              Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+              Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+              when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+              It has survived not only five centuries, but also the leap into electronic typesetting,
+              remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset
+              sheets containing Lorem Ipsum passages, and more recently with desktop publishing software
+              like Aldus PageMaker including versions of Lorem Ipsum.
+            / /.tab-pane
+          / /.tab-content
       / /.box-body
   - if current_membership.liabilities.count > 0
     .col-md-6

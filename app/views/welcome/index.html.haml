@@ -55,5 +55,5 @@ hello world!
             %i.fa.fa-times
       .box-body
         .chart
-          = column_chart Invite.where('created_at > ?', 1.week.ago).group_by_day(:created_at).count
+          = column_chart Invite.group_by_day(:created_at).count
       / /.box-body

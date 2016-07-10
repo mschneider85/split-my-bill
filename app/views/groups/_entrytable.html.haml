@@ -1,18 +1,18 @@
-%ul.list-group
-  %li.list-group-item
-    = link_to [:new, group, :entry], class: 'btn btn-default', data: { toggle: 'modal', target: '.modal' } do
-      = icon 'plus'
-      Neu
-  - group.entries.all.order(created_at: :desc).each do |entry|
-    %li.list-group-item
-      %label= entry.name
-      %br
-      %span.label.label-primary= l entry.created_at.to_date
-      %span.label.label-default= humanized_money_with_symbol entry.amount
-      = entry.transactions.map{ |transaction| transaction.creditor.name }.uniq.to_sentence
-      = icon 'long-arrow-right'
-      - debtor_array = entry.transactions.map{ |transaction| transaction.debtor.name }.uniq
-      - if debtor_array.size == @group.memberships.count
-        Alle
-      - else
-        = debtor_array.to_sentence
+%table.table.table-bordered.table-hover
+  %tbody
+    - group.entries.all.order(created_at: :desc).each do |entry|
+      %tr
+        %th.col-md-3
+          = entry.name
+        %td.col-md-3
+          %span= l entry.created_at.to_date
+        %td.col-md-3
+          %span.label.label-default= humanized_money_with_symbol entry.amount
+        %td.col-md-3
+          = entry.transactions.map{ |transaction| transaction.creditor.name }.uniq.to_sentence
+          = icon 'long-arrow-right'
+          - debtor_array = entry.transactions.map{ |transaction| transaction.debtor.name }.uniq
+          - if debtor_array.size == @group.memberships.count
+            Alle
+          - else
+            = debtor_array.to_sentence

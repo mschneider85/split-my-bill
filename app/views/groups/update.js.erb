@@ -1,0 +1,5 @@
+<% if @group.errors.any? %>
+  $('.modal-body').html("<%= j render 'form', group: @group %>");
+<% else %>
+  $('.modal').modal('hide');
+<% end %>

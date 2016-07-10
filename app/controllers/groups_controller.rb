@@ -1,5 +1,6 @@
 class GroupsController < AuthenticateController
-  before_action :load_group, :store_group, only: [:show, :edit, :update, :destroy]
+  before_action :load_group, only: [:show, :edit, :update, :destroy]
+  before_action :store_group, only: [:show, :edit, :update]
   helper_method :current_membership
 
   def index
@@ -14,20 +15,23 @@ class GroupsController < AuthenticateController
     @group = Group.new(group_params)
     if @group.save
       @group.users << current_user
-      redirect_to edit_group_path(@group), notice: t('messages.created', model: Group.model_name.human)
+      redirect_to group_path(@group), notice: t('messages.created', model: Group.model_name.human)
     else
       render :new
     end
   end
 
   def show
+    @report = GroupReport.new(@group)
     @invite = @group.invites.new
   end
 
   def edit
+    render layout: false
   end
 
   def update
+    @group.update(group_params)
   end
 
   def destroy
