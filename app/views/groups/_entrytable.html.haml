@@ -1,4 +1,10 @@
-%table.table.table-bordered.table-hover
+%table.table.table-bordered.table-hover#entries
+  %thead
+    %tr
+      %th Verwendungszweck
+      %th Datum
+      %th Betrag
+      %th Personen
   %tbody
     - group.entries.all.order(created_at: :desc).each do |entry|
       %tr
@@ -16,3 +22,31 @@
             Alle
           - else
             = debtor_array.to_sentence
+
+:coffee
+  $('#entries').DataTable
+    order: [[ 1, "desc" ]]
+    dom: 'Bfrtip'
+    language: {
+      buttons:
+        pageLength:       "%d #{Entry.model_name.human(count: 2)}",
+        selectAll:        "Alle auswählen",
+        selectNone:       "Auswahl aufheben"
+      sEmptyTable:        "Keine Daten in der Tabelle vorhanden",
+      sInfo:              "_START_ bis _END_ von _TOTAL_ #{Entry.model_name.human(count: 2)}",
+      sInfoEmpty:         "0 bis 0 von 0 #{Entry.model_name.human(count: 2)}",
+      sInfoFiltered:      "(gefiltert von _MAX_ #{Entry.model_name.human(count: 2)})",
+      sInfoPostFix:       "",
+      sInfoThousands:     ".",
+      sLengthMenu:        "_MENU_ #{Entry.model_name.human(count: 2)} anzeigen",
+      sLoadingRecords:    "Wird geladen...",
+      sProcessing:        "Bitte warten...",
+      sSearch:            "Suchen",
+      sZeroRecords:       "Keine #{Entry.model_name.human(count: 2)} vorhanden.",
+      oPaginate: {
+        sFirst:           "Erste",
+        sPrevious:        "Zurück",
+        sNext:            "Nächste",
+        sLast:            "Letzte"
+      }
+    }

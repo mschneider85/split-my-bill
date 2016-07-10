@@ -35,7 +35,7 @@
                       / start message
                       %a{:href => "#"}
                         .pull-left
-                          = image_tag current_user.avatar_url, class: 'img-circle'
+                          = image_tag User.all.sample.avatar_url, class: 'img-circle'
                         %h4
                           Support Team
                           %small
@@ -46,7 +46,7 @@
                     %li
                       %a{:href => "#"}
                         .pull-left
-                          %img.img-circle{:alt => "User Image", :src => "dist/img/user3-128x128.jpg"}
+                          = image_tag User.all.sample.avatar_url, class: 'img-circle'
                         %h4
                           AdminLTE Design Team
                           %small
@@ -56,7 +56,7 @@
                     %li
                       %a{:href => "#"}
                         .pull-left
-                          %img.img-circle{:alt => "User Image", :src => "dist/img/user4-128x128.jpg"}
+                          = image_tag User.all.sample.avatar_url, class: 'img-circle'
                         %h4
                           Developers
                           %small
@@ -66,7 +66,7 @@
                     %li
                       %a{:href => "#"}
                         .pull-left
-                          %img.img-circle{:alt => "User Image", :src => "dist/img/user3-128x128.jpg"}
+                          = image_tag User.all.sample.avatar_url, class: 'img-circle'
                         %h4
                           Sales Department
                           %small
@@ -76,7 +76,7 @@
                     %li
                       %a{:href => "#"}
                         .pull-left
-                          %img.img-circle{:alt => "User Image", :src => "dist/img/user4-128x128.jpg"}
+                          = image_tag User.all.sample.avatar_url, class: 'img-circle'
                         %h4
                           Reviewers
                           %small

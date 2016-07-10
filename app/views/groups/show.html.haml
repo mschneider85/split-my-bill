@@ -15,9 +15,12 @@
             %li.active
               %a{ data: { toggle: 'tab' }, href: '#tab_dashboard' } Dashboard
             %li
-              %a{ data: { toggle: 'tab' }, href: '#tab_users' }= User.model_name.human(count: 2)
+              %a{ data: { toggle: 'tab' }, href: '#tab_entries' } Buchungen
             %li
-              %a{ data: { toggle: 'tab' }, href: '#tab_3' } Tab 3
+              %a{ data: { toggle: 'tab' }, href: '#tab_users' }= User.model_name.human(count: 2)
+            - if current_membership.liabilities.count > 0
+              %li
+                %a{ data: { toggle: 'tab' }, href: '#tab_refund' } Zurückzahlen
             %li.dropdown
               %a.dropdown-toggle{ data: { toggle: 'dropdown' }, href: "#"}
                 Report
@@ -75,38 +78,25 @@
                   = link_to [:new, @group, :entry], class: 'btn btn-default', data: { toggle: 'modal', target: '.modal' } do
                     = icon 'plus'
                     Neu
-                .col-md-12.col-sm-12.col-xs-12
-                  = render 'entrytable', group: @group
+            / /.tab-pane
+            #tab_entries.tab-pane
+              = render 'entrytable', group: @group
             / /.tab-pane
             #tab_users.tab-pane
               = render 'usertable', group: @group
             / /.tab-pane
-            #tab_3.tab-pane
-              Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-              Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-              when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-              It has survived not only five centuries, but also the leap into electronic typesetting,
-              remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset
-              sheets containing Lorem Ipsum passages, and more recently with desktop publishing software
-              like Aldus PageMaker including versions of Lorem Ipsum.
-            / /.tab-pane
+            - if current_membership.liabilities.count > 0
+              #tab_refund.tab-pane
+                %table.table.table-bordered.table-hover
+                  %tbody
+                    - current_membership.liabilities.keys.each do |user|
+                      %tr
+                        %td= user.name
+                        %td
+                          %span.label.label-default= humanized_money_with_symbol current_membership.liabilities[user]/100.0
+              / /.tab-pane
           / /.tab-content
       / /.box-body
-  - if current_membership.liabilities.count > 0
-    .col-md-6
-      .box
-        .box-header
-          %h3.box-title Rückzahlungen
-        / /.box-header
-        .box-body
-          %table.table
-            %tbody
-              - current_membership.liabilities.keys.each do |user|
-                %tr
-                  %td= user.name
-                  %td
-                    %span.label.label-default= humanized_money_with_symbol current_membership.liabilities[user]/100.0
-        / /.box-body
   .col-md-6
     .box
       .box-header
