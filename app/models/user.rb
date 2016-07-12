@@ -5,8 +5,8 @@ class User < ActiveRecord::Base
 
   has_many :memberships
   has_many :groups, through: :memberships
-  has_many :invitations, class_name: 'Invite', foreign_key: 'recipient_id'
-  has_many :sent_invites, class_name: 'Invite', foreign_key: 'sender_id'
+  has_many :invitations, -> { order(created_at: :desc) }, class_name: 'Invite', foreign_key: 'recipient_id'
+  has_many :sent_invites, -> { order(created_at: :desc) }, class_name: 'Invite', foreign_key: 'sender_id'
   has_many :debts, class_name: 'Transaction', foreign_key: :debtor_id
   has_many :credits, class_name: 'Transaction', foreign_key: :creditor_id
 

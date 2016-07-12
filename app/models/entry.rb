@@ -1,4 +1,5 @@
 class Entry < ActiveRecord::Base
+  include PublicActivity::Common
   has_many :transactions, dependent: :destroy
   belongs_to :group
 

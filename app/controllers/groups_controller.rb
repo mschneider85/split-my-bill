@@ -15,6 +15,7 @@ class GroupsController < AuthenticateController
     @group = Group.new(group_params)
     if @group.save
       @group.users << current_user
+      @group.create_activity key: 'group.create', owner: current_user
       redirect_to group_path(@group), notice: t('messages.created', model: Group.model_name.human)
     else
       render :new
@@ -22,8 +23,9 @@ class GroupsController < AuthenticateController
   end
 
   def show
-    @report = GroupReport.new(@group)
     @invite = @group.invites.new
+    @activities = (PublicActivity::Activity.all.where(trackable_id: @group.invites.ids, trackable_type: 'Invite') + PublicActivity::Activity.all.where(trackable_id: @group.entries.ids, trackable_type: 'Entry') + @group.activities).sort{|a, b| a.created_at <=> b.created_at }.reverse
+    @activities = @activities.first(5) unless params[:all_activities]
   end
 
   def edit
@@ -31,7 +33,9 @@ class GroupsController < AuthenticateController
   end
 
   def update
-    @group.update(group_params)
+    if @group.update(group_params)
+      @group.create_activity key: 'group.update', owner: current_user
+    end
   end
 
   def destroy

@@ -1,0 +1,9 @@
+%ul.timeline
+  %li.time-label
+    %span.bg-gray
+      = l Date.today
+  = render_activities(activities)
+  %li= icon "clock-o"
+  %li.text-center#show-all-activities
+    = link_to group_path(group, all_activities: true), remote: true do
+      alle anzeigen

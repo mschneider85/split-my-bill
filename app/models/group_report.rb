@@ -19,11 +19,11 @@ class GroupReport
   end
 
   def first_expense
-    I18n.l(expenses.order(created_at: :asc).first.created_at, format: :short_date)
+    expenses.any? ? I18n.l(expenses.order(created_at: :asc).first.created_at, format: :short_date) : '-'
   end
 
   def last_expense
-    I18n.l(expenses.order(created_at: :desc).first.created_at, format: :short_date)
+    expenses.any? ? I18n.l(expenses.order(created_at: :desc).first.created_at, format: :short_date) : '-'
   end
 
   private

@@ -1,0 +1,9 @@
+%li.activity
+  = icon 'pencil', class: 'bg-yellow'
+  .timeline-item
+    %span.time
+      = icon 'clock-o'
+      = l activity.created_at
+    %h3.timeline-header.no-border
+      = activity.owner.name
+      hat diese Gruppe bearbeitet.

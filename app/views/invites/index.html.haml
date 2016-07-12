@@ -1,0 +1,24 @@
+.box
+  .box-header
+    %h3.box-title= Invite.model_name.human(count: 2)
+  / /.box-header
+  .box-body.no-padding
+    %table.table.table-hover
+      %tbody
+        %tr
+          %th Gruppe
+          %th Absender
+          %th Datum
+          %th
+        - @invites.each do |invite|
+          %tr
+            %td= invite.group_name
+            %td= invite.sender.name
+            %td= l invite.created_at.to_date
+            %td
+              .btn-toolbar
+                = link_to [:decline, invite], remote: true, class: 'btn btn-danger' do
+                  ablehnen
+                = link_to [:accept, invite], remote: true, class: 'btn btn-success' do
+                  akzeptieren
+  / /.box-body

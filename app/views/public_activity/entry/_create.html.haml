@@ -1,0 +1,11 @@
+%li.activity
+  = icon 'money', class: 'bg-green'
+  .timeline-item
+    %span.time
+      = icon 'clock-o'
+      = l activity.created_at
+    %h3.timeline-header.no-border
+      = activity.owner.name
+      hat eine Buchung über
+      = humanized_money_with_symbol activity.trackable.amount
+      erstellt.

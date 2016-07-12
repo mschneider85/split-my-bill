@@ -27,6 +27,7 @@
   $('#entries').DataTable
     order: [[ 1, "desc" ]]
     dom: 'Bfrtip'
+    pagingType: 'simple'
     language: {
       buttons:
         pageLength:       "%d #{Entry.model_name.human(count: 2)}",
@@ -44,9 +45,9 @@
       sSearch:            "Suchen",
       sZeroRecords:       "Keine #{Entry.model_name.human(count: 2)} vorhanden.",
       oPaginate: {
-        sFirst:           "Erste",
-        sPrevious:        "Zurück",
-        sNext:            "Nächste",
-        sLast:            "Letzte"
+        sFirst:           "<i class='fa fa-chevron-left'></i><i class='fa fa-chevron-left'></i>",
+        sPrevious:        "<i class='fa fa-chevron-left'></i>",
+        sNext:            "<i class='fa fa-chevron-right'></i>",
+        sLast:            "<i class='fa fa-chevron-right'></i><i class='fa fa-chevron-right'></i>"
       }
     }

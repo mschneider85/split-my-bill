@@ -1,3 +1,3 @@
 = simple_form_for group, remote: @group.persisted? do |f|
-  = f.input :name
-  = f.input :description
+  = f.input :name, hint: 'Gib einen Namen für die Gruppe ein, z.B. "Urlaub Portugal"'
+  = f.input :description, hint: 'Beschreibe die Gruppe in einem kurzen Satz, z.B. "Unser Urlaub 2016"'

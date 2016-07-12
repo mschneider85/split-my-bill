@@ -1,0 +1,12 @@
+%li
+  / start message
+  %a{:href => "#"}
+    .pull-left
+      = image_tag invite.sender.avatar_url, class: 'img-circle'
+    %h4
+      Einladung
+      %small
+        %i.fa.fa-clock-o
+        = time_ago_in_words invite.created_at
+    %p= "Einladung zur Gruppe \"#{invite.group_name}\""
+/ end message

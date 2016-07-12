@@ -1,3 +1,4 @@
+= render 'info_panel'
 .row
   .col-md-12
     .box
@@ -13,11 +14,9 @@
         .nav-tabs-custom
           %ul.nav.nav-tabs
             %li.active
-              %a{ data: { toggle: 'tab' }, href: '#tab_dashboard' } Dashboard
+              %a{ data: { toggle: 'tab' }, href: '#tab_users' }= User.model_name.human(count: 2)
             %li
               %a{ data: { toggle: 'tab' }, href: '#tab_entries' } Buchungen
-            %li
-              %a{ data: { toggle: 'tab' }, href: '#tab_users' }= User.model_name.human(count: 2)
             - if current_membership.liabilities.count > 0
               %li
                 %a{ data: { toggle: 'tab' }, href: '#tab_refund' } Zurückzahlen
@@ -35,55 +34,15 @@
                 %li.divider{:role => "presentation"}
                 %li{:role => "presentation"}
                   %a{:href => "#", :role => "menuitem", :tabindex => "-1"} Separated link
+            %li
+              = link_to [:new, @group, :entry], data: { toggle: 'modal', target: '.modal' } do
+                Neue Buchung
           .tab-content
-            #tab_dashboard.tab-pane.active
-              .row
-                .col-md-3.col-sm-6.col-xs-12
-                  .info-box.bg-red
-                    %span.info-box-icon
-                      = icon 'money'
-                    .info-box-content
-                      %span.info-box-text Gesamtkosten
-                      %span.info-box-number= @report.expenses_sum
-                    / /.info-box-content
-                  / /.info-box
-                .col-md-3.col-sm-6.col-xs-12
-                  .info-box.bg-yellow
-                    %span.info-box-icon
-                      = icon 'users'
-                    .info-box-content
-                      %span.info-box-text ø Kosten / Person
-                      %span.info-box-number= @report.expenses_avg
-                    / /.info-box-content
-                  / /.info-box
-                .col-md-3.col-sm-6.col-xs-12
-                  .info-box.bg-green
-                    %span.info-box-icon
-                      = icon 'calendar'
-                    .info-box-content
-                      %span.info-box-text Erste Ausgabe
-                      %span.info-box-number= @report.first_expense
-                    / /.info-box-content
-                  / /.info-box
-                .col-md-3.col-sm-6.col-xs-12
-                  .info-box.bg-blue
-                    %span.info-box-icon
-                      = icon 'calendar'
-                    .info-box-content
-                      %span.info-box-text Letzte Ausgabe
-                      %span.info-box-number= @report.last_expense
-                    / /.info-box-content
-                  / /.info-box
-                .col-md-12.col-sm-12.col-xs-12
-                  = link_to [:new, @group, :entry], class: 'btn btn-default', data: { toggle: 'modal', target: '.modal' } do
-                    = icon 'plus'
-                    Neu
+            #tab_users.tab-pane.active
+              = render 'usertable', group: @group
             / /.tab-pane
             #tab_entries.tab-pane
               = render 'entrytable', group: @group
-            / /.tab-pane
-            #tab_users.tab-pane
-              = render 'usertable', group: @group
             / /.tab-pane
             - if current_membership.liabilities.count > 0
               #tab_refund.tab-pane
@@ -97,6 +56,9 @@
               / /.tab-pane
           / /.tab-content
       / /.box-body
+  .col-md-12#activity-feed
+    = render 'activities', group: @group, activities: @activities
+
   .col-md-6
     .box
       .box-header

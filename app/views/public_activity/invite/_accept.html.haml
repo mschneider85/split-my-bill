@@ -1,0 +1,9 @@
+%li.activity
+  = icon 'check', class: 'bg-blue'
+  .timeline-item
+    %span.time
+      = icon 'clock-o'
+      = l activity.created_at
+    %h3.timeline-header.no-border
+      = activity.owner.name
+      ist der Gruppe beigetreten.

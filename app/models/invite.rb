@@ -1,10 +1,11 @@
 class Invite < ActiveRecord::Base
+  include PublicActivity::Common
   belongs_to :group
   belongs_to :sender, class_name: 'User'
   belongs_to :recipient, class_name: 'User'
 
   before_create :generate_token
-  before_save :check_user_existence
+  before_validation :check_user_existence
 
   delegate :name, to: :group, prefix: true
 
@@ -14,14 +15,19 @@ class Invite < ActiveRecord::Base
   scope :for_sender, ->(user) { where(sender: user) }
   scope :for_recipient, ->(user) { where(recipient: user) }
 
+  validates :email, presence: true, format: { with: Devise::email_regexp }
+  validate do
+    if (sender_id == recipient_id) || (group.users.ids.include? recipient_id)
+      errors.add(:recipient_id, 'Ungültiger Empfänger.')
+    end
+  end
+
   def accept!
-    self.accepted = true
-    self.save
+    update_column(:accepted, true)
   end
 
   def decline!
-    self.accepted = false
-    self.save
+    update_column(:accepted, false)
   end
 
   private
