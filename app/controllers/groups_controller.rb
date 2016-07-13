@@ -24,8 +24,10 @@ class GroupsController < AuthenticateController
 
   def show
     @invite = @group.invites.new
-    @activities = (PublicActivity::Activity.all.where(trackable_id: @group.invites.ids, trackable_type: 'Invite') + PublicActivity::Activity.all.where(trackable_id: @group.entries.ids, trackable_type: 'Entry') + @group.activities).sort{|a, b| a.created_at <=> b.created_at }.reverse
-    @activities = @activities.first(5) unless params[:all_activities]
+    @activities = params[:all_activities] ? @group.related_activities : @group.related_activities.first(5)
+    @commentable = @group
+    @comments = @commentable.comments.order(created_at: :desc)
+    @comment = Comment.new
   end
 
   def edit

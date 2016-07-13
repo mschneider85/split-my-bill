@@ -1,2 +1,10 @@
 $('#activity-feed').html("<%= j render '/groups/activities', group: @group, activities: @activities %>");
-$('#show-all-activities').hide();
+<% if params[:all_activities] %>
+  $('#show-all-activities').hide();
+  <% if @activities.count > 5 %>
+    $('#show-less-activities').show();
+  <% end %>
+<% else %>
+  $('#show-all-activities').show();
+  $('#show-less-activities').hide();
+<% end %>

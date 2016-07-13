@@ -5,7 +5,12 @@
       = icon 'clock-o'
       = l activity.created_at
     %h3.timeline-header.no-border
-      = activity.trackable.sender.name
+      = link_to activity.trackable.sender do
+        = activity.trackable.sender.name
       hat
-      = activity.trackable.recipient ? activity.trackable.recipient.name : activity.trackable.email
-      eingeladen.
+      - if activity.trackable.recipient
+        = link_to activity.trackable.recipient do
+          = activity.trackable.recipient.name
+      - else
+        = activity.trackable.email
+      in die Gruppe eingeladen.

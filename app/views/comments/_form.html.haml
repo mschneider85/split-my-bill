@@ -1,0 +1,17 @@
+.box
+  .box-header.with-border
+    %h3.box-title Kommentar
+  / /.box-header
+  .box-body
+    = simple_form_for [@commentable, @comment] do |f|
+      = f.input :content, label: false, input_html: { rows: 4 }
+  / /.box-body
+  .box-footer
+    = button_tag type: 'submit', class: 'btn btn-info pull-right submit-form' do
+      = t('helpers.submit.create', model: Comment.model_name.human)
+  / /.box-footer
+
+:coffee
+  $ ->
+    $('.submit-form').click ->
+      $(this).parent().parent().find('form').submit()

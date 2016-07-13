@@ -23,6 +23,7 @@ gem 'hightop'
 gem 'jquery-datatables-rails', git: 'git://github.com/rweng/jquery-datatables-rails.git'
 gem 'kaminari'
 gem 'public_activity'
+gem 'activerecord_any_of'
 
 gem 'money-rails'
 gem 'eu_central_bank'

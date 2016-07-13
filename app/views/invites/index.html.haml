@@ -10,15 +10,19 @@
           %th Absender
           %th Datum
           %th
-        - @invites.each do |invite|
+        - if @invites.any?
+          - @invites.each do |invite|
+            %tr
+              %td= invite.group_name
+              %td= invite.sender.name
+              %td= l invite.created_at.to_date
+              %td
+                .btn-toolbar
+                  = link_to [:decline, invite], remote: true, class: 'btn btn-danger' do
+                    ablehnen
+                  = link_to [:accept, invite], remote: true, class: 'btn btn-success' do
+                    akzeptieren
+        - else
           %tr
-            %td= invite.group_name
-            %td= invite.sender.name
-            %td= l invite.created_at.to_date
-            %td
-              .btn-toolbar
-                = link_to [:decline, invite], remote: true, class: 'btn btn-danger' do
-                  ablehnen
-                = link_to [:accept, invite], remote: true, class: 'btn btn-success' do
-                  akzeptieren
+            %td.text-center{ colspan: 4 } Keine Einladungen vorhanden.
   / /.box-body

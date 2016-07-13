@@ -1,7 +1,8 @@
 <% if @entry.errors.any? %>
   $('.modal-body').html("<%= j render 'form', group: @group, entry: @entry %>");
 <% else %>
-  $('#entrytable').html("<%= j render 'groups/entrytable', group: @group %>")
-  $('#usertable').html("<%= j render 'groups/usertable', group: @group %>")
+  $('#tab_entries').html("<%= j render 'groups/entrytable', group: @group %>")
+  $('#tab_users').html("<%= j render 'groups/usertable', group: @group %>")
+  $('#activity-feed').html("<%= j render '/groups/activities', group: @group, activities: @group.related_activities.first(5) %>");
   $('.modal').modal('hide');
 <% end %>

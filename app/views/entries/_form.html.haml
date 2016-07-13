@@ -1,11 +1,11 @@
-= simple_form_for(@entry, url: [@group, @entry], remote: true, validate: true) do |f|
+= simple_form_for(entry, url: [group, entry], remote: true, validate: true) do |f|
   .row
     .col-md-6
       = f.input :name, autofocus: true
       = f.input :entry_type, as: :hidden, input_html: { value: 'expense' }
       = f.input :amount, input_html: { data: { role: 'money', a_sep: '.', a_dec: ',' } }
     .col-md-6
-      = f.input :user_ids, as: :check_boxes, collection: @group.users, checked: (@entry.user_ids || @group.users.map(&:id))
+      = f.input :user_ids, as: :check_boxes, collection: group.users, checked: (entry.user_ids || group.users.map(&:id))
 
 :coffee
   $ ->

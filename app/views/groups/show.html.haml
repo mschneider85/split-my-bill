@@ -3,23 +3,35 @@
   .col-md-12
     .box
       .box-header
-        %h3.box-title= @group.name
+        %h3.box-title
+          = @group.name
         .box-tools.pull-right
           = link_to [:edit, @group], class: 'btn btn-box-tool', data: { toggle: 'modal', target: '.modal' } do
             = icon 'cog'
           %button.btn.btn-box-tool{ data: { widget: :collapse }, type: :button }
             %i.fa.fa-minus
       / /.box-header
-      .box-body.no-padding#usertable
+      .box-body.no-padding
+        = link_to [:new, @group, :entry], class: 'btn btn-app', data: { toggle: 'modal', target: '.modal' } do
+          %span.badge.bg-green
+            +
+          = icon 'file-text'
+          Neue Buchung
         .nav-tabs-custom
           %ul.nav.nav-tabs
             %li.active
-              %a{ data: { toggle: 'tab' }, href: '#tab_users' }= User.model_name.human(count: 2)
+              = link_to '#tab_users', data: { toggle: 'tab' } do
+                = User.model_name.human(count: 2)
             %li
-              %a{ data: { toggle: 'tab' }, href: '#tab_entries' } Buchungen
+              = link_to '#tab_entries', data: { toggle: 'tab' } do
+                Buchungen
             - if current_membership.liabilities.count > 0
               %li
-                %a{ data: { toggle: 'tab' }, href: '#tab_refund' } Zurückzahlen
+                = link_to '#tab_refund', data: { toggle: 'tab' } do
+                  Zurückzahlen
+            %li
+              = link_to '#tab_comments', data: { toggle: 'tab' } do
+                Kommentare
             %li.dropdown
               %a.dropdown-toggle{ data: { toggle: 'dropdown' }, href: "#"}
                 Report
@@ -54,10 +66,13 @@
                         %td
                           %span.label.label-default= humanized_money_with_symbol current_membership.liabilities[user]/100.0
               / /.tab-pane
+            #tab_comments.tab-pane
+              = render 'comments/comments'
           / /.tab-content
       / /.box-body
-  .col-md-12#activity-feed
-    = render 'activities', group: @group, activities: @activities
+  - if @activities.any?
+    .col-md-12#activity-feed
+      = render 'activities', group: @group, activities: @activities
 
   .col-md-6
     .box
@@ -68,5 +83,7 @@
         = simple_form_for @invite, url: invites_path, remote: :true do |f|
           = f.input :group_id, as: :hidden, value: @invite.group_id
           = f.input :email
-          = f.button :submit
+          = f.button :submit, class: 'pull-right'
       / /.box-body
+  .col-md-6
+    = render 'comments/form'

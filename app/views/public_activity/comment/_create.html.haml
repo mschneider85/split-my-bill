@@ -1,0 +1,15 @@
+%li.activity
+  = icon 'comment', class: 'bg-yellow'
+  .timeline-item
+    %span.time
+      = icon 'clock-o'
+      = l activity.created_at
+    %h3.timeline-header
+      = link_to activity.owner do
+        = activity.owner.name
+      hat diese Gruppe kommentiert.
+    .timeline-body
+      - if activity.trackable
+        = simple_format activity.trackable.content
+      - else
+        %em - gelöscht -

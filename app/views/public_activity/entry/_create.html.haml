@@ -5,7 +5,8 @@
       = icon 'clock-o'
       = l activity.created_at
     %h3.timeline-header.no-border
-      = activity.owner.name
+      = link_to activity.owner do
+        = activity.owner.name
       hat eine Buchung über
       = humanized_money_with_symbol activity.trackable.amount
       erstellt.

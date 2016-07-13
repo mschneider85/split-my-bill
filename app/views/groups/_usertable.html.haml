@@ -2,9 +2,9 @@
   %tbody
     - group.memberships.each do |membership|
       %tr
-        %td.text-center= image_tag membership.user.avatar_url, class: 'img-circle img-table'
-        %td
+        %td.col-md-1.text-center= image_tag membership.user.avatar_url, class: 'img-circle img-table'
+        %td.col-md-9
           = membership.user.name
           = render 'shared/online_status', user: membership.user
-        %td.text-right
+        %td.col-md-2.text-right
           = render 'shared/formatted_balance', amount: membership.balance

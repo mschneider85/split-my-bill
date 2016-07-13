@@ -1,9 +1,21 @@
-%ul.timeline
-  %li.time-label
-    %span.bg-gray
-      = l Date.today
-  = render_activities(activities)
-  %li= icon "clock-o"
-  %li.text-center#show-all-activities
-    = link_to group_path(group, all_activities: true), remote: true do
-      alle anzeigen
+.box
+  .box-header
+    %h3.box-title
+    .box-tools.pull-right
+      %button.btn.btn-box-tool{ data: { widget: :collapse }, type: :button }
+        %i.fa.fa-minus
+  / /.box-header
+  .box-body
+    %ul.timeline.timeline-inverse
+      - activities.group_by{|activity| activity.created_at.to_date}.each do |date, activities_on_date|
+        %li.time-label
+          %span.bg-gray
+            = l date
+        = render_activities(activities_on_date)
+      %li= icon "clock-o"
+      %li.text-center
+        = link_to group_path(group, all_activities: true), id: 'show-all-activities', remote: true do
+          alle anzeigen
+        = link_to group_path(group), id: 'show-less-activities', style: 'display: none;', remote: true do
+          weniger anzeigen
+  / /.box-body

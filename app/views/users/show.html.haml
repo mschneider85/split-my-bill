@@ -1,0 +1,20 @@
+.row
+  .col-md-3
+    .box.box-primary
+      .box-body.box-profile
+        = image_tag @user.avatar_url, class: 'profile-user-img img-responsive img-circle'
+        %h3.profile-username.text-center= @user.name
+        %p.text-muted.text-center= @user.email
+        %ul.list-group.list-group-unbordered
+          %li.list-group-item
+            %b Aktive Gruppen
+            %a.pull-right= @user.groups.count
+          %li.list-group-item
+            %b Mitglied seit
+            %a.pull-right= l @user.created_at.to_date
+          %li.list-group-item
+            %b Friends
+            %a.pull-right 13,287
+        = link_to '#', class: 'btn btn-primary btn-block' do
+          %b Nachricht senden
+    / /.box-body

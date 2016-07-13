@@ -5,5 +5,6 @@
       = icon 'clock-o'
       = l activity.created_at
     %h3.timeline-header.no-border
-      = activity.owner.name
+      = link_to activity.owner do
+        = activity.owner.name
       ist der Gruppe beigetreten.
