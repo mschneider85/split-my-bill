@@ -25,8 +25,9 @@ class EntriesController < AuthenticateController
     if @users.find_by(id: current_user)
       @entry.transactions.build(amount: (@entry.amount.to_i)-splitted_amount, creditor: current_user, debtor: current_user)
     end
-    @entry.save
-    @entry.create_activity key: 'entry.create', owner: current_user
+    if @entry.save
+      @entry.create_activity key: 'entry.create', owner: current_user
+    end
   end
 
   private
