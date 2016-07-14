@@ -1,0 +1,7 @@
+%table.table.table-bordered.table-hover
+  %tbody
+    - current_membership.liabilities.keys.each do |user|
+      %tr
+        %td= user.name
+        %td
+          %span.label.label-default= humanized_money_with_symbol current_membership.liabilities[user]/100.0

@@ -8,8 +8,15 @@ class InvitesController < AuthenticateController
   def show
   end
 
+  def new
+    @group = Group.find_by(id: params[:group_id])
+    @invite = @group.invites.new
+    render layout: false
+  end
+
   def create
-    @invite = Invite.new(invite_params)
+    @group = Group.find_by(id: params[:invite][:group_id])
+    @invite = @group.invites.new(invite_params)
     @invite.sender_id = current_user.id
     if @invite.save
       if @invite.recipient.present?
@@ -19,8 +26,6 @@ class InvitesController < AuthenticateController
       end
       @flash = { "notice" => "Einladung verschickt." }
       @invite.create_activity key: 'invite.create', owner: current_user
-    else
-      redirect_to group_path(@invite.group), alert: t('messages.not_found', model: Group.model_name.human(count: 1))
     end
   end
 

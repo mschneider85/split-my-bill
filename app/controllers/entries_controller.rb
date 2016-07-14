@@ -26,6 +26,7 @@ class EntriesController < AuthenticateController
       @entry.transactions.build(amount: (@entry.amount.to_i)-splitted_amount, creditor: current_user, debtor: current_user)
     end
     if @entry.save
+      @flash = { "notice" => "Buchung erstellt." }
       @entry.create_activity key: 'entry.create', owner: current_user
     end
   end

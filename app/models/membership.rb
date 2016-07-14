@@ -17,8 +17,17 @@ class Membership < ActiveRecord::Base
   end
 
   def liabilities
-    grouped_debts = debts.group(:creditor).sum(:amount_cents)
-    grouped_credits = credits.group(:debtor).sum(:amount_cents)
-    grouped_credits.merge(grouped_debts){ |user, credit, debit| debit - credit }.reject {|k, v|  v <= 0 }
+    hash = {}
+    group.users.each do |user|
+      hash[user] = liability_for(user)
+    end
+    hash.delete_if { |k, v| v.nil? }
+  end
+
+  private
+
+  def liability_for(other_user)
+    liability = (credits.where(debtor: other_user).sum(:amount_cents) - debts.where(creditor: other_user).sum(:amount_cents))
+    liability >= 0 ? nil : liability.abs
   end
 end

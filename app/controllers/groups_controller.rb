@@ -23,7 +23,6 @@ class GroupsController < AuthenticateController
   end
 
   def show
-    @invite = @group.invites.new
     @activities = params[:all_activities] ? @group.related_activities : @group.related_activities.first(5)
     @commentable = @group
     @comments = @commentable.comments.order(created_at: :desc)

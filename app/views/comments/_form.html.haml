@@ -1,2 +1,2 @@
-= simple_form_for [@commentable, @comment] do |f|
+= simple_form_for [commentable, comment], remote: true do |f|
   = f.input :content, label: false, autofocus: true, input_html: { rows: 4 }

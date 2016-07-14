@@ -11,6 +11,7 @@ class RegistrationsController < Devise::RegistrationsController
         invite.accept!
         resource.groups.push(invite.group)
         resource.skip_confirmation!
+        invite.create_activity key: 'invite.accept', owner: resource
       end
     end
     resource.save

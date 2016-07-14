@@ -5,7 +5,7 @@
         = icon 'money'
       .info-box-content
         %span.info-box-text Gesamtkosten
-        %span.info-box-number= @group.report.expenses_sum
+        %span.info-box-number= group.report.expenses_sum
       / /.info-box-content
     / /.info-box
   .col-md-3.col-sm-6.col-xs-12
@@ -14,7 +14,7 @@
         = icon 'users'
       .info-box-content
         %span.info-box-text ø Kosten / Person
-        %span.info-box-number= @group.report.expenses_avg
+        %span.info-box-number= group.report.expenses_avg
       / /.info-box-content
     / /.info-box
   .col-md-3.col-sm-6.col-xs-12
@@ -23,7 +23,7 @@
         = icon 'calendar'
       .info-box-content
         %span.info-box-text Erste Ausgabe
-        %span.info-box-number= @group.report.first_expense
+        %span.info-box-number= group.report.first_expense
       / /.info-box-content
     / /.info-box
   .col-md-3.col-sm-6.col-xs-12
@@ -32,6 +32,6 @@
         = icon 'calendar'
       .info-box-content
         %span.info-box-text Letzte Ausgabe
-        %span.info-box-number= @group.report.last_expense
+        %span.info-box-number= group.report.last_expense
       / /.info-box-content
     / /.info-box

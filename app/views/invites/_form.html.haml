@@ -1,0 +1,3 @@
+= simple_form_for [@group, @invite], url: @invite, remote: true do |f|
+  = f.input :group_id, as: :hidden, value: @invite.group_id
+  = f.input :email, autofocus: true

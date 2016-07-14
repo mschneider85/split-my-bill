@@ -1,14 +1,14 @@
 .modal-header
   = button_tag 'x', class: "close", data: { dismiss: "modal" }, aria: { hidden: true }
-  %h4.modal-title Neuer Kommentar
+  %h4.modal-title Neue Einladung
 
 .modal-body
-  = render 'form', commentable: @commentable, comment: @comment
+  = render 'form'
 
 .modal-footer
   = button_tag t('actions.cancel'), class: 'btn btn-cancel', data: { dismiss: "modal" }
   = button_tag type: 'submit', class: 'btn btn-info submit-form' do
-    = t('helpers.submit.create', model: Comment.model_name.human)
+    = t('helpers.submit.create', model: Invite.model_name.human)
 
 :coffee
   $ ->

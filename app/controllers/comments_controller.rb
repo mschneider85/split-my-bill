@@ -15,10 +15,8 @@ class CommentsController < ApplicationController
     @comment = @commentable.comments.new(comment_params)
     @comment.author = current_user
     if @comment.save
+      @flash = { "notice" => "Kommentar erstellt." }
       @comment.create_activity key: 'comment.create', owner: current_user
-      redirect_to @commentable, notice: "Kommentar erstellt."
-    else
-      render :new
     end
   end
 

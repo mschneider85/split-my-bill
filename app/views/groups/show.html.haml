@@ -1,4 +1,5 @@
-= render 'info_panel'
+#info_panel
+  = render 'info_panel', group: @group
 .row
   .col-md-12
     .box
@@ -13,15 +14,14 @@
       / /.box-header
       .box-body.no-padding
         = link_to [:new, @group, :entry], class: 'btn btn-app', data: { toggle: 'modal', target: '.modal' } do
-          %span.badge.bg-green
-            +
           = icon 'file-text'
-          Neue Buchung
+          Buchung
         = link_to [:new, @group, :comment], class: 'btn btn-app', data: { toggle: 'modal', target: '.modal' } do
-          %span.badge.bg-green
-            +
           = icon 'comment'
           Kommentar
+        = link_to [:new, :invite, group_id: @group.id], class: 'btn btn-app', data: { toggle: 'modal', target: '.modal' } do
+          = icon 'star'
+          Einladung
         .nav-tabs-custom
           %ul.nav.nav-tabs
             %li.active
@@ -46,30 +46,12 @@
             / /.tab-pane
             - if current_membership.liabilities.count > 0
               #tab_refund.tab-pane
-                %table.table.table-bordered.table-hover
-                  %tbody
-                    - current_membership.liabilities.keys.each do |user|
-                      %tr
-                        %td= user.name
-                        %td
-                          %span.label.label-default= humanized_money_with_symbol current_membership.liabilities[user]/100.0
+                = render 'liabilitytable'
               / /.tab-pane
             #tab_comments.tab-pane
-              = render 'comments/comments'
+              = render 'comments/comments', comments: @comments
           / /.tab-content
       / /.box-body
   - if @activities.any?
     .col-md-12#activity-feed
       = render 'activities', group: @group, activities: @activities
-
-  .col-md-6
-    .box
-      .box-header
-        %h3.box-title= [@group.name, Invite.model_name.human(count: 2)].merge_with(" - ")
-      / /.box-header
-      .box-body
-        = simple_form_for @invite, url: invites_path, remote: :true do |f|
-          = f.input :group_id, as: :hidden, value: @invite.group_id
-          = f.input :email
-          = f.button :submit, class: 'pull-right'
-      / /.box-body

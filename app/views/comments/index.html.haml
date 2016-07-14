@@ -1,7 +1,6 @@
 %h1 Comments#index
-%p Find me in app/views/comments/index.html.haml
 
-= render 'comments'
+= render 'comments', comments: @comments
 %p
   = link_to [:new, @commentable, :comment] do
     Neuer Kommentar

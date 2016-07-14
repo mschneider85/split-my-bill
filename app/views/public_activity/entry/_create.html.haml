@@ -15,7 +15,7 @@
       = humanized_money_with_symbol activity.trackable.amount
       für
       - debtor_array = activity.trackable.transactions.map{ |transaction| transaction.debtor.name }.uniq
-      - if debtor_array.size == @group.memberships.count
+      - if debtor_array.size == @group.memberships.count && debtor_array.size > 1
         alle
       - else
         = debtor_array.to_sentence

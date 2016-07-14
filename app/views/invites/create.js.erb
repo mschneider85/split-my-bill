@@ -1,2 +1,7 @@
-$('section.content').prepend("<%= j render 'shared/flash_messages', flash: @flash %>")
-$('input#invite_email').val('')
+<% if @invite.errors.any? %>
+  $('.modal-body').html("<%= j render 'form' %>");
+<% else %>
+  $('#activity-feed').html("<%= j render '/groups/activities', group: @group, activities: @group.related_activities.first(5) %>");
+  $('section.content').prepend("<%= j render 'shared/flash_messages', flash: @flash %>")
+  $('.modal').modal('hide');
+<% end %>

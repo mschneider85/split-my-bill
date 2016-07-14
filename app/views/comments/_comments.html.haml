@@ -1,14 +1,13 @@
-#comments
-  %table.table.table-bordered.table-hover
-    %tbody
-      - @comments.each do |comment|
-        %tr.comment
-          %td.col-md-1
-            %span.time
-              = icon 'clock-o'
-              = l comment.created_at.to_date
-          %td.col-md-3
-            = link_to comment.author do
-              = comment.author_name
-          %td.col-md-8
-            = simple_format comment.content
+%table.table.table-bordered.table-hover#comments
+  %tbody
+    - comments.each do |comment|
+      %tr.comment
+        %td.col-md-1
+          %span.time
+            = icon 'clock-o'
+            = l comment.created_at.to_date
+        %td.col-md-3
+          = link_to comment.author do
+            = comment.author_name
+        %td.col-md-8
+          = simple_format comment.content
