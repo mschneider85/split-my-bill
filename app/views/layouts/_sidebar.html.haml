@@ -27,7 +27,7 @@
             %a{:href => "#"}
               %i.fa.fa-circle-o
               Dashboard v2
-      %li
+      %li{ class: ('active' if controller_name == 'invites') }
         = link_to invites_path do
           = icon 'files-o'
           %span= Invite.model_name.human(count: 2)

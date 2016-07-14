@@ -1,11 +1,11 @@
 <% if @entry.errors.any? %>
   $('.modal-body').html("<%= j render 'form', group: @group, entry: @entry %>");
 <% else %>
-  $('#info_panel').html("<%= j render 'groups/info_panel', group: @group %>")
-  $('#tab_entries').html("<%= j render 'groups/entrytable', group: @group %>")
-  $('#tab_users').html("<%= j render 'groups/usertable', group: @group %>")
-  $('#tab_refund').html("<%= j render 'groups/liabilitytable', current_membership: current_user.memberships.find_by(group: @group) %>")
+  $('#info_panel').html("<%= j render 'groups/info_panel', group: @group %>");
+  $('#tab_entries').html("<%= j render 'groups/entrytable', group: @group %>");
+  $('#tab_users').html("<%= j render 'groups/usertable', group: @group %>");
+  $('#tab_refund').html("<%= j render 'groups/liabilitytable', current_membership: current_user.memberships.find_by(group: @group) %>");
   $('#activity-feed').html("<%= j render '/groups/activities', group: @group, activities: @group.related_activities.first(5) %>");
-  $('section.content').prepend("<%= j render 'shared/flash_messages', flash: @flash %>")
+  $('section.content').prepend("<%= j render 'shared/flash_messages', flash: @flash %>");
   $('.modal').modal('hide');
 <% end %>

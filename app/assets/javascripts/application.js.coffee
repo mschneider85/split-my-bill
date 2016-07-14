@@ -41,3 +41,4 @@ $ ->
 
   $('.modal').on 'shown.bs.modal', ->
     $(this).find('[autofocus]:first').focus()
+    $(this).find('form[data-validate="true"]').enableClientSideValidations();
