@@ -8,3 +8,7 @@ de:
       group:
         name: Name
         description: Beschreibung
+      entry:
+        name: Verwendungszweck
+        amount: Betrag
+        user_ids: für Benutzer

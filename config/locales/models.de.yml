@@ -16,3 +16,6 @@ de:
       entry:
         one: Buchung
         other: Buchungen
+      comment:
+        one: Komemtar
+        other: Kommentare

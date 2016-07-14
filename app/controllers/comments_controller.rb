@@ -8,6 +8,7 @@ class CommentsController < ApplicationController
 
   def new
     @comment = @commentable.comments.new
+    render layout: false
   end
 
   def create

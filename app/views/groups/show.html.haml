@@ -17,6 +17,11 @@
             +
           = icon 'file-text'
           Neue Buchung
+        = link_to [:new, @group, :comment], class: 'btn btn-app', data: { toggle: 'modal', target: '.modal' } do
+          %span.badge.bg-green
+            +
+          = icon 'comment'
+          Kommentar
         .nav-tabs-custom
           %ul.nav.nav-tabs
             %li.active
@@ -32,23 +37,6 @@
             %li
               = link_to '#tab_comments', data: { toggle: 'tab' } do
                 Kommentare
-            %li.dropdown
-              %a.dropdown-toggle{ data: { toggle: 'dropdown' }, href: "#"}
-                Report
-                %span.caret
-              %ul.dropdown-menu
-                %li{:role => "presentation"}
-                  %a{:href => "#", :role => "menuitem", :tabindex => "-1"} Action
-                %li{:role => "presentation"}
-                  %a{:href => "#", :role => "menuitem", :tabindex => "-1"} Another action
-                %li{:role => "presentation"}
-                  %a{:href => "#", :role => "menuitem", :tabindex => "-1"} Something else here
-                %li.divider{:role => "presentation"}
-                %li{:role => "presentation"}
-                  %a{:href => "#", :role => "menuitem", :tabindex => "-1"} Separated link
-            %li
-              = link_to [:new, @group, :entry], data: { toggle: 'modal', target: '.modal' } do
-                Neue Buchung
           .tab-content
             #tab_users.tab-pane.active
               = render 'usertable', group: @group
@@ -85,5 +73,3 @@
           = f.input :email
           = f.button :submit, class: 'pull-right'
       / /.box-body
-  .col-md-6
-    = render 'comments/form'
