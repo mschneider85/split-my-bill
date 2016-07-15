@@ -28,6 +28,8 @@ gem 'activerecord_any_of'
 gem 'money-rails'
 gem 'eu_central_bank'
 
+gem 'exception_notification'
+
 gem 'devise'
 gem 'devise_lastseenable'
 gem 'devise-i18n'
