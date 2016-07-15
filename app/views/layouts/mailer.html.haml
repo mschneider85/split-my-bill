@@ -1,3 +1,47 @@
-%hmtl
-  %body
-    = yield
+%html
+  %head
+    %meta{ content: 'text/html; charset=UTF-8', http: { equiv: 'Content-Type' } }
+    %meta{ content: 'width=device-width, initial-scale=1.0', name: 'viewport' }
+  %body{ style: "background: #fff; color: #000; font-family: verdana, arial, helvetica, sans-serif; font-size: 10pt;", leftmargin: '0', marginheight: '0', offset: '0', topmargin: '0' }
+    %center
+      %table{ border: "0", cellpadding: "0", cellspacing: "0", height:"100%", width: "100%" }
+        %tr
+          %td{ align: "center", valign: "top" }
+            %table{ border: "0", cellpadding: "20", cellspacing: "0", width: "640" }
+              %tr
+                %td{ align: "center", valign: "top"}
+                  %table{ border: "0", cellpadding: "0", cellspacing: "0", width: "100%" }
+                    %tr
+                      %td{ colspan: "2", style: "height: 54px; background: #367fa9; padding-bottom: 0cm; padding-top: 0cm; padding-left: 0cm; padding-right: 0cm; text-align: center;" }
+                        %span{ style: "color: #ffffff" }
+                          %b> Split
+                          My
+                          %b> Bill
+                    %tr
+                      %td{ colspan: "2", style: "padding-bottom: 0cm; padding-top: 0cm; padding-left: 0cm; padding-right: 0cm" }
+                        %img{ alt: "connect 2016", src: "#{root_url}smb_banner.jpg", width: "640"}
+                    %tr
+                      %td{ align: "center", valign: "top" }
+                    %tr
+                      %td{ align: "center", valign: "top" }
+                        %table{ border: "0", cellpadding: "0", cellspacing: "0", width: "100%", style: "padding-left: 10px; padding-right: 10px;" }
+                          %td{ colspan: "2", style: "padding-top: 20px; padding-bottom: 20px;"}
+                            %p{ style: "font-size: 18pt; font-family: arial,sans-serif; font-weight: bold; color: #367fa9; margin: 0cm 0cm 0pt; line-height: normal; mso-style-priority: 99; mso-style-link: email heading char; mso-style-name: email heading" }
+                              = yield(:title)
+                          %tr
+                            %td{ colspan: "2", style: "font-size: 10pt; line-height: 24px;" }
+                              = yield
+                              %p
+                                = "--"
+                                %br
+                                Martin
+                              %p
+                                %a{ href: "http://split-my-bill.herokuapp.com", style: "text-decoration: none; color: #367fa9;" }
+                                  http://split-my-bill.herokuapp.com
+                                %br
+                                %a{ href: "https://github.com/mschneider85/split-my-bill", style: "text-decoration: none; color: #367fa9;" }
+                                  https://github.com/mschneider85/split-my-bill
+                    %tr
+                      %td{ colspan: "2", style: "height: 20px; background: #ffffff; padding-bottom: 0cm; padding-top: 0cm; padding-left: 0cm; padding-right: 0cm; text-align: center;" }
+                    %tr
+                      %td{ colspan: "2", style: "height: 26px; background: #367fa9; padding-bottom: 0cm; padding-top: 0cm; padding-left: 0cm; padding-right: 0cm; text-align: center;" }

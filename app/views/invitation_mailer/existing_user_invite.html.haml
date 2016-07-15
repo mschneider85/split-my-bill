@@ -1,11 +1,11 @@
-!!!
-%html
-  %head
-    %meta{ :content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type" }
-    %title SplitMyBill Gruppeneinladung
-  %body{ style: "background: #fff; color: #000; font-family: verdana, arial, helvetica, sans-serif; font-size: 10pt;" }
-    Du wurdest zur Gruppe
-    = @invite.group_name
-    eingeladen
-    = link_to "#{root_url}#{groups_path}", target: "_blank" do
-      = "#{root_url}#{groups_path}"
+- content_for :title, 'Gruppeneinladung'
+%p
+  = "Hallo #{@invite.recipient.first_name},"
+%p
+  = "du wurdest von #{@invite.sender.name} zur Gruppe \"#{@invite.group_name}\" eingeladen!"
+  Um der Gruppe beizutreten folge diesem Link:
+  = succeed '.' do
+    - url = "#{root_url}#{invites_path.sub!(/^\//, '')}"
+    = link_to url, url, target: "_blank", style: "text-decoration: none; color: #367fa9; font-weight: bold;"
+%p
+  Viel Spaß mit SplitMyBill

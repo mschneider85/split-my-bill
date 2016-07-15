@@ -1,5 +1,6 @@
 - require 'devise/version'
-%p= t('.greeting', :recipient => @resource.email, :default => "Welcome #{@resource.email}!")
+- content_for :title, 'Aktivierung deines Accounts'
+%p= t('.greeting', :recipient => @resource.first_name, :default => "Welcome #{@resource.email}!")
 %p= t('.instruction', :default => "You can confirm your account email through the link below:")
-%p= link_to t('.action', :default => "Confirm my account"),                                                                         |
-    confirmation_url(@resource, :confirmation_token => (Devise::VERSION.start_with?('3.') ? @token : @resource.confirmation_token)) |
+%p
+  = link_to t('.action', :default => "Confirm my account"), confirmation_url(@resource, :confirmation_token => (Devise::VERSION.start_with?('3.') ? @token : @resource.confirmation_token)), style: "text-decoration: none; color: #367fa9; font-weight: bold;"

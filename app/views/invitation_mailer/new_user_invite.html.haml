@@ -1,11 +1,15 @@
-!!!
-%html
-  %head
-    %meta{ :content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type" }
-    %title SplitMyBill Gruppeneinladung
-  %body{ style: "background: #fff; color: #000; font-family: verdana, arial, helvetica, sans-serif; font-size: 10pt;" }
-    Du wurdest zur Gruppe
-    = @invite.group_name
-    eingeladen
-    = link_to "#{root_url}#{@invite_url}", target: "_blank" do
-      = "#{root_url}#{@invite_url}"
+- content_for :title, 'Einladung zu SplitMyBill'
+%p
+  Hallo Neuling,
+%p
+  du wurdest zu SplitMyBill eingeladen! Hier kannst du alle deine Ausgaben mit Freunden teilen und jederzeit sehen, wer wann was bezahlt hat.
+  = @invite.sender.name
+  möchte, dass du der Gruppe
+  = "\"#{@invite.group_name}\""
+  beitrittst. Folge dafür diesem Link:
+  = succeed '.' do
+    = link_to "Registrierung", "#{root_url}#{@invite_url}", target: "_blank", style: "text-decoration: none; color: #367fa9; font-weight: bold;"
+%p
+  = "Nach der Anmeldung trittst du automatisch der Gruppe bei. Falls du für deine Registrierung eine andere E-Mail-Adresse verwendest, muss #{@invite.sender.first_name} dich erneut zur Gruppe einladen."
+%p
+  Viel Spaß mit SplitMyBill

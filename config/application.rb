@@ -11,6 +11,8 @@ module SplitMyBill
 
       config.to_prepare do
         Devise::SessionsController.layout 'application'
+        Devise::PasswordsController.layout 'application'
+        Devise::Mailer.layout 'mailer'
       end
 
     # Settings in config/environments/* take precedence over those specified here.

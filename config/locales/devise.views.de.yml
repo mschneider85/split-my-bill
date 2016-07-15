@@ -29,20 +29,20 @@ de:
     mailer:
       confirmation_instructions:
         action: Mein Konto bestätigen
-        greeting: Willkommen %{recipient}!
-        instruction: 'Folgen Sie dem untenstehenden Link, um Ihr Konto zu bestätigen:'
-        subject: Anleitung zur Bestätigung Ihres Accounts
+        greeting: Hallo %{recipient},
+        instruction: 'Herzlich WIllkommen bei SplitMyBill! Folge dem untenstehenden Link, um dein Konto zu bestätigen:'
+        subject: "[SplitMyBill] Aktivierung deines Accounts"
       password_change:
-        greeting:
-        message:
+        greeting: Hallo %{recipient},
+        message: dein Passwort wurde soeben erfolgreich geändert.
         subject: Passwort geändert
       reset_password_instructions:
         action: Passwort ändern
         greeting: Hallo %{recipient}!
-        instruction: Jemand hat einen Link angefordert, um Ihr Passwort zu ändern. Klicken Sie auf den unten aufgeführten Link um das Passwort zu ändern.
-        instruction_2: Bitte ignorieren Sie diese E-Mail, wenn Sie kein neues Passwort angefordert haben.
-        instruction_3: Das Passwort wird nicht geändert bis Sie den obenstehenden Link abrufen und ein neues Passwort bestimmen.
-        subject: Anleitung für das Zurücksetzen Ihres Passworts
+        instruction: Jemand hat einen Link angefordert, um dein Passwort zu ändern. Klicke auf den unten aufgeführten Link um das Passwort zu ändern.
+        instruction_2: Bitte ignoriere diese E-Mail, falls du kein neues Passwort angefordert hast.
+        instruction_3: Das Passwort wird nicht geändert bis du den obenstehenden Link abrufst und ein neues Passwort bestimmst.
+        subject: "[SplitMyBill] Anleitung für das Zurücksetzen deines Passworts"
       unlock_instructions:
         action: Mein Konto entsperren
         greeting: Hallo %{recipient}!
