@@ -20,4 +20,5 @@
           .modal-dialog
             .modal-content
       = render 'layouts/footer'
-    = any_login_here
+    - if Rails.env.development?
+      = any_login_here
