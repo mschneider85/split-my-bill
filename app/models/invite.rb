@@ -18,7 +18,7 @@ class Invite < ActiveRecord::Base
   validates :email, presence: true, format: { with: Devise::email_regexp }
   validate do
     if (sender_id == recipient_id) || (group.users.ids.include? recipient_id)
-      errors.add(:recipient_id, 'Ungültiger Empfänger.')
+      errors.add(:email, 'ist schon Mitglied dieser Gruppe')
     end
   end
 

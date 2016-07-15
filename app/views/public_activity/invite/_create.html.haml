@@ -12,5 +12,11 @@
         = link_to activity.trackable.recipient do
           = activity.trackable.recipient.name
       - else
-        = activity.trackable.email
+        - group_users = activity.trackable.group.users
+        - if group_users.exists?(email: activity.trackable.email)
+          - group_user = group_users.find_by(email: activity.trackable.email)
+          = link_to group_user do
+            = group_user.name
+        - else
+          = activity.trackable.email
       in die Gruppe eingeladen.
