@@ -1,0 +1,22 @@
+%li.activity
+  = icon 'money', class: 'bg-green'
+  .timeline-item
+    %span.time
+      = icon 'clock-o'
+      = l activity.created_at
+    %h3.timeline-header
+      = link_to activity.owner do
+        = activity.owner.name
+      hat eine Buchung erstellt.
+    .timeline-body
+      - creditor_names = activity.trackable.transactions.map{ |transaction| transaction.creditor.name }.uniq
+      = creditor_names.to_sentence
+      = creditor_names.size == 1 ? 'hat' : 'haben'
+      = humanized_money_with_symbol activity.trackable.amount
+      an
+      - debtor_array = activity.trackable.transactions.map{ |transaction| transaction.debtor.name }.uniq
+      - if debtor_array.size == activity.trackable.group.memberships.count && debtor_array.size > 1
+        alle
+      - else
+        = debtor_array.to_sentence
+      zurückgezahlt.

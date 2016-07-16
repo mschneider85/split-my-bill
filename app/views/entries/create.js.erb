@@ -1,5 +1,7 @@
 <% if @entry.errors.any? %>
-  $('.modal-body').html("<%= j render 'form', group: @group, entry: @entry %>");
+  <% if @entry.entry_type == 'expense' %>
+    $('.modal-body').html("<%= j render 'form', group: @group, entry: @entry %>");
+  <% end %>
 <% else %>
   $('#info_panel').html("<%= j render 'groups/info_panel', group: @group %>");
   $('#tab_entries').html("<%= j render 'groups/entrytable', group: @group %>");

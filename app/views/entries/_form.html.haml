@@ -2,7 +2,7 @@
   .row
     .col-md-6
       = f.input :name, autofocus: true
-      = f.input :entry_type, as: :hidden, input_html: { value: 'expense' }
+      = f.input :entry_type, as: :hidden
       = f.input :amount, input_html: { data: { role: 'money', a_sep: '.', a_dec: ',' } }, required: true
     .col-md-6
       = f.input :user_ids, as: :check_boxes, collection: group.users, checked: (entry.user_ids || group.users.map(&:id))
@@ -12,4 +12,4 @@
     $('input[data-role=money]').autoNumeric('init')
 
     $('#entry_amount').focus ->
-      $('#entry_amount').val('')
+      $('#entry_amount').val('') if $('#entry_amount').val() == '0,00'

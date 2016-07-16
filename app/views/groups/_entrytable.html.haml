@@ -7,7 +7,7 @@
       %th.col-md-4 Personen
   %tbody
     - group.entries.all.order(created_at: :desc).each do |entry|
-      %tr
+      %tr{ data: { id: entry.id } }
         %td
           %span= l entry.created_at.to_date
         %td

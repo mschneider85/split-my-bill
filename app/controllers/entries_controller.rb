@@ -5,7 +5,7 @@ class EntriesController < AuthenticateController
   end
 
   def new
-    @entry = @group.entries.new
+    @entry = @group.entries.new(entry_type: params[:entry_type], user_ids: params[:user_ids], amount: params[:amount])
     render layout: false
   end
 
@@ -27,7 +27,12 @@ class EntriesController < AuthenticateController
     end
     if @entry.save
       @flash = { "notice" => "Buchung erstellt." }
-      @entry.create_activity key: 'entry.create', owner: current_user
+      case @entry.entry_type
+      when 'redemption'
+        @entry.create_activity key: 'entry.create_redemption', owner: current_user
+      else
+        @entry.create_activity key: 'entry.create', owner: current_user
+      end
     end
   end
 

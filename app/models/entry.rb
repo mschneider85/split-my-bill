@@ -3,7 +3,7 @@ class Entry < ActiveRecord::Base
   has_many :transactions, dependent: :destroy
   belongs_to :group
 
-  TYPES = %w(expense balance).freeze
+  TYPES = %w(expense redemption).freeze
   accepts_nested_attributes_for :transactions
   attr_accessor :user_ids
 
@@ -11,6 +11,10 @@ class Entry < ActiveRecord::Base
   validates :entry_type, inclusion: { in: TYPES }
   validates :name, presence: true
   monetize :amount_cents, numericality: { greater_than: 0 }
+
+  def beneficiary
+    User.find_by(id: user_ids) if user_ids && entry_type == 'redemption' && user_ids.size == 1
+  end
 
   private
 

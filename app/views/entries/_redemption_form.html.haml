@@ -1,0 +1,11 @@
+= simple_form_for(entry, url: [group, entry], remote: true) do |f|
+  .row
+    .col-md-12
+      = f.input :name, input_html: { value: "Rückzahlung an #{entry.beneficiary.name}" }, readonly: true
+      = f.input :entry_type, as: :hidden
+      = f.input :amount, input_html: { data: { role: 'money', a_sep: '.', a_dec: ',' } }, required: true, readonly: true
+      = f.input :user_ids, as: :check_boxes, collection: group.users, checked: (entry.user_ids || group.users.map(&:id)), wrapper_html: { class: 'hidden' }
+
+:coffee
+  $ ->
+    $('input[data-role=money]').autoNumeric('init')

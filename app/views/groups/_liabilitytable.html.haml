@@ -1,7 +1,11 @@
 %table.table.table-bordered.table-hover
   %tbody
     - current_membership.liabilities.keys.each do |user|
+      - amount = current_membership.liabilities[user]/100.0
       %tr
         %td= user.name
         %td
-          %span.label.label-default= humanized_money_with_symbol current_membership.liabilities[user]/100.0
+          %span.label.label-default= humanized_money_with_symbol amount
+        %td
+          = link_to [:new, @group, :entry, entry_type: 'redemption', user_ids: [user.id], amount: amount], data: { toggle: 'modal', target: '.modal' }, class: 'btn btn-sm btn-primary' do
+            jetzt zurückzahlen
