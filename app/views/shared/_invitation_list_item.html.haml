@@ -1,6 +1,6 @@
 %li
   / start message
-  %a{:href => "#"}
+  = link_to :invites do
     .pull-left
       = image_tag invite.sender.avatar_url, class: 'img-circle'
     %h4

@@ -34,8 +34,10 @@ class GroupsController < AuthenticateController
   end
 
   def update
-    if @group.update(group_params)
-      @group.create_activity key: 'group.update', owner: current_user
+    @group.assign_attributes(group_params)
+    changes = @group.changes
+    if @group.changed? && @group.save
+      @group.create_activity key: 'group.update', owner: current_user, parameters: changes
     end
   end
 

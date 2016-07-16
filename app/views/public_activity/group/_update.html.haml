@@ -8,3 +8,8 @@
       = link_to activity.owner do
         = activity.owner.name
       hat diese Gruppe bearbeitet.
+    - if activity.parameters.present?
+      .timeline-body
+        Es wurde
+        = activity.parameters.keys.map{ |attribute| "#{Group.human_attribute_name(attribute)} #{('von "' + activity.parameters[attribute][0] + '"') if activity.parameters[attribute][0].present?} zu #{activity.parameters[attribute][1].present? ? ('"' + activity.parameters[attribute][1] + '"') : '-leer-'}" }.to_sentence
+        geändert.
