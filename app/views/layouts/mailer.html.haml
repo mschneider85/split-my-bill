@@ -24,17 +24,19 @@
                       %td{ align: "center", valign: "top" }
                     %tr
                       %td{ align: "center", valign: "top" }
-                        %table{ border: "0", cellpadding: "0", cellspacing: "0", width: "100%", style: "padding-left: 10px; padding-right: 10px;" }
-                          %td{ colspan: "2", style: "padding-top: 20px; padding-bottom: 20px;"}
+                        %table{ border: "0", cellpadding: "0", cellspacing: "0", width: "100%", style: "padding-left: 20px; padding-right: 20px;" }
+                          %td{ colspan: "2", style: "padding-top: 20px; padding-bottom: 20px;" }
                             %p{ style: "font-size: 18pt; font-family: arial,sans-serif; font-weight: bold; color: #367fa9; margin: 0cm 0cm 0pt; line-height: normal; mso-style-priority: 99; mso-style-link: email heading char; mso-style-name: email heading" }
                               = yield(:title)
                           %tr
                             %td{ colspan: "2", style: "font-size: 10pt; line-height: 24px;" }
                               = yield
                               %p
-                                = "--"
-                                %br
-                                Martin
+                                %em
+                                  Martin
+                                  %br
+                                  %small
+                                    SplitMyBill Administrator
                               %p
                                 %a{ href: "http://split-my-bill.herokuapp.com", style: "text-decoration: none; color: #367fa9;" }
                                   http://split-my-bill.herokuapp.com
@@ -44,4 +46,4 @@
                     %tr
                       %td{ colspan: "2", style: "height: 20px; background: #ffffff; padding-bottom: 0cm; padding-top: 0cm; padding-left: 0cm; padding-right: 0cm; text-align: center;" }
                     %tr
-                      %td{ colspan: "2", style: "height: 26px; background: #367fa9; padding-bottom: 0cm; padding-top: 0cm; padding-left: 0cm; padding-right: 0cm; text-align: center;" }
+                      %td{ colspan: "2", style: "height: 14px; background: #367fa9; padding-bottom: 0cm; padding-top: 0cm; padding-left: 0cm; padding-right: 0cm; text-align: center;" }
