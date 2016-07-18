@@ -33,6 +33,11 @@
           %span= Invite.model_name.human(count: 2)
           - if current_user.invitations.pending.any?
             %span.label.label-success.pull-right neu
+      %li{ class: ('active' if controller_name == 'users' && action_name.in?(['index', 'show']) && @user != current_user) }
+        = link_to users_path do
+          = icon 'users'
+          %span Freunde
+          %span.label.label-primary.pull-right= current_user.friends.count
       %li.treeview#group-tree{ class: ('active' if controller_name == 'groups') }
         = link_to '#', id: 'group-button' do
           = icon('object-group')

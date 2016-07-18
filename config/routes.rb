@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users, controllers: { registrations: 'registrations' }
   get 'filter_groups' => 'application#filter_groups'
-  resources :users, only: :show
+  resources :users, only: [:index, :show]
   resources :invites do
     member do
       get :accept

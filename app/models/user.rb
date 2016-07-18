@@ -13,6 +13,7 @@ class User < ActiveRecord::Base
   attr_accessor :invite_token
 
   scope :without, ->(user) { where.not(id: user) }
+  scope :with_same_groups_as, ->(user) { includes(:groups).where(groups: { id: user.groups.ids }) }
 
   validates :first_name, :last_name, :email, presence: true
 
@@ -27,5 +28,9 @@ class User < ActiveRecord::Base
 
   def balance
     (credits.sum(:amount_cents) - debts.sum(:amount_cents)) / 100.0
+  end
+
+  def friends
+    User.without(self).with_same_groups_as(self)
   end
 end

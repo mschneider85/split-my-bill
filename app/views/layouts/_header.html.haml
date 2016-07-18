@@ -31,7 +31,7 @@
                 / inner menu: contains the actual data
                 .slimScrollDivx{:style => "position: relative; overflow: hidden; width: auto; height: 200px;"}
                   %ul.menu{:style => "overflow: hidden; width: 100%; height: 200px;"}
-                    - current_user.invitations.each do |invitation|
+                    - current_user.invitations.pending.each do |invitation|
                       = render '/shared/invitation_list_item', invite: invitation
               %li.footer
                 %a{:href => "#"} See All Messages

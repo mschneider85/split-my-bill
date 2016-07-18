@@ -8,6 +8,7 @@
 @import 'animate';
 @import 'checkbox3';
 @import 'dataTables/bootstrap/3/jquery.dataTables.bootstrap';
+@import 'pace.min';
 
 .navbar-login
 {
@@ -53,4 +54,13 @@ tr.comment {
     color: #999;
     font-size: 12px;
   }
+}
+
+.clickable-row {
+  cursor: pointer;
+}
+
+.col-centered{
+  float: none;
+  margin: 0 auto;
 }

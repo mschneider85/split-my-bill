@@ -24,6 +24,7 @@
 #= require dataTables/jquery.dataTables
 #= require dataTables/bootstrap/3/jquery.dataTables.bootstrap
 #= require jquery.slimscroll
+#= require pace
 #= require_tree .
 
 $(document).ready ->
@@ -34,6 +35,9 @@ $(document).on 'page:load', ->
   if o.sidebarPushMenu
     $.AdminLTE.pushMenu.activate(o.sidebarToggleSelector)
   $.AdminLTE.layout.activate()
+
+$(document).ajaxStart ->
+  Pace.restart()
 
 $ ->
   $('.modal').on 'hidden.bs.modal', ->
