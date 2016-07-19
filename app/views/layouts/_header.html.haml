@@ -50,16 +50,6 @@
                     = t('messages.member_since')
                     = l(current_user.confirmed_at.to_date)
               / Menu Body
-              %li.user-body
-                .row
-                  .col-xs-4.text-center
-                    %a{:href => "#"} Followers
-                  .col-xs-4.text-center
-                    %a{:href => "#"} Sales
-                  .col-xs-4.text-center
-                    %a{:href => "#"} Friends
-                / /.row
-              / Menu Footer
               %li.user-footer
                 .pull-left
                   = link_to edit_user_registration_path, class: 'btn btn-default btn-flat' do

@@ -10,8 +10,8 @@ module SplitMyBill
   class Application < Rails::Application
 
       config.to_prepare do
-        Devise::SessionsController.layout 'application'
-        Devise::PasswordsController.layout 'application'
+        Devise::SessionsController.layout 'devise'
+        Devise::PasswordsController.layout 'devise'
         Devise::Mailer.layout 'mailer'
       end
 

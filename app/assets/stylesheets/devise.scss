@@ -1,0 +1,20 @@
+body.devise {
+  i.field-addon {
+    position: absolute;
+    right: 24px;
+    z-index: 999;
+    top: 10px;
+  }
+  .alert.fade {
+    position: fixed;
+    width: 100%;
+    top: 0px;
+  }
+  .edit-box {
+    margin: 7% auto;
+    float: none;
+    i.field-addon {
+      top: 35px;
+    }
+  }
+}

@@ -1,9 +1,20 @@
-%h2= t('.resend_confirmation_instructions', :default => 'Resend confirmation instructions')
-= form_for(resource, :as => resource_name, :url => confirmation_path(resource_name), :html => { :method => :post }) do |f|
-  = devise_error_messages!
-  %div
-    = f.label :email
-    %br/
-    = f.email_field :email
-  %div= f.submit t('.resend_confirmation_instructions', :default => 'Resend confirmation instructions')
-= render "devise/shared/links"
+.login-box
+  .login-logo
+    %b> Split
+    My
+    %b> Bill
+  / /.login-logo
+  .login-box-body
+    %p.login-box-msg= t('.resend_confirmation_instructions', default: 'Resend confirmation instructions')
+    = simple_form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f|
+      .row
+        .col-md-12
+          = f.input :email, label: false, placeholder: User.human_attribute_name(:email), autofocus: true, validate: { uniqueness: false }
+          = icon('envelope fa-fw', class: 'field-addon')
+        .col-md-12
+          = button_tag type: 'submit', class: 'btn btn-primary' do
+            = t('.resend_confirmation_instructions', default: 'Resend confirmation instructions')
+    .devise-links
+      = render "devise/shared/links"
+  / /.login-box-body
+/ /.login-box

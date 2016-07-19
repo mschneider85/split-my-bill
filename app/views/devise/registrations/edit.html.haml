@@ -1,32 +1,42 @@
-%h2= t('.title', :resource => resource_class.model_name.human , :default => "Edit #{resource_name.to_s.humanize}")
-= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f|
-  = devise_error_messages!
-  %div
-    = f.label :email
-    %br/
-    = f.email_field :email
-  - if devise_mapping.confirmable? && resource.pending_reconfirmation?
+.edit-box.col-md-6
+  .login-logo
+    %b> Split
+    My
+    %b> Bill
+  / /.login-logo
+  .login-box-body
+    %p.login-box-msg= t('.title', resource: resource_class.model_name.human , default: "Edit #{resource_name.to_s.humanize}")
+    = simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }, validate: true) do |f|
+      .row
+        .col-md-12
+          = f.input :email, autofocus: true, required: true
+          = icon('envelope fa-fw', class: 'field-addon')
+          - if devise_mapping.confirmable? && resource.pending_reconfirmation?
+            %p
+              = t('.currently_waiting_confirmation_for_email', email: resource.unconfirmed_email, default: "Currently waiting confirmation for: %{email}")
+        .col-md-6
+          = f.input :first_name
+          = icon('user fa-fw', class: 'field-addon')
+        .col-md-6
+          = f.input :last_name
+          = icon('user fa-fw', class: 'field-addon')
+        .col-md-12
+          = f.input :password, hint: t('.leave_blank_if_you_don_t_want_to_change_it', default: "leave blank if you don't want to change it")
+          = icon('lock fa-fw', class: 'field-addon')
+        .col-md-12
+          = f.input :password_confirmation
+          = icon('sign-in fa-fw', class: 'field-addon')
+        .col-md-12
+          = f.input :current_password, hint: t('.we_need_your_current_password_to_confirm_your_changes', :default => 'we need your current password to confirm your changes')
+          = icon('lock fa-fw', class: 'field-addon')
+        .col-md-12
+          .btn-toolbar
+            = button_tag type: 'submit', class: 'btn btn-primary' do
+              = t('.update', default: "Update")
+    %h3= t('.cancel_my_account', :default => 'Cancel my account')
     %p
-      = t('.currently_waiting_confirmation_for_email', :email => resource.unconfirmed_email, :default => "Currently waiting confirmation for: %{email}")
-  %div
-    = f.label :password
-    %i
-      (#{t('.leave_blank_if_you_don_t_want_to_change_it', :default => "leave blank if you don't want to change it")})
-    %br/
-    = f.password_field :password, :autocomplete => "off"
-  %div
-    = f.label :password_confirmation
-    %br/
-    = f.password_field :password_confirmation
-  %div
-    = f.label :current_password
-    %i
-      (#{t('.we_need_your_current_password_to_confirm_your_changes', :default => 'we need your current password to confirm your changes')})
-    %br/
-    = f.password_field :current_password
-  %div= f.submit t('.update', :default => "Update")
-%h3= t('.cancel_my_account', :default => 'Cancel my account')
-%p
-  = t('.unhappy', :default => 'Unhappy')
-  ? #{link_to t('.cancel_my_account', :default => "Cancel my account"), registration_path(resource_name), :data => { :confirm => t('.are_you_sure', :default => "Are you sure?") }, :method => :delete}.
-= link_to t('devise.shared.links.back', :default => "Back"), :back
+      = t('.unhappy', default: 'Unhappy')
+      ? #{link_to t('.cancel_my_account', :default => "Cancel my account"), registration_path(resource_name), data: { confirm: t('actions.really_delete_account'), commit: t('.cancel_my_account') }, method: :delete}.
+    = link_to t('devise.shared.links.back', default: "Back"), :back
+  / /.login-box-body
+/ /.login-box

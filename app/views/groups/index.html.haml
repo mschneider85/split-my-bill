@@ -1,20 +1,16 @@
-.box
-  .box-header
-    %h3.box-title= Group.model_name.human(count: 2)
-  / /.box-header
-  .box-body.no-padding
-    %table.table.table-hover
-      %tbody
-        %tr
-          %th= Group.human_attribute_name(:name)
-          %th= Group.human_attribute_name(:description)
-          %th
-        - @groups.each do |group|
+.col-md-6.col-centered
+  .box
+    .box-header
+      %h3.box-title= Group.model_name.human(count: 2)
+    / /.box-header
+    .box-body.no-padding
+      %table.table.table-hover.table-bordered
+        %tbody
           %tr
-            %td= group.name
-            %td= group.description
-            %td
-              .btn-toolbar
-                = link_to group_path(group), class: 'btn btn-default' do
-                  = t('actions.show')
-  / /.box-body
+            %th= Group.human_attribute_name(:name)
+            %th= Group.human_attribute_name(:description)
+          - @groups.each do |group|
+            %tr.clickable-row{ data: { href: group_path(group) } }
+              %td= group.name
+              %td= group.description
+    / /.box-body

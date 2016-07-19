@@ -8,6 +8,7 @@ de:
     cancel: abbrechen
     sign_out: ausloggen
     sign_in: einloggen
+    really_delete_account: Soll dein Konto wirklich gelöscht werden?
   date:
     abbr_day_names:
     - So

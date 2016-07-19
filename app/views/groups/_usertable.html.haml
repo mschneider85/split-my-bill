@@ -1,7 +1,7 @@
 %table.table.table-hover.table-bordered
   %tbody
     - group.memberships.each do |membership|
-      %tr
+      %tr.clickable-row{ data: { href: user_path(membership.user) } }
         %td.col-md-1.text-center= image_tag membership.user.avatar_url, class: 'img-circle img-table'
         %td.col-md-9
           = membership.user.name

@@ -24,11 +24,15 @@
 #= require dataTables/jquery.dataTables
 #= require dataTables/bootstrap/3/jquery.dataTables.bootstrap
 #= require jquery.slimscroll
+#= require data-confirm-modal
 #= require pace
 #= require_tree .
 
 $(document).ready ->
   $.AdminLTE.layout.activate()
+
+  $('.clickable-row').click ->
+    window.document.location = $(this).data('href')
 
 $(document).on 'page:load', ->
   o = $.AdminLTE.options
@@ -46,3 +50,8 @@ $ ->
   $('.modal').on 'shown.bs.modal', ->
     $(this).find('[autofocus]:first').focus()
     $(this).find('form[data-validate="true"]').enableClientSideValidations();
+
+dataConfirmModal.setDefaults
+  title: 'Bist du sicher?'
+  commit: 'OK'
+  cancel: 'Abbrechen'

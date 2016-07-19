@@ -24,6 +24,7 @@ gem 'jquery-datatables-rails', git: 'git://github.com/rweng/jquery-datatables-ra
 gem 'kaminari'
 gem 'public_activity'
 gem 'activerecord_any_of'
+gem 'data-confirm-modal'
 
 gem 'money-rails'
 gem 'eu_central_bank'
