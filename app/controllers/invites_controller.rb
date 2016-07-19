@@ -8,6 +8,16 @@ class InvitesController < AuthenticateController
   def show
   end
 
+  def autocomplete
+    friends = current_user.friends.map do |friend|
+      {
+        name: friend.name,
+        email: friend.email
+      }
+    end
+    render json: friends
+  end
+
   def new
     @group = Group.find_by(id: params[:group_id])
     @invite = @group.invites.new

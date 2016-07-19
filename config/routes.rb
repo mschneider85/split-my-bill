@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   get 'filter_groups' => 'application#filter_groups'
   resources :users, only: [:index, :show]
   resources :invites do
+    get :autocomplete, on: :collection
     member do
       get :accept
       get :decline

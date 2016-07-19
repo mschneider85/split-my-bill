@@ -25,6 +25,8 @@
 #= require dataTables/bootstrap/3/jquery.dataTables.bootstrap
 #= require jquery.slimscroll
 #= require pace
+#= require bootstrap-tokenfield
+#= require twitter/typeahead
 #= require_tree .
 
 $(document).ready ->

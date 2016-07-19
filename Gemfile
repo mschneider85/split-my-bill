@@ -24,6 +24,8 @@ gem 'jquery-datatables-rails', git: 'git://github.com/rweng/jquery-datatables-ra
 gem 'kaminari'
 gem 'public_activity'
 gem 'activerecord_any_of'
+gem 'bootstrap_tokenfield_rails'
+gem 'twitter-typeahead-rails'
 
 gem 'money-rails'
 gem 'eu_central_bank'

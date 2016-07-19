@@ -1,3 +1,31 @@
 = simple_form_for [@group, @invite], url: @invite, remote: true do |f|
   = f.input :group_id, as: :hidden, value: @invite.group_id
-  = f.input :email, autofocus: true
+  = f.input :email, input_html: { class: 'tokenize' }
+
+:coffee
+  $('#invite_email-tokenfield').focus()
+
+  email_addresses = new Bloodhound(
+    datumTokenizer: Bloodhound.tokenizers.obj.whitespace(
+      "name", "email"
+    ),
+    queryTokenizer: Bloodhound.tokenizers.whitespace,
+    prefetch:
+      url: "/invites/autocomplete"
+      cache: false
+    )
+
+  email_addresses.clearPrefetchCache()
+  email_addresses.initialize()
+
+  $('input.tokenize').tokenfield
+    limit: 1
+    inputType: 'email'
+    createTokensOnBlur: true
+    typeahead: [
+      null
+      {
+        displayKey: 'email',
+        source: email_addresses.ttAdapter()
+      }
+    ]
