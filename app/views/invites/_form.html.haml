@@ -3,8 +3,6 @@
   = f.input :email, input_html: { class: 'tokenize' }
 
 :coffee
-  $('#invite_email-tokenfield').focus()
-
   email_addresses = new Bloodhound(
     datumTokenizer: Bloodhound.tokenizers.obj.whitespace(
       "name", "email"
@@ -18,7 +16,7 @@
   email_addresses.clearPrefetchCache()
   email_addresses.initialize()
 
-  $('input.tokenize').tokenfield
+  myTypeahead = $('input.tokenize').tokenfield
     limit: 1
     inputType: 'email'
     createTokensOnBlur: true
@@ -29,3 +27,10 @@
         source: email_addresses.ttAdapter()
       }
     ]
+
+  setTimeout (->
+    focus_input()
+  ), 1000
+
+  focus_input =->
+    $('#invite_email-tokenfield').focus()
