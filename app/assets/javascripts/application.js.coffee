@@ -23,6 +23,7 @@
 #= require chartkick
 #= require dataTables/jquery.dataTables
 #= require dataTables/bootstrap/3/jquery.dataTables.bootstrap
+#= require dataTables.select
 #= require jquery.slimscroll
 #= require data-confirm-modal
 #= require pace

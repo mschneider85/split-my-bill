@@ -9,7 +9,7 @@ Rails.application.routes.draw do
     end
   end
   resources :groups do
-    resources :entries
+    resources :entries, only: [:index, :new, :create, :destroy]
     resources :comments, only: [:index, :new, :create]
   end
   root to: 'welcome#index'

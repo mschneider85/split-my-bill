@@ -10,6 +10,7 @@
 @import 'dataTables/bootstrap/3/jquery.dataTables.bootstrap';
 @import 'pace.min';
 @import 'devise';
+@import 'select.bootstrap';
 
 .navbar-login
 {
@@ -61,7 +62,17 @@ tr.comment {
   cursor: pointer;
 }
 
-.col-centered{
+.col-centered {
   float: none;
   margin: 0 auto;
+}
+
+.group-title {
+  float: left;
+  margin-top: 14px;
+  color: #fff;
+}
+
+.btn-action {
+  float: left;
 }

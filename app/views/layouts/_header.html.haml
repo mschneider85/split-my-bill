@@ -16,6 +16,9 @@
     / Sidebar toggle button
     %a.sidebar-toggle{"data-toggle" => "offcanvas", :href => "#", :role => "button"}
       %span.sr-only Toggle navigation
+    - if @group && @group.persisted?
+      = link_to group_path(@group), class: 'group-title' do
+        = @group.name
     / Navbar Right Menu
     .navbar-custom-menu
       %ul.nav.navbar-nav

@@ -1,3 +1,5 @@
+= link_to '#', id: 'action-delete-entry', data: { confirm: 'Buchung wirklich löschen?', commit: 'Löschen' }, class: 'btn btn-default btn-action disabled hidden', title: 'Löschen', method: :delete do
+  Buchung löschen
 %table.table.table-bordered.table-hover#entries
   %thead
     %tr
@@ -22,13 +24,15 @@
             Alle
           - else
             = debtor_array.to_sentence
-
 :coffee
   $('#entries').DataTable
     order: [[ 0, "desc" ]]
     dom: 'Bfrtip'
     pagingType: 'simple'
     pageLength: 10
+    select:
+      style: 'os'
+      info: false
     language: {
       buttons:
         pageLength:       "%d #{Entry.model_name.human(count: 2)}",
@@ -52,3 +56,13 @@
         sLast:            "<i class='fa fa-chevron-right'></i><i class='fa fa-chevron-right'></i>"
       }
     }
+
+  $('#entries_wrapper #entries_filter').prepend($('.btn#action-delete-entry'))
+
+  $('#entries_wrapper').on 'click', 'tr', ->
+    if $("#entries_wrapper tr.selected").length == 0
+      $(".btn-action:not([class*='disabled'])").addClass('disabled hidden')
+    else if $("#entries_wrapper tr.selected").length == 1
+      $('.btn-action').removeClass('disabled hidden')
+      id = $("tr.selected").data('id')
+      $('.btn-action#action-delete-entry').attr("href", "/groups/#{@group.id}/entries/" + id)

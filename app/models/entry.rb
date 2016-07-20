@@ -19,6 +19,6 @@ class Entry < ActiveRecord::Base
   private
 
   def validate_user_ids
-    errors.add :user_ids, I18n.t('errors.messages.blank') if user_ids.reject(&:blank?).blank?
+    errors.add :user_ids, I18n.t('errors.messages.blank') if !user_ids || user_ids.reject(&:blank?).blank?
   end
 end

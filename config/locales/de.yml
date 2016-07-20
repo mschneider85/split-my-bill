@@ -3,6 +3,7 @@ de:
     member_since: Mitglied seit
     not_found: '%{model} nicht gefunden.'
     created: '%{model} erstellt.'
+    deleted: '%{model} gelöscht.'
   actions:
     edit: bearbeiten
     cancel: abbrechen

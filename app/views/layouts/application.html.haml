@@ -1,24 +1,16 @@
-!!!
-%html
-  %head
-    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}
-    %meta{name: "viewport", content: "width=device-width, initial-scale=1.0, maximum-scale=1.0,  user-scalable=no"}
-    %title SplitMyBill
-    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
-    = javascript_include_tag 'application', 'data-turbolinks-track' => true
-    = csrf_meta_tags
-  %body.skin-blue.sidebar-mini
-    = render 'layouts/header'
-    - if current_user
-      = render 'layouts/sidebar'
-    .wrapper
-      .content-wrapper
-        %section.content
-          = render 'shared/flash_messages'
-          = yield
-        .modal.fade{ role: 'dialog', tabindex: "-1", aria: { hidden: true } }
-          .modal-dialog
-            .modal-content
-      = render 'layouts/footer'
-    - if Rails.env.development?
-      = any_login_here
+= render 'shared/head'
+%body.skin-blue.sidebar-mini
+  = render 'layouts/header'
+  - if current_user
+    = render 'layouts/sidebar'
+  .wrapper
+    .content-wrapper
+      %section.content
+        = render 'shared/flash_messages'
+        = yield
+      .modal.fade{ role: 'dialog', tabindex: "-1", aria: { hidden: true } }
+        .modal-dialog
+          .modal-content
+    = render 'layouts/footer'
+  - if Rails.env.development?
+    = any_login_here
