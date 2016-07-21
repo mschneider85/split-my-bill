@@ -10,7 +10,7 @@
       = f.input :reset_password_token, as: :hidden
       .row
         .col-md-12
-          = f.input :password, label: false, placeholder: t('.new_password', default: 'New password'), autofocus: true, validate: { uniqueness: false }
+          = f.input :password, label: false, placeholder: t('.new_password', default: 'New password'), autofocus: true
           = icon('lock fa-fw', class: 'field-addon')
         .col-md-12
           = f.input :password_confirmation, label: false, placeholder: t('.confirm_new_password', default: 'Confirm new password')

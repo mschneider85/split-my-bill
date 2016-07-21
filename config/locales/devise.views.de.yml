@@ -30,7 +30,7 @@ de:
       confirmation_instructions:
         action: Mein Konto bestätigen
         greeting: Hallo %{recipient},
-        instruction: 'Herzlich WIllkommen bei SplitMyBill! Folge dem untenstehenden Link, um dein Konto zu bestätigen:'
+        instruction: 'Herzlich Willkommen bei SplitMyBill! Folge dem untenstehenden Link, um dein Konto zu bestätigen:'
         subject: "[SplitMyBill] Aktivierung deines Accounts"
       password_change:
         greeting: Hallo %{recipient},
@@ -64,7 +64,7 @@ de:
       no_token: Du kannst dich nicht auf dieser Seite anmelden, wenn der Link nicht von einer Passwort-Zurücksetzen-E-Mail kommt. Bitte überprüfe, ob du die richtige URL verwendetest.
       send_instructions: Du erhältst in wenigen Minuten eine E-Mail mit der Anleitung, wie du dein Passwort zurücksetzen kannst.
       send_paranoid_instructions: Falls deine E-Mail-Adresse in unserer Datenbank existiert, erhältst du in wenigen Minuten eine E-Mail, mit der Anleitung, wie du dein Passwort zurücksetzen kannst.
-      updated: Ihr Passwort wurde geändert. Sie sind jetzt angemeldet.
+      updated: Dein Passwort wurde geändert. Du bist jetzt angemeldet.
       updated_not_active: Dein Passwort wurde geändert.
     registrations:
       destroyed: Dein Account wurde gelöscht.
