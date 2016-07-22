@@ -2,5 +2,9 @@
   $('.modal-body').html("<%= j render 'form', group: @group %>");
 <% else %>
   $('#activity-feed').html("<%= j render '/groups/activities', group: @group, activities: @group.related_activities.first(5) %>");
+  link = $('li.group-name a')
+  $(link).text("<%= @group.name %>")
+  $(link).attr("href", "<%= url_for([@group]) %>")
+  $('h3.box-title.group-name').text("<%= @group.name %>")
   $('.modal').modal('hide');
 <% end %>

@@ -14,3 +14,11 @@
     = render 'layouts/footer'
   - if Rails.env.development?
     = any_login_here
+
+:coffee
+  $('nav.navbar.navbar-static-top').on 'affixed.bs.affix', ->
+    $('body>.wrapper').addClass('affixed')
+
+  $(document).on 'scroll', ->
+    if $(document).scrollTop() <= 50
+      $('body>.wrapper').removeClass('affixed')

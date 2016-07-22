@@ -3,7 +3,7 @@
   .timeline-item
     %span.time
       = icon 'clock-o'
-      = l activity.created_at
+      = l activity.created_at, format: :abbr_day
     %h3.timeline-header
       = link_to activity.owner do
         = activity.owner.name

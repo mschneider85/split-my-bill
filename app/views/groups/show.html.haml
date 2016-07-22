@@ -4,7 +4,7 @@
   .col-md-12
     .box
       .box-header
-        %h3.box-title
+        %h3.box-title.group-name.truncate.truncate-medium
           = @group.name
         .box-tools.pull-right
           = link_to [:edit, @group], class: 'btn btn-box-tool', data: { toggle: 'modal', target: '.modal' } do
@@ -22,8 +22,15 @@
         = link_to [:new, :invite, group_id: @group.id], class: 'btn btn-app', data: { toggle: 'modal', target: '.modal' } do
           = icon 'envelope'
           Einladung
+        .select-wrapper
+          %select.form-control#tab-select.hidden-md.hidden-lg
+            %option.users.show{ value: "#tab_users" }= User.model_name.human(count: 2)
+            %option.entries.show{ value: "#tab_entries" } Buchungen
+            - if current_membership.liabilities.count > 0
+              %option.refund.show{ value: "#tab_refund" } Zurückzahlen
+            %option.comments.show{ value: "#tab_comments" } Kommentare
         .nav-tabs-custom
-          %ul.nav.nav-tabs
+          %ul.nav.nav-tabs.nav-justified.hidden-xs.hidden-sm
             %li.active
               = link_to '#tab_users', data: { toggle: 'tab' } do
                 = User.model_name.human(count: 2)
@@ -38,20 +45,28 @@
               = link_to '#tab_comments', data: { toggle: 'tab' } do
                 Kommentare
           .tab-content
-            #tab_users.tab-pane.active
+            #tab_users.tab-pane.active.fade.in
               = render 'usertable', group: @group
             / /.tab-pane
-            #tab_entries.tab-pane
+            #tab_entries.tab-pane.fade
               = render 'entrytable', group: @group
             / /.tab-pane
             - if current_membership.liabilities.count > 0
-              #tab_refund.tab-pane
+              #tab_refund.tab-pane.fade
                 = render 'liabilitytable'
               / /.tab-pane
-            #tab_comments.tab-pane
+            #tab_comments.tab-pane.fade
               = render 'comments/comments', comments: @comments
           / /.tab-content
       / /.box-body
   - if @activities.any?
     .col-md-12#activity-feed
       = render 'activities', group: @group, activities: @activities
+
+:coffee
+  $(".nav-tabs a[href='#tab_users']").tab('show')
+
+  $('select#tab-select').change ->
+    href = this.options[this.selectedIndex].value
+    console.log href
+    $(".nav-tabs a[href='" + href + "']").tab('show')

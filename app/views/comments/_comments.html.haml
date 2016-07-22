@@ -1,13 +1,40 @@
-%table.table.table-bordered.table-hover#comments
-  %tbody
-    - comments.each do |comment|
-      %tr.comment
-        %td.col-md-1
-          %span.time
-            = icon 'clock-o'
-            = l comment.created_at.to_date
-        %td.col-md-3
-          = link_to comment.author do
-            = comment.author_name
-        %td.col-md-8
-          = simple_format comment.content
+.perfectScrollbar
+  .comment-timeline
+    - comments.group_by{|comments| comments.created_at.to_date}.each do |date, comments_on_date|
+      .direct-chat-timestamp.timestamp-header
+        = comments_on_date.first.created_at.to_s(:humanized_ago)
+      - comments_on_date.each do |comment|
+        - if comment.author == current_user
+          / Message to the right
+          .direct-chat-msg.right
+            .direct-chat-info.clearfix
+              %span.direct-chat-name.pull-right
+                = comment.author_name
+              %span.direct-chat-timestamp.pull-left
+                = icon 'clock-o'
+                = l comment.created_at, format: :short_time
+            / /.direct-chat-info
+            = link_to comment.author do
+              = image_tag comment.author.avatar_url, class: 'direct-chat-img'
+            / /.direct-chat-img
+            .direct-chat-text
+              = simple_format comment.content
+            / /.direct-chat-text
+          / /.direct-chat-msg
+        - else
+          / Message. Default to the left
+          .direct-chat-msg
+            .direct-chat-info.clearfix
+              %span.direct-chat-name.pull-left
+                = comment.author_name
+              %span.direct-chat-timestamp.pull-right
+                = icon 'clock-o'
+                = l comment.created_at, format: :short_time
+            / /.direct-chat-info
+            = link_to comment.author do
+              = image_tag comment.author.avatar_url, class: 'direct-chat-img'
+            / /.direct-chat-img
+            .direct-chat-text
+              = simple_format comment.content
+            / /.direct-chat-text
+          / /.direct-chat-msg

@@ -25,6 +25,7 @@ gem 'kaminari'
 gem 'public_activity'
 gem 'activerecord_any_of'
 gem 'data-confirm-modal'
+gem 'perfect-scrollbar-rails'
 
 gem 'money-rails'
 gem 'eu_central_bank'

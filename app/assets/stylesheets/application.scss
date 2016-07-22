@@ -11,24 +11,22 @@
 @import 'pace.min';
 @import 'devise';
 @import 'select.bootstrap';
+@import 'perfect-scrollbar';
 
-.navbar-login
-{
-    width: 305px;
-    padding: 10px;
-    padding-bottom: 0px;
+.navbar-login {
+  width: 305px;
+  padding: 10px;
+  padding-bottom: 0px;
 }
 
-.navbar-login-session
-{
-    padding: 10px;
-    padding-bottom: 0px;
-    padding-top: 0px;
+.navbar-login-session {
+  padding: 10px;
+  padding-bottom: 0px;
+  padding-top: 0px;
 }
 
-.icon-size
-{
-    font-size: 87px;
+.icon-size {
+  font-size: 87px;
 }
 
 .devise-links {
@@ -67,12 +65,107 @@ tr.comment {
   margin: 0 auto;
 }
 
-.group-title {
-  float: left;
-  margin-top: 14px;
-  color: #fff;
-}
-
 .btn-action {
   float: left;
+}
+
+.perfectScrollbar {
+  position: relative;
+  max-height: 380px;
+}
+
+.timeline-wrapper {
+  width: 100%;
+  display: flex;
+}
+
+.select-wrapper {
+  margin: auto;
+  padding: 10px;
+}
+
+.comment-timeline {
+  transition: transform 0.5s ease-in-out;
+  font-size: 16px;
+  padding: 10px 0px 10px 0px;
+
+  .direct-chat-timestamp.timestamp-header {
+    text-align: center;
+    margin-bottom: 4px;
+  }
+
+  .direct-chat-text {
+    min-height: 76px;
+    padding: 10px;
+  }
+
+  .direct-chat-name {
+    &.pull-right {
+      margin-right: 50px;
+    }
+    &.pull-left {
+      margin-left: 50px;
+    }
+  }
+
+  .direct-chat-msg:not(.right) {
+    margin-right: 50px;
+  }
+
+  .direct-chat-msg.right {
+    margin-left: 50px;
+  }
+
+  .direct-chat-msg:not(:last-child){
+    padding-bottom: 14px;
+  }
+
+  .direct-chat-msg.right>.direct-chat-text {
+    background: #3c8dbc;
+    border-color: #3c8dbc;
+    color: #fff;
+  }
+
+  .direct-chat-msg.right>.direct-chat-text:after {
+    border-left-color: #3c8dbc;
+  }
+}
+
+@media (min-width: 992px) {
+  .comment-timeline {
+    padding: 10px 60px 10px 60px;
+  }
+}
+
+// Half-Fixed Layout
+@media (max-width: 768px) {
+  nav.navbar.navbar-static-top.affix {
+    top: 0;
+  }
+  .wrapper.affixed {
+    padding-top: 50px;
+  }
+  .truncate {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    &.truncate-small {
+      max-width: 170px;
+    }
+    &.truncate-medium {
+      max-width: 220px;
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  nav.navbar.navbar-static-top.affix {
+    position: relative;
+  }
+}
+
+// iOS-Fix
+nav.navbar.navbar-static-top {
+  -webkit-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
 }

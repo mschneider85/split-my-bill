@@ -220,6 +220,9 @@ de:
       short: "%d. %B, %H:%M Uhr"
       short_date: "%d.%m.%Y"
       number_date: "%Y%m%d"
+      short_time: "%H:%M"
+      day_of_week_with_time: "%A, %H:%M"
+      abbr_day: "%a., %e. %B, %H:%M"
     pm: nachmittags
   datepicker:
     dformat: '%d.%m.%Y'             # display format of the date (this is the default, can be ommited)

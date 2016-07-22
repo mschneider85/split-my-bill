@@ -27,6 +27,7 @@
 #= require jquery.slimscroll
 #= require data-confirm-modal
 #= require pace
+#= require perfect-scrollbar
 #= require_tree .
 
 $(document).ready ->
@@ -34,6 +35,8 @@ $(document).ready ->
 
   $('.clickable-row').click ->
     window.document.location = $(this).data('href')
+
+  $('.perfectScrollbar').perfectScrollbar()
 
 $(document).on 'page:load', ->
   o = $.AdminLTE.options

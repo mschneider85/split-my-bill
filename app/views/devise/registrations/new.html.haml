@@ -22,8 +22,8 @@
           = f.input :password, label: false, placeholder: User.human_attribute_name(:password)
           = icon('lock fa-fw', class: 'field-addon')
         .col-md-12
-          = f.input :password_confirmation, validate: true, label: false, placeholder: User.human_attribute_name(:password_confirmation)
-          = icon('sign-in fa-fw', class: 'field-addon')
+          = f.input :password_confirmation, label: false, placeholder: User.human_attribute_name(:password_confirmation)
+          = icon('lock fa-fw', class: 'field-addon')
         .col-md-12
           .btn-toolbar
             = button_tag type: 'submit', class: 'btn btn-primary' do

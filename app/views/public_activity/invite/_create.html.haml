@@ -3,7 +3,7 @@
   .timeline-item
     %span.time
       = icon 'clock-o'
-      = l activity.created_at
+      = l activity.created_at, format: :abbr_day
     %h3.timeline-header.no-border
       = link_to activity.trackable.sender do
         = activity.trackable.sender.name

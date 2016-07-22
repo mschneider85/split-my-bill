@@ -12,17 +12,18 @@
       My
       %b> Bill
   / Header Navbar: style can be found in header.less
-  %nav.navbar.navbar-static-top
+  %nav.navbar.navbar-static-top{ data: { spy: 'affix', offset: { top: '50' } } }
     / Sidebar toggle button
     %a.sidebar-toggle{"data-toggle" => "offcanvas", :href => "#", :role => "button"}
       %span.sr-only Toggle navigation
-    - if @group && @group.persisted?
-      = link_to group_path(@group), class: 'group-title' do
-        = @group.name
     / Navbar Right Menu
     .navbar-custom-menu
       %ul.nav.navbar-nav
         / Messages: style can be found in dropdown.less
+        - if @group && @group.persisted?
+          %li.group-name
+            = link_to group_path(@group), class: 'truncate truncate-small' do
+              = @group.name
         - if current_user
           %li.dropdown.messages-menu
             %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
