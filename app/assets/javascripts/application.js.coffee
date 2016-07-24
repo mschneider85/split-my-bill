@@ -19,7 +19,7 @@
 #= require autoNumeric
 #= require rails.validations
 #= require rails.validations.simple_form
-#= require Chart.bundle
+#= require highcharts
 #= require chartkick
 #= require dataTables/jquery.dataTables
 #= require dataTables/bootstrap/3/jquery.dataTables.bootstrap
@@ -36,7 +36,7 @@ $(document).ready ->
   $('.clickable-row').click ->
     window.document.location = $(this).data('href')
 
-  $('.perfectScrollbar').perfectScrollbar()
+  $('.perfectScrollbar').perfectScrollbar(wheelPropagation: true, suppressScrollX: true)
 
 $(document).on 'page:load', ->
   o = $.AdminLTE.options

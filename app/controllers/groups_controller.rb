@@ -1,5 +1,5 @@
 class GroupsController < AuthenticateController
-  before_action :load_group, only: [:show, :edit, :update, :destroy]
+  before_action :load_group, only: [:show, :get_chart_data, :edit, :update, :destroy]
   before_action :store_group, only: [:show, :edit, :update]
   helper_method :current_membership
 
@@ -27,6 +27,10 @@ class GroupsController < AuthenticateController
     @commentable = @group
     @comments = @commentable.comments.order(created_at: :desc)
     @comment = Comment.new
+  end
+
+  def get_chart_data
+    render json: @group.report.successive_expenses_sum
   end
 
   def edit

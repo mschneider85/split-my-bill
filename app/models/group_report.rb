@@ -26,10 +26,40 @@ class GroupReport
     expenses.any? ? I18n.l(expenses.order(created_at: :desc).first.created_at, format: :short_date) : '-'
   end
 
+  def successive_expenses_sum
+    s = 0
+    expenses.group_by_day(:created_at, series: false).sum("amount_cents/100.0").map{ |k,v| [k, s = s + v] }
+  end
+
+  def chart_options
+    {
+      library: {
+        yAxis: {
+          labels: {
+            format: '{value} EUR' } },
+        xAxis: {
+          type: 'datetime',
+          labels: {
+            format: '{value: %d.%b}' } },
+        plotOptions: {
+          column: {
+            cursor: 'pointer' } },
+        tooltip: {
+          headerFormat: 'Gesamtkosten<br>{point.x: %d.%m.%Y}<br>',
+          pointFormat: '<b>{point.y:,.2f} EUR</b>' } },
+      min: expenses_sum_on_creation_date,
+      colors: ["#3c8dbc"]
+    }
+  end
+
   private
 
   def expenses
     @group.entries.where(entry_type: 'expense')
+  end
+
+  def expenses_sum_on_creation_date
+    expenses.where('DATE(created_at) = ?', @group.created_at.to_date).sum('amount_cents/100.0').to_f
   end
 
   def users

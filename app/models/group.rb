@@ -4,6 +4,7 @@ class Group < ActiveRecord::Base
   has_many :users, through: :memberships
   has_many :invites, dependent: :destroy
   has_many :entries, dependent: :destroy
+  has_many :transactions, through: :entries
   has_many :comments, as: :commentable
 
   accepts_nested_attributes_for :invites, allow_destroy: true
@@ -15,7 +16,7 @@ class Group < ActiveRecord::Base
   end
 
   def report
-    GroupReport.new(self)
+    @group_report ||= GroupReport.new(self)
   end
 
   def related_activities

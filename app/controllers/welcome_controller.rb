@@ -4,7 +4,7 @@ class WelcomeController < ApplicationController
       if current_user.groups.ids.include?(cookies[:latest_group].to_i)
         redirect_to group_path(cookies[:latest_group])
       else
-        redirect_to groups_path
+        redirect_to dashboard_path
       end
     else
       redirect_to new_user_session_path

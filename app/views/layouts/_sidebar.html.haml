@@ -13,20 +13,10 @@
     / sidebar menu: : style can be found in sidebar.less
     %ul.sidebar-menu
       %li.header MAIN NAVIGATION
-      %li.treeview
-        %a{:href => "#"}
-          %i.fa.fa-dashboard
+      %li{ class: ('active' if controller_name == 'dashboard') }
+        = link_to dashboard_path do
+          = icon 'dashboard'
           %span Dashboard
-          %i.fa.fa-angle-left.pull-right
-        %ul.treeview-menu
-          %li
-            %a{:href => "#"}
-              %i.fa.fa-circle-o
-              Dashboard v1
-          %li
-            %a{:href => "#"}
-              %i.fa.fa-circle-o
-              Dashboard v2
       %li{ class: ('active' if controller_name == 'invites') }
         = link_to invites_path do
           = icon 'files-o'

@@ -1,11 +1,15 @@
-.perfectScrollbar
-  %table.table.table-hover.table-bordered
-    %tbody
-      - group.memberships.each do |membership|
-        %tr.clickable-row{ data: { href: user_path(membership.user) } }
-          %td.col-md-1.text-center= image_tag membership.user.avatar_url, class: 'img-circle img-table'
-          %td.col-md-9
-            = membership.user.name
-            = render 'shared/online_status', user: membership.user
-          %td.col-md-2.text-right
-            = render 'shared/formatted_balance', amount: membership.balance
+.row.perfectScrollbar
+  .col-md-6
+    %table.table.table-hover.table-bordered
+      %tbody
+        - group.memberships.each do |membership|
+          %tr.clickable-row{ data: { href: user_path(membership.user) } }
+            %td.col-md-1.text-center= image_tag membership.user.avatar_url, class: 'img-circle img-table'
+            %td.col-md-9
+              = membership.user.name
+              = render 'shared/online_status', user: membership.user
+            %td.col-md-2.text-right
+              = render 'shared/formatted_balance', amount: membership.balance
+  .col-md-6
+    .chart
+      = area_chart get_chart_data_group_path(group), group.report.chart_options

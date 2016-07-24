@@ -9,8 +9,10 @@ Rails.application.routes.draw do
     end
   end
   resources :groups do
+    get :get_chart_data, on: :member
     resources :entries, only: [:index, :new, :create, :destroy]
     resources :comments, only: [:index, :new, :create]
   end
+  get 'dashboard' => 'dashboard#index'
   root to: 'welcome#index'
 end

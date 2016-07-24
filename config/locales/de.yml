@@ -5,10 +5,10 @@ de:
     created: '%{model} erstellt.'
     deleted: '%{model} gelöscht.'
   actions:
-    edit: bearbeiten
-    cancel: abbrechen
-    sign_out: ausloggen
-    sign_in: einloggen
+    edit: Bearbeiten
+    cancel: Abbrechen
+    sign_out: Ausloggen
+    sign_in: Einloggen
     really_delete_account: Soll dein Konto wirklich gelöscht werden?
   date:
     abbr_day_names:
@@ -220,6 +220,7 @@ de:
       short: "%d. %B, %H:%M Uhr"
       short_date: "%d.%m.%Y"
       number_date: "%Y%m%d"
+      chart_date: "%Y-%m-%d"
       short_time: "%H:%M"
       day_of_week_with_time: "%A, %H:%M"
       abbr_day: "%a., %e. %B, %H:%M"

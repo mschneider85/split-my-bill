@@ -16,6 +16,11 @@ class Entry < ActiveRecord::Base
     User.find_by(id: user_ids) if user_ids && entry_type == 'redemption' && user_ids.size == 1
   end
 
+  def creditor
+    #transactions.map(&:creditor).uniq
+    transactions.first.creditor
+  end
+
   private
 
   def validate_user_ids
