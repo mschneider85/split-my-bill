@@ -1,5 +1,5 @@
-.row.perfectScrollbar
-  .col-md-6
+.row
+  .col-md-7
     %table.table.table-hover.table-bordered
       %tbody
         - group.memberships.each do |membership|
@@ -10,6 +10,6 @@
               = render 'shared/online_status', user: membership.user
             %td.col-md-2.text-right
               = render 'shared/formatted_balance', amount: membership.balance
-  .col-md-6
-    .chart
-      = area_chart get_chart_data_group_path(group), group.report.chart_options
+  .col-md-5
+    #chart
+      = line_chart get_chart_data_group_path(group), group.report.chart_options

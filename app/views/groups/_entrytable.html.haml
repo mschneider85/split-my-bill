@@ -1,6 +1,6 @@
 = link_to '#', id: 'action-delete-entry', data: { confirm: 'Buchung wirklich löschen?', commit: 'Löschen' }, class: 'btn btn-default btn-action disabled hidden', title: 'Löschen', method: :delete do
   Buchung löschen
-%table.table.table-bordered.table-hover#entries
+%table.table.table-bordered.table-hover.display.responsive.nowrap#entries{ width: "100%" }
   %thead
     %tr
       %th.col-md-2 Datum
@@ -26,6 +26,7 @@
             = debtor_array.to_sentence
 :coffee
   $('#entries').DataTable
+    responsive: true
     order: [[ 0, "desc" ]]
     dom: 'Bfrtip'
     pagingType: 'simple'

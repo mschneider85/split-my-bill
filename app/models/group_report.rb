@@ -28,7 +28,7 @@ class GroupReport
 
   def successive_expenses_sum
     s = 0
-    expenses.group_by_day(:created_at, series: false).sum("amount_cents/100.0").map{ |k,v| [k, s = s + v] }
+    expenses.group_by_day(:created_at, series: false).sum("amount_cents/100.0").map{ |k,v| [k, (s = s + v).to_f] }
   end
 
   def chart_options
@@ -41,14 +41,12 @@ class GroupReport
           type: 'datetime',
           labels: {
             format: '{value: %d.%b}' } },
-        plotOptions: {
-          column: {
-            cursor: 'pointer' } },
         tooltip: {
           headerFormat: 'Gesamtkosten<br>{point.x: %d.%m.%Y}<br>',
           pointFormat: '<b>{point.y:,.2f} EUR</b>' } },
       min: expenses_sum_on_creation_date,
-      colors: ["#3c8dbc"]
+      colors: ["#3c8dbc"],
+      height: "220px"
     }
   end
 

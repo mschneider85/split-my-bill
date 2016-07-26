@@ -24,7 +24,7 @@
           Einladung
         .select-wrapper
           %select.form-control#tab-select.hidden-md.hidden-lg
-            %option.users.show{ value: "#tab_users" }= User.model_name.human(count: 2)
+            %option.users.show{ value: "#tab_users" } Übersicht
             %option.entries.show{ value: "#tab_entries" } Buchungen
             - if current_membership.liabilities.count > 0
               %option.refund.show{ value: "#tab_refund" } Zurückzahlen

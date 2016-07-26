@@ -8,9 +8,10 @@
 @import 'animate';
 @import 'checkbox3';
 @import 'dataTables/bootstrap/3/jquery.dataTables.bootstrap';
+@import 'select.bootstrap';
+@import 'responsive.bootstrap';
 @import 'pace.min';
 @import 'devise';
-@import 'select.bootstrap';
 @import 'perfect-scrollbar';
 
 .navbar-login {
@@ -168,4 +169,12 @@ tr.comment {
 nav.navbar.navbar-static-top {
   -webkit-transform: translate3d(0, 0, 0);
   transform: translate3d(0, 0, 0);
+}
+
+.nav-tabs-custom > .nav-tabs > li:not(.active) > a:hover, .nav-tabs-custom > .nav-tabs > li:not(.active) > a:focus, .nav-tabs-custom > .nav-tabs > li:not(.active) > a:active {
+  border-bottom-color: #DDDDDD;
+}
+
+.nav-tabs-custom > .nav-tabs > li > a, .nav-tabs-custom > .nav-tabs > li > a:hover {
+  background: #F0F0F0;
 }
