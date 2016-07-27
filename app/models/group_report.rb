@@ -35,6 +35,7 @@ class GroupReport
     {
       library: {
         yAxis: {
+          allowDecimals: false,
           labels: {
             format: '{value} EUR' } },
         xAxis: {

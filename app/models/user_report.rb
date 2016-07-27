@@ -28,6 +28,7 @@ class UserReport
     {
       library: {
         yAxis: {
+          allowDecimals: false,
           labels: {
             format: '{value} EUR' } },
         xAxis: {
