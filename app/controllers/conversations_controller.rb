@@ -1,0 +1,24 @@
+class ConversationsController < ApplicationController
+  def index
+    @users = current_user.friends
+    @conversations = Conversation.all
+  end
+
+  def create
+    sender = params[:sender_id]
+    recipient = params[:recipient_id]
+
+    if Conversation.between(sender, recipient).present?
+      @conversation = Conversation.between(sender, recipient).first
+    else
+      @conversation = Conversation.create!(conversation_params)
+    end
+    redirect_to conversation_messages_path(@conversation)
+  end
+
+  private
+
+  def conversation_params
+    params.permit(:sender_id, :recipient_id)
+  end
+end

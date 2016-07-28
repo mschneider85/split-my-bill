@@ -40,7 +40,7 @@
       .info-box-content
         %span.info-box-text Buchungen
         %span.info-box-number
-          = current_user.groups.map{|g|g.entries.count}.sum
+          = @user_report.entries.count
       / /.info-box-content
     / /.info-box
   / /.col

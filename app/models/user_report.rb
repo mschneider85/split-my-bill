@@ -18,7 +18,8 @@ class UserReport
     total = debts_sum.to_h.merge(credits_sum.to_h){|key, oldval, newval| newval - oldval}
 
     @data = [
-      { name: 'Kontostand', data: total },
+      #TODO
+      #{ name: 'Kontostand', data: total },
       { name: 'Kredite', data: credits_by_day },
       { name: 'Schulden', data: debts_by_day }
     ]
@@ -39,7 +40,8 @@ class UserReport
           headerFormat: '{point.x: %d.%m.%Y}<br>',
           shared: true,
           pointFormat: '<span style="color: {point.series.color}">⚫ </span>{point.series.name}: <b>{point.y:,.2f} EUR</b><br>' },
-        colors: ['#3c8dbc', '#00a65a', '#dd4b39'] }
+        #'#3c8dbc',
+        colors: ['#00a65a', '#dd4b39'] }
     }
   end
 
@@ -51,6 +53,10 @@ class UserReport
     credits_sum = @user.credits.where("debtor_id != creditor_id").where(created_at: date.beginning_of_day..date.end_of_day).sum(:amount_cents)
     debts_sum = @user.debts.where("debtor_id != creditor_id").where(created_at: date.beginning_of_day..date.end_of_day).sum(:amount_cents)
     (credits_sum - debts_sum) / 100.0
+  end
+
+  def entries
+    Entry.includes(:transactions).where(group: @user.groups).where.any_of(transactions: { creditor: @user }, transactions: { debtor: @user })
   end
 
   private

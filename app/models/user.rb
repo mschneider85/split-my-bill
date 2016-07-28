@@ -27,6 +27,10 @@ class User < ActiveRecord::Base
     "http://gravatar.com/avatar/#{gravatar_id}.png?s=200&d=monsterid"
   end
 
+  def is_admin_of(group)
+    group.users.order(:created_at).first == self
+  end
+
   def balance
     (credits.sum(:amount_cents) - debts.sum(:amount_cents)) / 100.0
   end

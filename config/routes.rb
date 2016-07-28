@@ -8,6 +8,9 @@ Rails.application.routes.draw do
       get :decline
     end
   end
+  resources :conversations, only: [:index, :create] do
+    resources :messages, only: [:index, :new, :create]
+  end
   resources :groups do
     get :get_chart_data, on: :member
     resources :entries, only: [:index, :new, :create, :destroy]

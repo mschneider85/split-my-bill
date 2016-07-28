@@ -4,6 +4,7 @@ class CommentsController < ApplicationController
   def index
     @commentable = Group.find(params[:group_id])
     @comments = @commentable.comments.order(created_at: :desc)
+    @comment = @commentable.comments.new
   end
 
   def new
