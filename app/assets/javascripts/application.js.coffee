@@ -40,6 +40,13 @@ $(document).ready ->
 
   $('.perfectScrollbar').perfectScrollbar(wheelPropagation: true, suppressScrollX: true)
 
+  $('nav.navbar.navbar-static-top').on 'affixed.bs.affix', ->
+    $('body>.wrapper').addClass('affixed')
+
+  $(document).on 'scroll', ->
+    if $(document).scrollTop() <= 50
+      $('body>.wrapper').removeClass('affixed')
+
 $(document).on 'page:load', ->
   o = $.AdminLTE.options
   if o.sidebarPushMenu

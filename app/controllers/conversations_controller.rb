@@ -1,7 +1,7 @@
 class ConversationsController < ApplicationController
   def index
     @users = current_user.friends
-    @conversations = Conversation.all
+    @conversations = Conversation.where.any_of(sender: current_user, recipient: current_user)
   end
 
   def create
