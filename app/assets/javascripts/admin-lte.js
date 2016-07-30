@@ -38,7 +38,7 @@ $.AdminLTE.options = {
   //in every page before app.js
   navbarMenuSlimscroll: true,
   navbarMenuSlimscrollWidth: "3px", //The width of the scroll bar
-  navbarMenuHeight: "200px", //The height of the inner menu
+  navbarMenuHeight: "10px", //The height of the inner menu
   //General animation speed for JS animated elements such as box collapse/expand and
   //sidebar treeview slide up/down. This options accepts an integer as milliseconds,
   //'fast', 'normal', or 'slow'
@@ -64,7 +64,7 @@ $.AdminLTE.options = {
   //before AdminLTE's app.js
   enableFastclick: true,
   //Control Sidebar Options
-  enableControlSidebar: true,
+  enableControlSidebar: false,
   controlSidebarOptions: {
     //Which button should trigger the open/close event
     toggleBtnSelector: "[data-toggle='control-sidebar']",

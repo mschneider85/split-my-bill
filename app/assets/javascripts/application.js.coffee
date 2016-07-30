@@ -15,7 +15,7 @@
 #= require jquery.turbolinks
 #= require jquery_ujs
 #= require bootstrap-sprockets
-#= require admin-lte
+#= require fastclick
 #= require autoNumeric
 #= require rails.validations
 #= require rails.validations.simple_form

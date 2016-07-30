@@ -26,37 +26,31 @@
           %select.form-control#tab-select.hidden-md.hidden-lg
             %option.users.show{ value: "#tab_users" } Übersicht
             %option.entries.show{ value: "#tab_entries" } Buchungen
-            - if current_membership.liabilities.count > 0
-              %option.refund.show{ value: "#tab_refund" } Zurückzahlen
+            %option.refund.show{ value: "#tab_refund" } Zurückzahlen
             %option.comments.show{ value: "#tab_comments" } Kommentare
         .nav-tabs-custom
           %ul.nav.nav-tabs.nav-justified.hidden-xs.hidden-sm
             %li.active
-              = link_to '#tab_users', data: { toggle: 'tab' } do
+              = link_to '#tab_users', data: { toggle: 'tab', target: 'users', href: group_path(@group) } do
                 Übersicht
             %li
-              = link_to '#tab_entries', data: { toggle: 'tab' } do
+              = link_to '#tab_entries', data: { toggle: 'tab', target: 'entries', href: group_path(@group) } do
                 Buchungen
-            - if current_membership.liabilities.count > 0
-              %li
-                = link_to '#tab_refund', data: { toggle: 'tab' } do
-                  Zurückzahlen
             %li
-              = link_to '#tab_comments', data: { toggle: 'tab' } do
+              = link_to '#tab_refund', data: { toggle: 'tab', target: 'refunds', href: group_path(@group) } do
+                Zurückzahlen
+            %li
+              = link_to '#tab_comments', data: { toggle: 'tab', target: 'comments', href: group_path(@group) } do
                 Kommentare
           .tab-content
             #tab_users.tab-pane.active.fade.in
               = render 'usertable', group: @group
             / /.tab-pane
             #tab_entries.tab-pane.fade
-              = render 'entrytable', group: @group
             / /.tab-pane
-            - if current_membership.liabilities.count > 0
-              #tab_refund.tab-pane.fade
-                = render 'liabilitytable'
-              / /.tab-pane
+            #tab_refund.tab-pane.fade
+            / /.tab-pane
             #tab_comments.tab-pane.fade
-              = render 'comments/comments', comments: @comments
           / /.tab-content
       / /.box-body
   - if @activities.any?
@@ -68,5 +62,13 @@
 
   $('select#tab-select').change ->
     href = this.options[this.selectedIndex].value
-    console.log href
     $(".nav-tabs a[href='" + href + "']").tab('show')
+
+  $('a[data-toggle="tab"]').on 'shown.bs.tab', (e) ->
+    target = $(this).data('target')
+    href = $(this).data('href')
+    $.ajax
+      type: 'GET'
+      url: href
+      data: tab: target
+      dataType: 'script'

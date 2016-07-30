@@ -8,3 +8,13 @@ $('#activity-feed').html("<%= j render '/groups/activities', group: @group, acti
   $('#show-all-activities').show();
   $('#show-less-activities').hide();
 <% end %>
+
+<% if params[:tab] == 'users' %>
+  $(".tab-pane.active").html("<%= j render '/groups/usertable', group: @group %>");
+<% elsif params[:tab] == 'entries' %>
+  $(".tab-pane.active").html("<%= j render '/groups/entrytable', group: @group %>");
+<% elsif params[:tab] == 'refunds' %>
+  $(".tab-pane.active").html("<%= j render '/groups/liabilitytable', group: @group %>");
+<% elsif params[:tab] == 'comments' %>
+  $(".tab-pane.active").html("<%= j render '/comments/comments', comments: @comments %>");
+<% end %>

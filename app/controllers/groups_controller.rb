@@ -25,8 +25,8 @@ class GroupsController < AuthenticateController
   def show
     @activities = params[:all_activities] ? @group.related_activities : @group.related_activities.first(5)
     @commentable = @group
-    @comments = @commentable.comments.order(created_at: :desc)
     @comment = Comment.new
+    @comments = @commentable.comments.order(created_at: :desc) if params[:tab] == 'comments'
   end
 
   def get_chart_data
