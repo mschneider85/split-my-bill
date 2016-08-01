@@ -19,3 +19,9 @@ de:
       comment:
         one: Kommentar
         other: Kommentare
+      conversation:
+        one: Unterhaltung
+        other: Unterhaltungen
+      message:
+        one: Nachricht
+        other: Nachrichten

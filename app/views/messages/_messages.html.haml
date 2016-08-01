@@ -1,12 +1,12 @@
 - messages.each do |message|
-  - if message.body
-    - user = User.find(message.user_id)
-    %strong= user.name
-    %br
-    %span.direct-chat-timestamp.pull-left
-      = icon 'clock-o'
-      = l message.created_at, format: :short
-    %br
-    = message.body
+  %p
+    - if message.body
+      %strong= message.user.name
+      %br
+      %span.direct-chat-timestamp.pull-left
+        = icon 'clock-o'
+        = l message.created_at, format: :short
+      %br
+      = simple_format message.body
 - if @over_ten
   = link_to 'Show Previous', '?m=all', remote: true

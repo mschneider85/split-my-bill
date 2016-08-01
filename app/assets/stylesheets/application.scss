@@ -143,6 +143,10 @@ tr.comment {
   nav.navbar.navbar-static-top.affix {
     top: 0;
   }
+  .wrapper {
+    position: absolute;
+    width: 100%;
+  }
   .wrapper.affixed {
     padding-top: 50px;
   }

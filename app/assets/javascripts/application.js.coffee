@@ -33,6 +33,10 @@
 #= require_tree .
 
 $(document).ready ->
+  $('nav.navbar.navbar-static-top').affix
+    offset:
+      top: 50
+
   $.AdminLTE.layout.activate()
 
   $('.clickable-row').click ->
@@ -41,11 +45,11 @@ $(document).ready ->
   $('.perfectScrollbar').perfectScrollbar(wheelPropagation: true, suppressScrollX: true)
 
   $('nav.navbar.navbar-static-top').on 'affixed.bs.affix', ->
-    $('body>.wrapper').addClass('affixed')
+    $('body>.wrapper, body>.main-header').addClass('affixed')
 
   $(document).on 'scroll', ->
     if $(document).scrollTop() <= 50
-      $('body>.wrapper').removeClass('affixed')
+      $('body>.wrapper, body>.main-header').removeClass('affixed')
 
 $(document).on 'page:load', ->
   o = $.AdminLTE.options

@@ -18,8 +18,9 @@
           %li.list-group-item
             %b Mitglied seit
             %a.pull-right= l @user.created_at.to_date
-        = link_to '#', class: 'btn btn-primary btn-block' do
-          %b Nachricht senden
+        - unless current_user == @user
+          = link_to conversations_path(sender_id: current_user.id, recipient_id: @user.id), class: 'btn btn-primary btn-block', method: 'post' do
+            %b Nachricht senden
     / /.box-body
-    = link_to :back, class: 'pull-right' do
+    = link_to :back, class: 'btn btn-default pull-right' do
       Zurück

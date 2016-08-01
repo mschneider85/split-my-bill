@@ -1,10 +1,10 @@
-= simple_form_for [@conversation, @message], remote: true do |f|
+= simple_form_for [@conversation, @message] do |f|
   .field
     = f.input :body, autofocus: true, label: false
     = f.input :user_id, as: :hidden, input_html: { value: current_user.id }
   %div
     = button_tag type: 'submit', class: 'btn btn-info submit-form' do
-      = t('helpers.submit.create', model: Message.model_name.human)
+      = t('actions.send', model: Message.model_name.human)
 
 .messages
   = render 'messages', messages: @messages

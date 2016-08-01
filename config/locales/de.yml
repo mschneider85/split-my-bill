@@ -4,9 +4,11 @@ de:
     not_found: '%{model} nicht gefunden.'
     created: '%{model} erstellt.'
     deleted: '%{model} gelöscht.'
+    sent: '%{model} gesendet.'
   actions:
     edit: Bearbeiten
     cancel: Abbrechen
+    send: '%{model} senden'
     sign_out: Ausloggen
     sign_in: Einloggen
     really_delete_account: Soll dein Konto wirklich gelöscht werden?

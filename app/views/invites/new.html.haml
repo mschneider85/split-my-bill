@@ -8,7 +8,7 @@
 .modal-footer
   = button_tag t('actions.cancel'), class: 'btn btn-cancel', data: { dismiss: "modal" }
   = button_tag type: 'submit', class: 'btn btn-info submit-form' do
-    = t('helpers.submit.create', model: Invite.model_name.human)
+    = t('actions.send', model: Invite.model_name.human)
 
 :coffee
   $ ->

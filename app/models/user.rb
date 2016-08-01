@@ -10,6 +10,7 @@ class User < ActiveRecord::Base
   has_many :debts, class_name: 'Transaction', foreign_key: :debtor_id
   has_many :credits, class_name: 'Transaction', foreign_key: :creditor_id
   has_many :comments, foreign_key: 'author_id'
+  has_many :messages
 
   attr_accessor :invite_token
 
