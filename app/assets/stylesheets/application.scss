@@ -149,6 +149,12 @@ tr.comment {
 
 // Half-Fixed Layout
 @media (max-width: 768px) {
+  .modal-open {
+    overflow: hidden;
+    height: 100%;
+    width: 100%;
+    position: fixed;
+  }
   nav.navbar.navbar-static-top.affix {
     top: 0;
   }

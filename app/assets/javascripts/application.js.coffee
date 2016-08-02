@@ -35,15 +35,6 @@
 #= require_tree .
 
 $(document).ready ->
-  #prevent scroll on mobile
-  $('body').on 'touchmove', (e) ->
-    if $('.scroll-disable').has($(e.target)).length
-      e.preventDefault()
-  $('body').on 'shown.bs.modal', ->
-    $(this).addClass 'scroll-disable'
-  $('body').on 'hidden.bs.modal', ->
-    $(this).removeClass 'scroll-disable'
-
   $('nav.navbar.navbar-static-top').affix
     offset:
       top: 50
@@ -76,6 +67,7 @@ $ ->
     $(this).removeData('bs.modal').find('.modal-content').html('')
 
   $('.modal').on 'shown.bs.modal', ->
+    $('.modal-open').scrollTop(100)
     $(this).find('[autofocus]:first').focus()
     $(this).find('form[data-validate="true"]').enableClientSideValidations();
 
