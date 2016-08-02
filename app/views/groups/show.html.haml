@@ -13,13 +13,13 @@
             %i.fa.fa-minus
       / /.box-header
       .box-body.no-padding
-        = link_to [:new, @group, :entry, entry_type: 'expense'], class: 'btn btn-app', data: { toggle: 'modal', target: '.modal' } do
+        = link_to [:new, @group, :entry, entry_type: 'expense'], class: 'btn btn-app', data: { toggle: 'modal', target: '.modal', backdrop: 'static' } do
           = icon 'file-text'
           Buchung
-        = link_to [:new, @group, :comment], class: 'btn btn-app', data: { toggle: 'modal', target: '.modal' } do
+        = link_to [:new, @group, :comment], class: 'btn btn-app', data: { toggle: 'modal', target: '.modal', backdrop: 'static' } do
           = icon 'comment'
           Kommentar
-        = link_to [:new, :invite, group_id: @group.id], class: 'btn btn-app', data: { toggle: 'modal', target: '.modal' } do
+        = link_to [:new, :invite, group_id: @group.id], class: 'btn btn-app', data: { toggle: 'modal', target: '.modal', backdrop: 'static' } do
           = icon 'envelope'
           Einladung
         .select-wrapper

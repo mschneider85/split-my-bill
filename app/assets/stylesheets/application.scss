@@ -14,6 +14,15 @@
 @import 'devise';
 @import 'perfect-scrollbar';
 
+.checkbox3 label.collection_check_boxes {
+  display: block;
+  float: left;
+  width: 50%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .navbar-login {
   width: 305px;
   padding: 10px;

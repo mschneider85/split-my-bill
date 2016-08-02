@@ -35,3 +35,6 @@ $ ->
     target = $this.attr('href')
     if typeof target == 'string'
       $('body').animate { scrollTop: $(target).offset().top + 'px' }, 500
+
+  $('.modal').on 'shown.bs.modal', ->
+    $(slideToTop).fadeOut 500
