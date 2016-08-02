@@ -12,4 +12,10 @@
     $('input[data-role=money]').autoNumeric('init')
 
     $('#entry_amount').focus ->
-      $('#entry_amount').val('') if $('#entry_amount').val() == '0,00'
+      $(this).val('') if $(this).val() == '0,00'
+    $('#entry_amount').blur ->
+      $(this).val('0,00') if $(this).val() == ''
+
+  $('#new_entry').submit ->
+    $('.btn.submit-form:not(disabled)').addClass('disabled').prop("disabled", true)
+  $('.btn.submit-form').removeClass('disabled').prop("disabled", false)

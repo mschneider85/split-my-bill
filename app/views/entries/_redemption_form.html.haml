@@ -9,3 +9,7 @@
 :coffee
   $ ->
     $('input[data-role=money]').autoNumeric('init')
+
+  $('#new_entry').submit ->
+    $('.btn.submit-form:not(disabled)').addClass('disabled').prop("disabled", true)
+  $('.btn.submit-form').removeClass('disabled').prop("disabled", false)
