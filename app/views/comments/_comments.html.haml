@@ -1,5 +1,5 @@
 .perfectScrollbar
-  .comment-timeline
+  .message-timeline
     - comments.group_by{|comments| comments.created_at.to_date}.each do |date, comments_on_date|
       .direct-chat-timestamp.timestamp-header
         = comments_on_date.first.created_at.to_s(:humanized_ago)

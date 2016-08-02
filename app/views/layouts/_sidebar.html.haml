@@ -23,6 +23,12 @@
           %span= Invite.model_name.human(count: 2)
           - if current_user.invitations.pending.any?
             %span.label.label-success.pull-right neu
+      %li{ class: ('active' if ['conversations', 'messages'].include? controller_name) }
+        = link_to conversations_path do
+          = icon 'envelope-o'
+          %span Mailbox
+          - if current_user.unread_messages.any?
+            %span.label.label-success.pull-right neu
       %li{ class: ('active' if controller_name == 'users' && action_name.in?(['index', 'show']) && @user != current_user) }
         = link_to users_path do
           = icon 'users'

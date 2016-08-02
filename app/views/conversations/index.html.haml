@@ -1,15 +1,58 @@
-%h3 Mailbox
-- @conversations.each do |conversation|
-  - if conversation.sender_id == current_user.id
-    - recipient = User.find(conversation.recipient_id)
-  - else
-    - recipient = User.find(conversation.sender_id)
-  %p
-    = link_to recipient.name, conversation_messages_path(conversation)
+%h3
+  Mailbox
+  %small
+    = current_user.unread_messages.count
+    ungelesene
+    = Message.model_name.human(count: current_user.unread_messages.count)
+.box
+  .box-header
+    %h3.box-title Unterhaltungen
+    .box-tools.pull-right
+      %button.btn.btn-box-tool{ data: { widget: 'collapse' }, type: 'button' }
+        = icon 'minus'
+  / /.box-header
+  .box-body.no-padding
+    %table.table.table-hover.table-bordered.table-vertical-center
+      %tbody
+        - @conversations.each do |conversation|
+          - if conversation.sender_id == current_user.id
+            - recipient = User.find(conversation.recipient_id)
+          - else
+            - recipient = User.find(conversation.sender_id)
 
-%h3 All Users
-- @users.each do |user|
-  %p
-    = user.name
-    = link_to conversations_path(sender_id: current_user.id, recipient_id: user.id), method: 'post' do
-      Nachricht senden
+          %tr.clickable-row{ data: { href: conversation_messages_path(conversation) } }
+            %td.col-md-1.text-center= image_tag recipient.avatar_url, class: 'img-circle img-table'
+            %td.col-md-7
+              = recipient.name
+              = render 'shared/online_status', user: recipient
+            %td.col-md-4.text-center
+              - new_messages = conversation.messages.unread_for(current_user).count
+              - if new_messages > 0
+                %span.label.label-success
+                  = new_messages
+                  ungelesen
+                  = Message.model_name.human(count: current_user.unread_messages.count)
+  / /.box-body
+%h3
+  Neue
+  = Message.model_name.human(count: 1)
+.box
+  .box-header
+    %h3.box-title Freunde
+    .box-tools.pull-right
+      %button.btn.btn-box-tool{ data: { widget: 'collapse' }, type: 'button' }
+        = icon 'minus'
+  / /.box-header
+  .box-body.no-padding
+    %table.table.table-hover.table-bordered
+      %tbody
+        - @users.each do |user|
+          %tr
+            %td.col-md-1.text-center= image_tag user.avatar_url, class: 'img-circle img-table'
+            %td.col-md-7.clickable-row{ data: { href: user_path(user) } }
+              = user.name
+              = render 'shared/online_status', user: user
+            %td.col-md-4
+              = link_to conversations_path(sender_id: current_user.id, recipient_id: user.id), method: 'post', class: 'btn btn-primary btn-block' do
+                %b Nachricht senden
+  / /.box-body

@@ -49,10 +49,8 @@
       .box-header.with-border
         %h3.box-title= Entry.model_name.human(count: 2)
         .box-tools.pull-right
-          %button.btn.btn-box-tool{"data-widget" => "collapse", :type => "button"}
-            %i.fa.fa-minus
-          %button.btn.btn-box-tool{"data-widget" => "remove", :type => "button"}
-            %i.fa.fa-times
+          %button.btn.btn-box-tool{ data: { widget: 'collapse' }, type: 'button' }
+            = icon 'minus'
       .box-body
         = line_chart dashboard_path, @user_report.chart_options
       / /.box-body

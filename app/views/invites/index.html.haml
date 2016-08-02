@@ -1,6 +1,9 @@
 .box
   .box-header
     %h3.box-title= Invite.model_name.human(count: 2)
+    .box-tools.pull-right
+      %button.btn.btn-box-tool{ data: { widget: 'collapse' }, type: 'button' }
+        = icon 'minus'
   / /.box-header
   .box-body.no-padding
     %table.table.table-hover
@@ -19,9 +22,9 @@
               %td
                 .btn-toolbar
                   = link_to [:decline, invite], remote: true, class: 'btn btn-danger' do
-                    ablehnen
+                    Ablehnen
                   = link_to [:accept, invite], remote: true, class: 'btn btn-success' do
-                    akzeptieren
+                    Akzeptieren
         - else
           %tr
             %td.text-center{ colspan: 4 } Keine Einladungen vorhanden.

@@ -10,7 +10,6 @@ class User < ActiveRecord::Base
   has_many :debts, class_name: 'Transaction', foreign_key: :debtor_id
   has_many :credits, class_name: 'Transaction', foreign_key: :creditor_id
   has_many :comments, foreign_key: 'author_id'
-  has_many :messages
 
   attr_accessor :invite_token
 
@@ -18,6 +17,14 @@ class User < ActiveRecord::Base
   scope :with_same_groups_as, ->(user) { includes(:groups).where(groups: { id: user.groups.ids }) }
 
   validates :first_name, :last_name, :email, presence: true
+
+  def messages
+    Message.joins(:conversation).where.any_of({conversations: { sender_id: id }}, {conversations: { recipient_id: id }})
+  end
+
+  def unread_messages
+    messages.unread_for(self)
+  end
 
   def name
     [first_name, last_name].merge_with(" ")

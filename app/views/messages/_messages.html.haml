@@ -1,12 +1,42 @@
-- messages.each do |message|
-  %p
-    - if message.body
-      %strong= message.user.name
-      %br
-      %span.direct-chat-timestamp.pull-left
-        = icon 'clock-o'
-        = l message.created_at, format: :short
-      %br
-      = simple_format message.body
-- if @over_ten
-  = link_to 'Show Previous', '?m=all', remote: true
+.comment-timeline
+  - messages.group_by{|message| message.created_at.to_date}.each do |date, messages_on_date|
+    .direct-chat-timestamp.timestamp-header
+      = messages_on_date.first.created_at.to_s(:humanized_ago)
+    - messages_on_date.each do |message|
+      - if message.user == current_user
+        / Message to the right
+        .direct-chat-msg.right
+          .direct-chat-info.clearfix
+            %span.direct-chat-name.pull-right
+              = message.user.name
+            %span.direct-chat-timestamp.pull-left
+              = icon 'clock-o'
+              = l message.created_at, format: :short_time
+          / /.direct-chat-info
+          = link_to message.user do
+            = image_tag message.user.avatar_url, class: 'direct-chat-img'
+          / /.direct-chat-img
+          .direct-chat-text
+            = simple_format message.body
+          / /.direct-chat-text
+        / /.direct-chat-msg
+      - else
+        / Message. Default to the left
+        .direct-chat-msg
+          .direct-chat-info.clearfix
+            %span.direct-chat-name.pull-left
+              = message.user.name
+            %span.direct-chat-timestamp.pull-right
+              = icon 'clock-o'
+              = l message.created_at, format: :short_time
+          / /.direct-chat-info
+          = link_to message.user do
+            = image_tag message.user.avatar_url, class: 'direct-chat-img'
+          / /.direct-chat-img
+          .direct-chat-text
+            = simple_format message.body
+          / /.direct-chat-text
+        / /.direct-chat-msg
+  - if @over_ten
+    .text-center
+      = link_to 'alle anzeigen', '?m=all', remote: true

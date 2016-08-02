@@ -30,7 +30,7 @@ class MessagesController < ApplicationController
     end
     if params[:m]
       @over_ten = false
-      @messages = @conversation.messages
+      @messages = @conversation.messages.where.not(body: nil)
     end
     if @messages
       @messages.where.not(user: current_user).update_all(read: true)

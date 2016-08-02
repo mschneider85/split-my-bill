@@ -15,7 +15,7 @@ class UserReport
     credits_sum = credits_by_day.map{ |k, v| [k, (c = c + v)] }
     debts_sum = debts_by_day.map{ |k, v| [k, (d = d + v)] }
 
-    total = debts_sum.to_h.merge(credits_sum.to_h){|key, oldval, newval| newval - oldval}
+    total = debts_sum.to_h.merge(credits_sum.to_h){ |key, oldval, newval| newval > 0 ? (newval - oldval) : - oldval}
 
     @data = [
       #TODO
@@ -56,7 +56,7 @@ class UserReport
   end
 
   def entries
-    Entry.includes(:transactions).where(group: @user.groups).where.any_of(transactions: { creditor: @user }, transactions: { debtor: @user })
+    Entry.includes(:transactions).where(group: @user.groups).where.any_of({transactions: { creditor: @user }}, {transactions: { debtor: @user }})
   end
 
   private

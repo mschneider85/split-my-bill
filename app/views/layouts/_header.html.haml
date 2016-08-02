@@ -19,27 +19,21 @@
     / Navbar Right Menu
     .navbar-custom-menu
       %ul.nav.navbar-nav
-        / Messages: style can be found in dropdown.less
         - if @group && @group.persisted?
           %li.group-name
             = link_to group_path(@group), class: 'truncate truncate-small' do
               = @group.name
         - if current_user
-          %li.dropdown.messages-menu
-            %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
-              %i.fa.fa-envelope-o
-              %span.label.label-success= current_user.invitations.pending.count
-            %ul.dropdown-menu
-              %li.header= "#{current_user.invitations.pending.count} Einladungen"
-              %li
-                / inner menu: contains the actual data
-                .slimScrollDivx{:style => "position: relative; overflow: hidden; width: auto; height: 200px;"}
-                  %ul.menu{:style => "overflow: hidden; width: 100%; height: 200px;"}
-                    - current_user.invitations.pending.each do |invitation|
-                      = render '/shared/invitation_list_item', invite: invitation
-              %li.footer
-                %a{:href => "#"} See All Messages
-          / User Account: style can be found in dropdown.less
+          %li.invites{ class: ('active' if controller_name == 'invites') }
+            = link_to :invites do
+              = icon 'files-o'
+              - if current_user.invitations.pending.count > 0
+                %span.label.label-success= current_user.invitations.pending.count
+          %li.conversations{ class: ('active' if ['conversations', 'messages'].include? controller_name) }
+            = link_to :conversations do
+              = icon 'envelope-o'
+              - if current_user.unread_messages.count > 0
+                %span.label.label-success= current_user.unread_messages.count
           %li.dropdown.user.user-menu
             %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
               = image_tag current_user.avatar_url, class: 'user-image'
