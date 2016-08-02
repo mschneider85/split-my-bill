@@ -30,6 +30,8 @@
 #= require data-confirm-modal
 #= require pace
 #= require perfect-scrollbar
+#= require moment
+#= require datetime-moment
 #= require_tree .
 
 $(document).ready ->

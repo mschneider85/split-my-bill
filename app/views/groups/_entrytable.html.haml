@@ -25,7 +25,9 @@
           - else
             = debtor_array.to_sentence
 :coffee
+  $.fn.dataTable.moment( 'DD.MM.YYYY' );
   $('#entries').DataTable
+    destroy: true
     responsive: true
     order: [[ 0, "desc" ]]
     dom: 'Bfrtip'
