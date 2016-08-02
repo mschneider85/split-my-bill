@@ -17,3 +17,7 @@
   .col-md-5
     #chart
       = line_chart get_chart_data_group_path(group), group.report.chart_options
+
+:coffee
+  $('.clickable-row').click ->
+    window.document.location = $(this).data('href')
