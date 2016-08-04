@@ -30,7 +30,7 @@
               - if new_messages > 0
                 %span.label.label-success
                   = new_messages
-                  ungelesen
+                  ungelesene
                   = Message.model_name.human(count: current_user.unread_messages.count)
   / /.box-body
 %h3

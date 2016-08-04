@@ -1,5 +1,6 @@
-class CommentsController < ApplicationController
+class CommentsController < AuthenticateController
   before_action :load_commentable
+  authorize_resource
 
   def index
     @commentable = Group.find(params[:group_id])

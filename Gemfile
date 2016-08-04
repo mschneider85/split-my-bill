@@ -38,6 +38,8 @@ gem 'devise-i18n'
 gem 'client_side_validations'
 gem 'client_side_validations-simple_form'
 
+gem 'cancancan', '~> 1.15'
+
 group :development, :test do
   gem 'byebug'
 end

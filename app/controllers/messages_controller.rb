@@ -1,5 +1,6 @@
-class MessagesController < ApplicationController
+class MessagesController < AuthenticateController
   before_action :load_conversation_and_messages
+  authorize_resource
 
   def index
     @message = @conversation.messages.new

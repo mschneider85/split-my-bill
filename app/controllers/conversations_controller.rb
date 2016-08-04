@@ -1,4 +1,6 @@
-class ConversationsController < ApplicationController
+class ConversationsController < AuthenticateController
+  authorize_resource
+
   def index
     @users = current_user.friends
     @conversations = Conversation.where.any_of(sender: current_user, recipient: current_user)

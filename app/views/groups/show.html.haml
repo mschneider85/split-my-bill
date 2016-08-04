@@ -7,6 +7,11 @@
         %h3.box-title.group-name.truncate.truncate-medium
           = @group.name
         .box-tools.pull-right
+          //- if can? :destroy, @group
+          // TODO Fix Modal class
+          - if false
+            = link_to @group, method: :delete, data: { confirm: 'Mit dem Löschen dieser Gruppe gehen alle Buchungen, Schulden und Kredite verloren.', verify: 'LÖSCHEN', verify_text: 'Tippe hier "LÖSCHEN" um den Vorgang zu bestätigen', commit: 'Löschen' }, class: 'btn btn-box-tool' do
+              = icon 'trash'
           = link_to [:edit, @group], class: 'btn btn-box-tool', data: { toggle: 'modal', target: '.modal' } do
             = icon 'cog'
           %button.btn.btn-box-tool{ data: { widget: :collapse }, type: :button }

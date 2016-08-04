@@ -1,4 +1,6 @@
-class UsersController < ApplicationController
+class UsersController < AuthenticateController
+  load_and_authorize_resource
+
   def index
     @users = current_user.friends
   end

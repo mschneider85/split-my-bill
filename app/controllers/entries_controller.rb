@@ -1,5 +1,7 @@
 class EntriesController < AuthenticateController
   before_action :load_group, except: :destroy
+  authorize_resource
+  
   def index
     @entries = @group.entries.all.order(created_at: :desc)
   end

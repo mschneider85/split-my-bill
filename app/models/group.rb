@@ -15,6 +15,10 @@ class Group < ActiveRecord::Base
     [id, name.parameterize].join("-")
   end
 
+  def admin
+    users.order(:created_at).first
+  end
+
   def report
     @group_report ||= GroupReport.new(self)
   end

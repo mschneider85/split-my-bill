@@ -1,5 +1,6 @@
 class InvitesController < AuthenticateController
   before_action :load_invite, only: [:accept, :decline]
+  authorize_resource
 
   def index
     @invites = current_user.invitations.pending

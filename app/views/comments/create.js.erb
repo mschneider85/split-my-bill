@@ -1,8 +1,9 @@
 <% if @comment.errors.any? %>
   $('.modal-body').html("<%= j render 'form', commentable: @commentable, comment: @comment %>");
 <% else %>
-  $('#tab_comments').html("<%= j render 'comments/comments', comments: @commentable.comments %>");
+  $('.tab-pane.active').html("<%= j render 'comments/comments', comments: @commentable.comments %>");
   $('#activity-feed').html("<%= j render '/groups/activities', group: @commentable, activities: @commentable.related_activities.first(5) %>");
   $('section.content').prepend("<%= j render 'shared/flash_messages', flash: @flash %>");
   $('.modal').modal('hide');
+  $(".nav-tabs a[href='#tab_comments']").tab('show');
 <% end %>

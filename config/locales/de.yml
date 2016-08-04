@@ -1,4 +1,7 @@
 de:
+  unauthorized:
+    manage:
+      all: "Du bist dafür nicht authorisiert."
   messages:
     member_since: Mitglied seit
     not_found: '%{model} nicht gefunden.'
