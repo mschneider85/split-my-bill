@@ -36,16 +36,16 @@
         .nav-tabs-custom
           %ul.nav.nav-tabs.nav-justified.hidden-xs.hidden-sm
             %li.active
-              = link_to '#tab_users', data: { toggle: 'tab', target: 'users', href: group_path(@group) } do
+              = link_to '#tab_users', data: { toggle: 'tab', tabtarget: 'users', href: group_path(@group) } do
                 Übersicht
             %li
-              = link_to '#tab_entries', data: { toggle: 'tab', target: 'entries', href: group_path(@group) } do
+              = link_to '#tab_entries', data: { toggle: 'tab', tabtarget: 'entries', href: group_path(@group) } do
                 Buchungen
             %li
-              = link_to '#tab_refund', data: { toggle: 'tab', target: 'refunds', href: group_path(@group) } do
+              = link_to '#tab_refund', data: { toggle: 'tab', tabtarget: 'refund', href: group_path(@group) } do
                 Zurückzahlen
             %li
-              = link_to '#tab_comments', data: { toggle: 'tab', target: 'comments', href: group_path(@group) } do
+              = link_to '#tab_comments', data: { toggle: 'tab', tabtarget: 'comments', href: group_path(@group) } do
                 Kommentare
           .tab-content
             #tab_users.tab-pane.active.fade.in
@@ -70,10 +70,12 @@
     $(".nav-tabs a[href='" + href + "']").tab('show')
 
   $('a[data-toggle="tab"]').on 'shown.bs.tab', (e) ->
-    target = $(this).data('target')
+    target = $(this).data('tabtarget')
     href = $(this).data('href')
-    $.ajax
-      type: 'GET'
-      url: href
-      data: tab: target
-      dataType: 'script'
+    if ($('#tab_'+target).is(':empty'))
+      $('#tab_'+target).html("#{j render 'loading'}")
+      $.ajax
+        type: 'GET'
+        url: href
+        data: tab: target
+        dataType: 'script'

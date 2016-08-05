@@ -13,7 +13,7 @@ $('#activity-feed').html("<%= j render '/groups/activities', group: @group, acti
   $(".tab-pane.active").html("<%= j render '/groups/usertable', group: @group %>");
 <% elsif params[:tab] == 'entries' %>
   $(".tab-pane.active").html("<%= j render '/groups/entrytable', group: @group %>");
-<% elsif params[:tab] == 'refunds' %>
+<% elsif params[:tab] == 'refund' %>
   $(".tab-pane.active").html("<%= j render '/groups/liabilitytable', group: @group %>");
 <% elsif params[:tab] == 'comments' %>
   $(".tab-pane.active").html("<%= j render '/comments/comments', comments: @comments %>");

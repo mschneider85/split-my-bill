@@ -1,42 +1,48 @@
-.perfectScrollbar
-  .message-timeline
-    - comments.group_by{|comments| comments.created_at.to_date}.each do |date, comments_on_date|
-      .direct-chat-timestamp.timestamp-header
-        = comments_on_date.first.created_at.to_s(:humanized_ago)
-      - comments_on_date.each do |comment|
-        - if comment.author == current_user
-          / Message to the right
-          .direct-chat-msg.right
-            .direct-chat-info.clearfix
-              %span.direct-chat-name.pull-right
-                = comment.author_name
-              %span.direct-chat-timestamp.pull-left
-                = icon 'clock-o'
-                = l comment.created_at, format: :short_time
-            / /.direct-chat-info
-            = link_to comment.author do
-              = image_tag comment.author.avatar_url, class: 'direct-chat-img'
-            / /.direct-chat-img
-            .direct-chat-text
-              = simple_format comment.content
-            / /.direct-chat-text
-          / /.direct-chat-msg
-        - else
-          / Message. Default to the left
-          .direct-chat-msg
-            .direct-chat-info.clearfix
-              %span.direct-chat-name.pull-left
-                = comment.author_name
-              %span.direct-chat-timestamp.pull-right
-                = icon 'clock-o'
-                = l comment.created_at, format: :short_time
-            / /.direct-chat-info
-            = link_to comment.author do
-              = image_tag comment.author.avatar_url, class: 'direct-chat-img'
-            / /.direct-chat-img
-            .direct-chat-text
-              = simple_format comment.content
-            / /.direct-chat-text
-          / /.direct-chat-msg
+- if comments.blank?
+  %table.table.table-bordered.table-hover
+    %tbody
+      %tr
+        %td.info In dieser Gruppe wurden bis jetzt keine Kommentare erstellt.
+- else
+  .perfectScrollbar
+    .message-timeline
+      - comments.group_by{|comments| comments.created_at.to_date}.each do |date, comments_on_date|
+        .direct-chat-timestamp.timestamp-header
+          = comments_on_date.first.created_at.to_s(:humanized_ago)
+        - comments_on_date.each do |comment|
+          - if comment.author == current_user
+            / Message to the right
+            .direct-chat-msg.right
+              .direct-chat-info.clearfix
+                %span.direct-chat-name.pull-right
+                  = comment.author_name
+                %span.direct-chat-timestamp.pull-left
+                  = icon 'clock-o'
+                  = l comment.created_at, format: :short_time
+              / /.direct-chat-info
+              = link_to comment.author do
+                = image_tag comment.author.avatar_url, class: 'direct-chat-img'
+              / /.direct-chat-img
+              .direct-chat-text
+                = simple_format comment.content
+              / /.direct-chat-text
+            / /.direct-chat-msg
+          - else
+            / Message. Default to the left
+            .direct-chat-msg
+              .direct-chat-info.clearfix
+                %span.direct-chat-name.pull-left
+                  = comment.author_name
+                %span.direct-chat-timestamp.pull-right
+                  = icon 'clock-o'
+                  = l comment.created_at, format: :short_time
+              / /.direct-chat-info
+              = link_to comment.author do
+                = image_tag comment.author.avatar_url, class: 'direct-chat-img'
+              / /.direct-chat-img
+              .direct-chat-text
+                = simple_format comment.content
+              / /.direct-chat-text
+            / /.direct-chat-msg
 :coffee
   $('.perfectScrollbar').perfectScrollbar(wheelPropagation: true, suppressScrollX: true)
