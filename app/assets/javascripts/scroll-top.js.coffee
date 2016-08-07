@@ -30,11 +30,6 @@ $ ->
       $(slideToTop).fadeOut 500
   $(slideToTop).click ->
     $('body').animate { scrollTop: 0 }, 500
-  $('.sidebar-menu li:not(.treeview) a').click ->
-    $this = $(this)
-    target = $this.attr('href')
-    if typeof target == 'string'
-      $('body').animate { scrollTop: $(target).offset().top + 'px' }, 500
 
   $('.modal').on 'shown.bs.modal', ->
     $(slideToTop).fadeOut 500

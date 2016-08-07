@@ -72,6 +72,8 @@
   $('a[data-toggle="tab"]').on 'shown.bs.tab', (e) ->
     target = $(this).data('tabtarget')
     href = $(this).data('href')
+    if target == 'users'
+      $('#chart-1').highcharts().reflow()
     if ($('#tab_'+target).is(':empty'))
       $('#tab_'+target).html("#{j render 'loading'}")
       $.ajax
