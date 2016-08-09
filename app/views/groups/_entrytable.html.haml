@@ -13,7 +13,7 @@
         %td
           %span= l entry.created_at.to_date
         %td
-          %span.label.label-default= humanized_money_with_symbol entry.amount
+          %span.badge= humanized_money_with_symbol entry.amount
         %th
           = entry.name
         %td

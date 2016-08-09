@@ -21,13 +21,13 @@ class Membership < ActiveRecord::Base
     group.users.each do |user|
       hash[user] = liability_for(user)
     end
-    hash.delete_if { |k, v| v.nil? }
+    hash.delete_if{ |_, v| v.nil? }.partition{ |_, v| v < 0 }.map(&:to_h)
   end
 
   private
 
   def liability_for(other_user)
     liability = (credits.where(debtor: other_user).sum(:amount_cents) - debts.where(creditor: other_user).sum(:amount_cents))
-    liability >= 0 ? nil : liability.abs
+    liability == 0 ? nil : liability
   end
 end

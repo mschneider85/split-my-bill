@@ -74,7 +74,7 @@
     href = $(this).data('href')
     if target == 'users'
       $('#chart-1').highcharts().reflow()
-    if ($('#tab_'+target).is(':empty'))
+    if ($('#tab_'+target).is(':empty')) or ($('#tab_'+target)).find(">:first-child").hasClass('loading-partial')
       $('#tab_'+target).html("#{j render 'loading'}")
       $.ajax
         type: 'GET'

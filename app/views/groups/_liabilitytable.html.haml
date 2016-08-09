@@ -1,15 +1,37 @@
 %table.table.table-bordered.table-hover
+  %thead
+    %tr
+      %th{ colspan: 3 } Meine Schulden
   %tbody
-    - if current_membership.liabilities.count == 0
-      %tr
-        %td.success Du hast keine Schulden in dieser Gruppe.
+    - if current_membership.liabilities[0].count == 0
+      %tr{ colspan: 3 }
+        %td.bg-green Du hast keine Schulden in dieser Gruppe.
     - else
-      - current_membership.liabilities.keys.each do |user|
-        - amount = current_membership.liabilities[user]/100.0
+      - current_membership.liabilities[0].keys.each do |user|
+        - amount = (current_membership.liabilities[0][user]/100.0).abs
         %tr
-          %td= user.name
-          %td
-            %span.label.label-default= humanized_money_with_symbol amount
-          %td
+          %td.col-xs-4= user.name
+          %td.col-xs-4
+            %span.badge.bg-red= humanized_money_with_symbol amount
+          %td.col-xs-4
             = link_to [:new, group, :entry, entry_type: 'redemption', user_ids: [user.id], amount: amount], data: { toggle: 'modal', target: '.modal', backdrop: 'static' }, class: 'btn btn-sm btn-primary' do
               jetzt zurückzahlen
+
+%table.table.table-bordered.table-hover
+  %thead
+    %tr
+      %th{ colspan: 3 } Meine Kredite
+  %tbody
+    - if current_membership.liabilities[1].count == 0
+      %tr{ colspan: 3 }
+        %td.bg-gray Du hast keine Kredite in dieser Gruppe.
+    - else
+      - current_membership.liabilities[1].keys.each do |user|
+        - amount = (current_membership.liabilities[1][user]/100.0).abs
+        %tr
+          %td.col-xs-4= user.name
+          %td.col-xs-4
+            %span.badge.bg-green= humanized_money_with_symbol amount
+          %td.col-xs-4
+            = link_to conversations_path(sender_id: current_user.id, recipient_id: user.id), method: 'post', class: 'btn btn-sm btn-primary' do
+              Erinnerung senden
