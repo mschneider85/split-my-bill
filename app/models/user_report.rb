@@ -19,7 +19,7 @@ class UserReport
 
     @data = [
       #TODO
-      #{ name: 'Kontostand', data: total },
+      { name: 'Kontostand', data: total },
       { name: 'Kredite', data: credits_by_day },
       { name: 'Schulden', data: debts_by_day }
     ]
@@ -40,8 +40,7 @@ class UserReport
           headerFormat: '{point.x: %d.%m.%Y}<br>',
           shared: true,
           pointFormat: '<span style="color: {point.series.color}">⚫ </span>{point.series.name}: <b>{point.y:,.2f} EUR</b><br>' },
-        #'#3c8dbc',
-        colors: ['#00a65a', '#dd4b39'] }
+        colors: ['#3c8dbc', '#00a65a', '#dd4b39'] }
     }
   end
 
@@ -59,13 +58,34 @@ class UserReport
     Entry.includes(:transactions).where(group: @user.groups).where.any_of({transactions: { creditor: @user }}, {transactions: { debtor: @user }})
   end
 
-  private
+  #private
+
+  def first_transaction_date
+    transactions = Transaction.where.any_of(creditor: @user, debtor: @user).order(:created_at).limit(1).pluck(:created_at)
+    transaction = transactions.present? ? transactions.first.to_date : @user.created_at.to_date
+  end
 
   def credits_by_day
-    @user.credits.where.not(debtor: @user).group_by_day(:created_at).sum("amount_cents/100.0")
+    Rails.cache.fetch("#{cache_key}/credits_by_day") do
+      hash = {}
+      (first_transaction_date..Date.current).each do |date|
+        hash[date] = @user.credits.where.not(debtor: @user).where(created_at: date.beginning_of_day..date.end_of_day).sum("amount_cents/100.0")
+      end
+      hash
+    end
   end
 
   def debts_by_day
-    @user.debts.where.not(creditor: @user).group_by_day(:created_at).sum("amount_cents/100.0")
+    Rails.cache.fetch("#{cache_key}/debts_by_day") do
+      hash = {}
+      (first_transaction_date..Date.current).each do |date|
+        hash[date] = @user.debts.where.not(creditor: @user).where(created_at: date.beginning_of_day..date.end_of_day).sum("amount_cents/100.0")
+      end
+      hash
+    end
+  end
+
+  def cache_key
+    @cache_key ||= "#{@user.id}#{@user.debts&.last&.created_at.to_i}#{@user.credits&.last&.created_at.to_i}#{@user.updated_at.to_i}"
   end
 end
