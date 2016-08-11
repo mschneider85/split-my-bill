@@ -18,7 +18,6 @@ class UserReport
     total = debts_sum.to_h.merge(credits_sum.to_h){ |key, oldval, newval| newval > 0 ? (newval - oldval) : - oldval}
 
     @data = [
-      #TODO
       { name: 'Kontostand', data: total },
       { name: 'Kredite', data: credits_by_day },
       { name: 'Schulden', data: debts_by_day }
@@ -58,7 +57,7 @@ class UserReport
     Entry.includes(:transactions).where(group: @user.groups).where.any_of({transactions: { creditor: @user }}, {transactions: { debtor: @user }})
   end
 
-  #private
+  private
 
   def first_transaction_date
     transactions = Transaction.where.any_of(creditor: @user, debtor: @user).order(:created_at).limit(1).pluck(:created_at)
