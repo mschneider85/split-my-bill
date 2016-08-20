@@ -12,6 +12,7 @@ Rails.application.routes.draw do
     resources :messages, only: [:index, :new, :create]
   end
   resources :groups do
+    get :updated_at, on: :member
     get :get_chart_data, on: :member
     resources :entries, only: [:index, :new, :create, :destroy]
     resources :comments, only: [:index, :new, :create]

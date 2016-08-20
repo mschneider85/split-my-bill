@@ -1,5 +1,5 @@
 class GroupsController < AuthenticateController
-  before_action :load_group, only: [:show, :get_chart_data, :edit, :update, :destroy]
+  before_action :load_group, only: [:show, :get_chart_data, :edit, :update, :destroy, :updated_at]
   before_action :store_group, only: [:show, :edit, :update]
   helper_method :current_membership
   authorize_resource
@@ -49,6 +49,10 @@ class GroupsController < AuthenticateController
   def destroy
     @group.destroy
     redirect_to groups_path, notice: t('messages.deleted', model: @group.name)
+  end
+
+  def updated_at
+    render text: @group.updated_at.to_i
   end
 
   private

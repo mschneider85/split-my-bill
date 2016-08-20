@@ -1,7 +1,7 @@
 class Entry < ActiveRecord::Base
   include PublicActivity::Common
   has_many :transactions, dependent: :destroy
-  belongs_to :group
+  belongs_to :group, touch: true
 
   TYPES = %w(expense redemption).freeze
   accepts_nested_attributes_for :transactions

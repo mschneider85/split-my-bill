@@ -74,10 +74,15 @@
     href = $(this).data('href')
     if target == 'users'
       $('#chart-1').highcharts().reflow()
-    if ($('#tab_'+target).is(':empty')) or ($('#tab_'+target)).find(">:first-child").hasClass('loading-partial')
-      $('#tab_'+target).html("#{j render 'loading'}")
-      $.ajax
-        type: 'GET'
-        url: href
-        data: tab: target
-        dataType: 'script'
+
+    $.ajax(url: "#{updated_at_group_path(@group)}").done (last_update) ->
+      if ($('#tab_'+target).is(':empty')) or
+      $('#tab_'+target).find(">:first-child").hasClass('loading-partial') or
+      $('#tab_'+target).attr('last-update') != last_update
+        $('#tab_'+target).attr('last-update', last_update)
+        $('#tab_'+target).html("#{j render 'loading'}")
+        $.ajax
+          type: 'GET'
+          url: href
+          data: tab: target
+          dataType: 'script'
