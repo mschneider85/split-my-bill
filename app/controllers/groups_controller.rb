@@ -1,6 +1,7 @@
 class GroupsController < AuthenticateController
   before_action :load_group, only: [:show, :get_chart_data, :edit, :update, :destroy, :updated_at]
   before_action :store_group, only: [:show, :edit, :update]
+  skip_before_action :load_group_list, only: [:get_chart_data, :updated_at]
   helper_method :current_membership
   authorize_resource
 
