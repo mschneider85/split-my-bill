@@ -17,7 +17,7 @@
         = f.input :body, autofocus: true, label: false, input_html: { rows: 3 }
         = f.input :user_id, as: :hidden, input_html: { value: current_user.id }
       .btn-toolbar.pull-right
-        = link_to :back, class: 'btn btn-default' do
+        = link_to :conversations, class: 'btn btn-default' do
           Zurück
         = button_tag type: 'submit', class: 'btn btn-info submit-form' do
           = t('actions.send', model: Message.model_name.human)

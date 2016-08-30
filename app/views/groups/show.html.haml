@@ -7,24 +7,22 @@
         %h3.box-title.group-name.truncate.truncate-medium
           = @group.name
         .box-tools.pull-right
-          //- if can? :destroy, @group
-          // TODO Fix Modal class
-          - if false
+          - if can? :destroy, @group
             = link_to @group, method: :delete, data: { confirm: 'Mit dem Löschen dieser Gruppe gehen alle Buchungen, Schulden und Kredite verloren.', verify: 'LÖSCHEN', verify_text: 'Tippe hier "LÖSCHEN" um den Vorgang zu bestätigen', commit: 'Löschen' }, class: 'btn btn-box-tool' do
               = icon 'trash'
-          = link_to [:edit, @group], class: 'btn btn-box-tool', data: { toggle: 'modal', target: '.modal' } do
+          = link_to [:edit, @group], class: 'btn btn-box-tool', data: { toggle: 'modal', target: '.dialog-modal' } do
             = icon 'cog'
           %button.btn.btn-box-tool{ data: { widget: :collapse }, type: :button }
             %i.fa.fa-minus
       / /.box-header
       .box-body.no-padding
-        = link_to [:new, @group, :entry, entry_type: 'expense'], class: 'btn btn-app', data: { toggle: 'modal', target: '.modal', backdrop: 'static' } do
+        = link_to [:new, @group, :entry, entry_type: 'expense'], class: 'btn btn-app', data: { toggle: 'modal', target: '.dialog-modal', backdrop: 'static' } do
           = icon 'file-text'
           Buchung
-        = link_to [:new, @group, :comment], class: 'btn btn-app', data: { toggle: 'modal', target: '.modal', backdrop: 'static' } do
+        = link_to [:new, @group, :comment], class: 'btn btn-app', data: { toggle: 'modal', target: '.dialog-modal', backdrop: 'static' } do
           = icon 'comment'
           Kommentar
-        = link_to [:new, :invite, group_id: @group.id], class: 'btn btn-app', data: { toggle: 'modal', target: '.modal', backdrop: 'static' } do
+        = link_to [:new, :invite, group_id: @group.id], class: 'btn btn-app', data: { toggle: 'modal', target: '.dialog-modal', backdrop: 'static' } do
           = icon 'envelope'
           Einladung
         .select-wrapper

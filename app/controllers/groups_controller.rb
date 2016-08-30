@@ -14,10 +14,8 @@ class GroupsController < AuthenticateController
   end
 
   def create
-    @group = Group.new(group_params)
-    if @group.save
-      @group.users << current_user
-      @group.create_activity key: 'group.create', owner: current_user
+    @group = CreateGroup.call(Group.new(group_params), current_user)
+    if @group.valid?
       redirect_to group_path(@group), notice: t('messages.created', model: Group.model_name.human)
     else
       render :new

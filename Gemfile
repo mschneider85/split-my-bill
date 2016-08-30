@@ -53,5 +53,6 @@ group :development do
   gem 'letter_opener'
   gem 'any_login'
   gem 'rails-erd'
+  gem 'pry-rails'
 end
 gem 'rails_12factor', group: :production

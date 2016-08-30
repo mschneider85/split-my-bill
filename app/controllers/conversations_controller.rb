@@ -7,20 +7,7 @@ class ConversationsController < AuthenticateController
   end
 
   def create
-    sender = params[:sender_id]
-    recipient = params[:recipient_id]
-
-    if Conversation.between(sender, recipient).present?
-      @conversation = Conversation.between(sender, recipient).first
-    else
-      @conversation = Conversation.create!(conversation_params)
-    end
+    @conversation = FindOrCreateConversation.call(params[:sender_id], params[:recipient_id])
     redirect_to conversation_messages_path(@conversation)
-  end
-
-  private
-
-  def conversation_params
-    params.permit(:sender_id, :recipient_id)
   end
 end

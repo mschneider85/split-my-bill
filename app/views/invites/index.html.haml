@@ -14,7 +14,8 @@
           %th Datum
           %th
         - if @invites.any?
-          - @invites.each do |invite|
+          - @invites.group_by(&:group).each do |group, invites|
+            - invite = invites.first
             %tr
               %td= invite.group_name
               %td= invite.sender.name

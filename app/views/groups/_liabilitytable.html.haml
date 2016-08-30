@@ -14,7 +14,7 @@
           %td.col-xs-4
             %span.badge.bg-red= humanized_money_with_symbol amount
           %td.col-xs-4
-            = link_to [:new, group, :entry, entry_type: 'redemption', user_ids: [user.id], amount: amount], data: { toggle: 'modal', target: '.modal', backdrop: 'static' }, class: 'btn btn-sm btn-primary' do
+            = link_to [:new, group, :entry, entry_type: 'redemption', user_ids: [user.id], amount: amount], data: { toggle: 'modal', target: '.dialog-modal', backdrop: 'static' }, class: 'btn btn-sm btn-primary' do
               jetzt zurückzahlen
 
 %table.table.table-bordered.table-hover
