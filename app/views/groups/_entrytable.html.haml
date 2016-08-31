@@ -8,7 +8,7 @@
       %th.col-md-4 Verwendungszweck
       %th.col-md-4 Personen
   %tbody
-    - group.entries.all.order(created_at: :desc).each do |entry|
+    - group.entries.order(created_at: :desc).each do |entry|
       %tr{ data: { id: entry.id } }
         %td
           %span= l entry.created_at.to_date
@@ -17,13 +17,12 @@
         %th
           = entry.name
         %td
-          = entry.transactions.map{ |transaction| transaction.creditor.name }.uniq.to_sentence
+          = entry.creditor_names.to_sentence
           = icon 'long-arrow-right'
-          - debtor_array = entry.transactions.map{ |transaction| transaction.debtor.name }.uniq
-          - if debtor_array.size == @group.memberships.count
+          - if entry.debtor_names.size == @group.memberships.count
             Alle
           - else
-            = debtor_array.to_sentence
+            = entry.debtor_names.to_sentence
 :coffee
   $.fn.dataTable.moment( 'DD.MM.YYYY' );
   $('#entries').DataTable

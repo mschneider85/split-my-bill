@@ -24,7 +24,7 @@ class Group < ActiveRecord::Base
   end
 
   def related_activities
-    PublicActivity::Activity.where.any_of(
+    PublicActivity::Activity.includes(:owner, :trackable).where.any_of(
       { trackable_id: comments.ids, trackable_type: 'Comment' },
       { trackable_id: invites.ids, trackable_type: 'Invite' },
       { trackable_id: entries.ids, trackable_type: 'Entry' },

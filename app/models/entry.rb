@@ -17,8 +17,15 @@ class Entry < ActiveRecord::Base
   end
 
   def creditor
-    #transactions.map(&:creditor).uniq
-    transactions.first.creditor
+    transactions.take.creditor
+  end
+
+  def creditor_names
+    transactions.select(:creditor_id).distinct.map{ |transaction| transaction.creditor.name }
+  end
+
+  def debtor_names
+    transactions.select(:debtor_id).distinct.map{ |transaction| transaction.debtor.name }
   end
 
   private
