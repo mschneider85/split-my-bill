@@ -12,7 +12,7 @@ class Group < ActiveRecord::Base
   validates :name, presence: true
 
   def to_param
-    [id, name.parameterize].join("-")
+    [id, name.parameterize].join('-')
   end
 
   def admin

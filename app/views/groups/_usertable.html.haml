@@ -9,7 +9,7 @@
               = membership.user.name
               = render 'shared/online_status', user: membership.user
             %td.col-md-1
-              - if membership.user.is_admin_of(group)
+              - if membership.user.admin_of?(group)
                 %span.badge.bg-blue{ data: { 'original-title' => 'Gruppenadministrator', toggle: 'tooltip' } }
                   A
             %td.col-md-2.text-right

@@ -5,13 +5,13 @@ class CreateEntry
     splitted_amount = 0.0
 
     users.without(current_user).each do |user|
-      current_amount = ((100.0*entry.amount.to_d/users.count).to_f.ceil)/100.0
+      current_amount = (100.0 * entry.amount.to_d / users.count).to_f.ceil / 100.0
       entry.transactions.build(amount: current_amount, creditor: current_user, debtor: user)
       splitted_amount += current_amount
     end
 
     if users.find_by(id: current_user)
-      entry.transactions.build(amount: (entry.amount.to_f)-splitted_amount, creditor: current_user, debtor: current_user)
+      entry.transactions.build(amount: entry.amount.to_f - splitted_amount, creditor: current_user, debtor: current_user)
     end
 
     if entry.save

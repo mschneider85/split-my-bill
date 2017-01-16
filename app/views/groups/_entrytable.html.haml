@@ -1,12 +1,11 @@
-= link_to '#', id: 'action-delete-entry', data: { confirm: 'Buchung wirklich löschen?', commit: 'Löschen' }, class: 'btn btn-default btn-action disabled hidden', title: 'Löschen', method: :delete do
-  Buchung löschen
 %table.table.table-bordered.table-hover.display.responsive.nowrap#entries{ width: "100%" }
   %thead
     %tr
       %th.col-md-2 Datum
       %th.col-md-2 Betrag
       %th.col-md-4 Verwendungszweck
-      %th.col-md-4 Personen
+      %th.col-md-3 Personen
+      %th.col-md-1.no-sort
   %tbody
     - group.entries.order(created_at: :desc).each do |entry|
       %tr{ data: { id: entry.id } }
@@ -23,6 +22,8 @@
             Alle
           - else
             = entry.debtor_names.to_sentence
+        %td{ data: { order: false } }
+          = link_to 'Löschen', group_entry_path(group, entry), data: { confirm: 'Buchung wirklich löschen?', commit: 'Löschen' }, class: 'btn btn-default btn-action', method: :delete
 :coffee
   $.fn.dataTable.moment( 'DD.MM.YYYY' );
   $('#entries').DataTable
@@ -32,9 +33,12 @@
     dom: 'Bfrtip'
     pagingType: 'simple'
     pageLength: 10
-    select:
-      style: 'os'
-      info: false
+    columnDefs: [
+      targets: 'no-sort', orderable: false
+    ]
+    # select:
+    #   style: 'os'
+    #   info: false
     language: {
       buttons:
         pageLength:       "%d #{Entry.model_name.human(count: 2)}",
@@ -58,13 +62,3 @@
         sLast:            "<i class='fa fa-chevron-right'></i><i class='fa fa-chevron-right'></i>"
       }
     }
-
-  $('#entries_wrapper #entries_filter').prepend($('.btn#action-delete-entry'))
-
-  $('#entries_wrapper').on 'click', 'tr', ->
-    if $("#entries_wrapper tr.selected").length == 0
-      $(".btn-action:not([class*='disabled'])").addClass('disabled hidden')
-    else if $("#entries_wrapper tr.selected").length == 1
-      $('.btn-action').removeClass('disabled hidden')
-      id = $("tr.selected").data('id')
-      $('.btn-action#action-delete-entry').attr("href", "/groups/#{@group.id}/entries/" + id)

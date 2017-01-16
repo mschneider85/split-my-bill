@@ -15,7 +15,7 @@ class Invite < ActiveRecord::Base
   scope :for_sender, ->(user) { where(sender: user) }
   scope :for_recipient, ->(user) { where(recipient: user) }
 
-  validates :email, presence: true, format: { with: Devise::email_regexp }
+  validates :email, presence: true, format: { with: Devise.email_regexp }
   validate do
     if (sender_id == recipient_id) || (group.users.ids.include? recipient_id)
       errors.add(:email, 'ist schon Mitglied dieser Gruppe')
@@ -33,13 +33,11 @@ class Invite < ActiveRecord::Base
   private
 
   def generate_token
-    self.token = Digest::SHA1.hexdigest([self.group_id, Time.now, rand].join)
+    self.token = Digest::SHA1.hexdigest([group_id, Time.now, rand].join)
   end
 
   def check_user_existence
     recipient = User.find_by(email: email)
-    if recipient.present?
-      self.recipient_id = recipient.id
-    end
+    self.recipient_id = recipient.id if recipient.present?
   end
 end

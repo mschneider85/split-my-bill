@@ -1,0 +1,6 @@
+Documentation:
+  Enabled: false
+Style/Lambda:
+  EnforcedStyle: literal
+Metrics/LineLength:
+  Max: false

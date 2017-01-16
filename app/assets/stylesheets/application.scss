@@ -1,9 +1,9 @@
-@import "bootstrap-sprockets";
-@import "bootstrap";
-@import "font-awesome-sprockets";
-@import "font-awesome";
-@import "admin-lte";
-@import "admin-lte/skins/skin-blue";
+@import 'bootstrap-sprockets';
+@import 'bootstrap';
+@import 'font-awesome-sprockets';
+@import 'font-awesome';
+@import 'admin-lte';
+@import 'admin-lte/skins/skin-blue';
 @import 'ionicons';
 @import 'animate';
 @import 'checkbox3';
@@ -24,15 +24,15 @@
 }
 
 .navbar-login {
-  width: 305px;
   padding: 10px;
-  padding-bottom: 0px;
+  padding-bottom: 0;
+  width: 305px;
 }
 
 .navbar-login-session {
   padding: 10px;
-  padding-bottom: 0px;
-  padding-top: 0px;
+  padding-bottom: 0;
+  padding-top: 0;
 }
 
 .icon-size {
@@ -41,14 +41,14 @@
 
 .devise-links {
   border-top: 1px solid#888;
-  padding-top: 15px;
-  margin-top: 15px;
   font-size: 85%;
+  margin-top: 15px;
+  padding-top: 15px;
 }
 
 .img-table {
-  width: 32px;
   margin-top: 3px;
+  width: 32px;
 }
 
 ul .treeview-menu form {
@@ -80,13 +80,13 @@ tr.comment {
 }
 
 .perfectScrollbar {
-  position: relative;
   max-height: 380px;
+  position: relative;
 }
 
 .timeline-wrapper {
-  width: 100%;
   display: flex;
+  width: 100%;
 }
 
 .select-wrapper {
@@ -94,14 +94,15 @@ tr.comment {
   padding: 10px;
 }
 
-.comment-timeline, .message-timeline {
-  transition: transform 0.5s ease-in-out;
+.comment-timeline,
+.message-timeline {
   font-size: 16px;
-  padding: 10px 0px 10px 0px;
+  padding: 10px 0;
+  transition: transform .5s ease-in-out;
 
   .direct-chat-timestamp.timestamp-header {
-    text-align: center;
     margin-bottom: 4px;
+    text-align: center;
   }
 
   .direct-chat-text {
@@ -113,6 +114,7 @@ tr.comment {
     &.pull-right {
       margin-right: 50px;
     }
+
     &.pull-left {
       margin-left: 50px;
     }
@@ -126,52 +128,61 @@ tr.comment {
     margin-left: 50px;
   }
 
-  .direct-chat-msg:not(:last-child){
+  .direct-chat-msg:not(:last-child) {
     padding-bottom: 14px;
   }
 
+  $active-chat: #3c8dbc;
+
   .direct-chat-msg.right>.direct-chat-text {
-    background: #3c8dbc;
-    border-color: #3c8dbc;
+    background: $active-chat;
+    border-color: $active-chat;
     color: #fff;
   }
 
   .direct-chat-msg.right>.direct-chat-text:after {
-    border-left-color: #3c8dbc;
+    border-left-color: $active-chat;
   }
 }
 
 @media (min-width: 992px) {
-  .comment-timeline, .message-timeline {
-    padding: 10px 60px 10px 60px;
+  .comment-timeline,
+  .message-timeline {
+    padding: 10px 60px;
   }
 }
 
 // Half-Fixed Layout
 @media (max-width: 768px) {
   .modal-open {
-    overflow: hidden;
     height: 100%;
-    width: 100%;
+    overflow: hidden;
     position: fixed;
+    width: 100%;
   }
+
   nav.navbar.navbar-static-top.affix {
     top: 0;
   }
+
   .wrapper {
     position: absolute;
     width: 100%;
   }
+
   .wrapper.affixed {
     padding-top: 50px;
   }
+
   .truncate {
-    white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    white-space: nowrap;
+
     &.truncate-small {
       max-width: 170px;
     }
+
     &.truncate-medium {
       max-width: 220px;
     }
@@ -186,15 +197,18 @@ tr.comment {
 
 // iOS-Fix
 nav.navbar.navbar-static-top {
-  transform:translateZ(0);
+  transform: translateZ(0);
 }
 
-.nav-tabs-custom > .nav-tabs > li:not(.active) > a:hover, .nav-tabs-custom > .nav-tabs > li:not(.active) > a:focus, .nav-tabs-custom > .nav-tabs > li:not(.active) > a:active {
-  border-bottom-color: #DDDDDD;
+.nav-tabs-custom > .nav-tabs > li:not(.active) > a:hover,
+.nav-tabs-custom > .nav-tabs > li:not(.active) > a:focus,
+.nav-tabs-custom > .nav-tabs > li:not(.active) > a:active {
+  border-bottom-color: #ddd;
 }
 
-.nav-tabs-custom > .nav-tabs > li > a, .nav-tabs-custom > .nav-tabs > li > a:hover {
-  background: #F0F0F0;
+.nav-tabs-custom > .nav-tabs > li > a,
+.nav-tabs-custom > .nav-tabs > li > a:hover {
+  background: #f0f0f0;
 }
 
 h3>small {
@@ -202,7 +216,8 @@ h3>small {
 }
 
 .table-vertical-center {
-  thead tr th, tbody tr td {
+  thead tr th,
+  tbody tr td {
     vertical-align: middle;
   }
 }
@@ -214,7 +229,8 @@ h3>small {
 .loading-partial {
   line-height: 100px;
   text-align: center;
-    >i {
-      vertical-align: middle;
-    }
+
+  >i {
+    vertical-align: middle;
+  }
 }

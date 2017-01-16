@@ -21,11 +21,11 @@ class Entry < ActiveRecord::Base
   end
 
   def creditor_names
-    transactions.select(:creditor_id).distinct.map{ |transaction| transaction.creditor.name }
+    transactions.select(:creditor_id).distinct.map { |transaction| transaction.creditor.name }
   end
 
   def debtor_names
-    transactions.select(:debtor_id).distinct.map{ |transaction| transaction.debtor.name }
+    transactions.select(:debtor_id).distinct.map { |transaction| transaction.debtor.name }
   end
 
   private

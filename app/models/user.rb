@@ -19,7 +19,7 @@ class User < ActiveRecord::Base
   validates :first_name, :last_name, :email, presence: true
 
   def messages
-    Message.joins(:conversation).where.any_of({conversations: { sender_id: id }}, {conversations: { recipient_id: id }})
+    Message.joins(:conversation).where.any_of({ conversations: { sender_id: id } }, { conversations: { recipient_id: id } })
   end
 
   def unread_messages
@@ -27,7 +27,7 @@ class User < ActiveRecord::Base
   end
 
   def name
-    [first_name, last_name].merge_with(" ")
+    [first_name, last_name].merge_with(' ')
   end
 
   def avatar_url
@@ -35,7 +35,7 @@ class User < ActiveRecord::Base
     "http://gravatar.com/avatar/#{gravatar_id}.png?s=200&d=monsterid"
   end
 
-  def is_admin_of(group)
+  def admin_of?(group)
     group.users.order(:created_at).first == self
   end
 
